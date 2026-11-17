@@ -1,0 +1,14 @@
+{
+  "name": "wrapsense-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "WrapSense Packaging website — static site generator + Vercel lead function",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "dev": "node build/build.mjs && node tools/serve.mjs",
+    "fetch-images": "node tools/fetch-legacy-images.mjs",
+    "check": "node build/build.mjs && node tools/check.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

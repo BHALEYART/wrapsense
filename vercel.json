@@ -1,0 +1,355 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/packaging-machines/vertical-form-fill-seal/vertical-form-fill-and-seal-wrapsense",
+      "destination": "/machines/vertical-form-fill-seal/fastpack-intermittent-motion-vffs/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/multihead-weighers-combination-scales-10head-14head/10-head-weigher-combination-scale",
+      "destination": "/machines/weighing-filling/sensiweigh-pro-multihead-weigher/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/multihead-weighers-combination-scales-10head-14head/14-head-weigher-combination-scale-copy",
+      "destination": "/machines/weighing-filling/sensiweigh-pro-multihead-weigher/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/flow-wrappers/flow-wrapper",
+      "destination": "/machines/flow-wrappers/triservo-23000-3sp-flow-wrapper/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/flow-wrappers/inverted-flow-wrappers/inverted-flow-wrapper-packaging-machine",
+      "destination": "/machines/flow-wrappers/triservo-inverted-33000-i3sp/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/flow-wrappers/horizontal-flow-wrapper-packaging-machine-dk-450wse-by-wrapsense",
+      "destination": "/machines/flow-wrappers/reciprocating-jaw-flow-wrapper/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/metal-detectors-and-checkweighers/metal-detector",
+      "destination": "/machines/metal-detectors-checkweighers/food-metal-detector/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/metal-detectors-and-checkweighers/high-speed-checkweigher",
+      "destination": "/machines/metal-detectors-checkweighers/high-precision-checkweigher/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/carton-sealers-and-taping-machines/carton-sealer-taper-box-taper",
+      "destination": "/machines/case-erectors-sealers/casemaster-fastseal-case-sealer/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/carton-box-erectors/box-erector-carton-erector-automatic",
+      "destination": "/machines/case-erectors-sealers/ws-300-carton-erector/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/bucket-elevators-conveyors/bucket-elevator-conveyor",
+      "destination": "/machines/conveyors-elevators/bucket-elevator-conveyor/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/bucket-elevators-conveyors/take-away-exit-conveyor",
+      "destination": "/machines/conveyors-elevators/take-away-exit-conveyor/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/cannabis-packaging-specialty-packaging/automatic-preroll-cone-filling-and-sealing-machine",
+      "destination": "/machines/specialty-machines/automatic-preroll-cone-filling-machine/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/cannabis-packaging-specialty-packaging/bakesense-horizontal-cake-cutting-slicer-machine-for-layer-cakes",
+      "destination": "/machines/specialty-machines/bakesense-horizontal-cake-slicer/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/bucket-elevators-conveyors",
+      "destination": "/machines/conveyors-elevators/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/carton-box-erectors",
+      "destination": "/machines/case-erectors-sealers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/carton-sealers-taping-machines",
+      "destination": "/machines/case-erectors-sealers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/custom-packaging-film",
+      "destination": "/machines/packaging-film/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/horizontal-flow-wrappers-flow-pack",
+      "destination": "/machines/flow-wrappers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/metal-detectors-and-checkweighers",
+      "destination": "/machines/metal-detectors-checkweighers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/10-head-14-head-multihead-weighers-combination-scales",
+      "destination": "/machines/weighing-filling/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/cannabis-packaging-preroll-and-specialty-packaging-lines",
+      "destination": "/machines/specialty-machines/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/vertical-form-fill-and-seal",
+      "destination": "/machines/vertical-form-fill-seal/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/bucket-elevators-conveyors",
+      "destination": "/machines/conveyors-elevators/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/carton-box-erectors",
+      "destination": "/machines/case-erectors-sealers/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/carton-sealers-taping-machines",
+      "destination": "/machines/case-erectors-sealers/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/custom-packaging-film",
+      "destination": "/machines/packaging-film/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/horizontal-flow-wrappers-flow-pack",
+      "destination": "/machines/flow-wrappers/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/metal-detectors-and-checkweighers",
+      "destination": "/machines/metal-detectors-checkweighers/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/10-head-14-head-multihead-weighers-combination-scales",
+      "destination": "/machines/weighing-filling/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/cannabis-packaging-preroll-and-specialty-packaging-lines",
+      "destination": "/machines/specialty-machines/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/vertical-form-fill-and-seal",
+      "destination": "/machines/vertical-form-fill-seal/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/food-metal-detectors",
+      "destination": "/machines/metal-detectors-checkweighers/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/high-speed-checkweighers",
+      "destination": "/machines/metal-detectors-checkweighers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/multihead-weighers-combination-scales-10head-14head/:path*",
+      "destination": "/machines/weighing-filling/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/flow-wrappers/:path*",
+      "destination": "/machines/flow-wrappers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/cannabis-packaging-specialty-packaging/:path*",
+      "destination": "/machines/specialty-machines/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/vertical-form-fill-seal/:path*",
+      "destination": "/machines/vertical-form-fill-seal/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/carton-sealers-and-taping-machines/:path*",
+      "destination": "/machines/case-erectors-sealers/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-machines/:path*",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/machinery/:path*",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/request-a-quote",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/industry",
+      "destination": "/industries/",
+      "permanent": true
+    },
+    {
+      "source": "/policies",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/articles",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/videos",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:path*",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/product/:path*",
+      "destination": "/machines/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-admin/:path*",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        }
+      ]
+    },
+    {
+      "source": "/assets/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(css|js)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/assets/docs/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/thank-you/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
+}
