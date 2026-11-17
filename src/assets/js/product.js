@@ -42,3 +42,20 @@
     new IntersectionObserver(function (e) { sticky.classList.toggle('is-visible', !e[0].isIntersecting && e[0].boundingClientRect.top < 0); }).observe(hero);
   }
 })();
+
+/* Blog: highlight the current section in the table of contents. */
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.toc a'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('is-active'); a.removeAttribute('aria-current'); });
+      var a = byId[e.target.id];
+      if (a) { a.classList.add('is-active'); a.setAttribute('aria-current', 'true'); }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  Object.keys(byId).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+})();

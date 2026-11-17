@@ -8,6 +8,7 @@ import {
   catBySlug, productUrl, categoryUrl, productsIn, categoryImage, accentStyle, speedLabel,
   productCard, categoryCard, wheel, lineDiagram, specTable, modelsTable, ctaBand,
 } from './components.mjs';
+import { relatedGuides, postsFor, homeGuides } from './blog.mjs';
 
 const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
 const indBySlug = Object.fromEntries(industries.map((i) => [i.slug, i]));
@@ -146,6 +147,8 @@ export function homePage() {
   </div>
 </section>
 
+${homeGuides()}
+
 ${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 'We can set up testing with your products and packaging so you can see results before you invest.' })}
 `;
   return layout({
@@ -275,6 +278,8 @@ ${pairs.length ? html`<section class="section" aria-labelledby="pairs-title">
     <ul class="grid grid--products" role="list">${pairs.map((p) => `<li>${productCard(p)}</li>`)}</ul>
   </div>
 </section>` : ''}
+
+${relatedGuides(postsFor({ category: c.slug }), { title: `${c.short.charAt(0).toUpperCase() + c.short.slice(1)}: guides & answers` })}
 
 ${related.length ? html`<section class="section section--tight" aria-labelledby="rel-title"><div class="container">
   <h2 id="rel-title" class="h3">Related categories</h2>
@@ -408,6 +413,8 @@ ${pairs.length ? html`<section class="section section--alt" id="line" aria-label
     <ul class="grid grid--products" role="list">${pairs.map((x) => `<li>${productCard(x)}</li>`)}</ul>
   </div>
 </section>` : ''}
+
+${relatedGuides(postsFor({ product: p.slug }), { title: 'Guides & answers' })}
 
 ${siblings.length ? html`<section class="section" aria-labelledby="sib-title">
   <div class="container">
@@ -596,6 +603,8 @@ export function industryPage(i) {
   ${support.length ? html`<h2 class="section-title mt-lg">Weighing, inspection &amp; line equipment</h2>
   <ul class="grid grid--products" role="list">${support.map((p) => `<li>${productCard(p)}</li>`)}</ul>` : ''}
 </div></section>
+${relatedGuides(postsFor({ industry: i.slug }))}
+
 ${ctaBand({ title: `Packaging ${i.name.toLowerCase()}? Let’s talk.`, text: 'Send us your product details or samples and we’ll recommend a machine or full line.' })}`;
   return layout({
     path: `/industries/${i.slug}/`,

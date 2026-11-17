@@ -12,6 +12,7 @@ import { productUrl, categoryUrl } from './components.mjs';
 import {
   homePage, machinesPage, categoryPage, productPage, finderPage, industriesPage, industryPage, servicesPage, aboutPage,
 } from './pages.mjs';
+import { blogIndexPage, blogPostPage, posts } from './blog.mjs';
 import { contactPage, catalogPage, privacyPage, accessibilityPage, thankYouPage, notFoundPage } from './pages-forms.mjs';
 
 const t0 = Date.now();
@@ -47,12 +48,12 @@ const ogExists = (f) => fs.existsSync(path.join(ogDir, f));
 
 // ── pages ──
 const pages = [];
-const emit = (urlPath, htmlStr, { priority = 0.6, sitemap = true } = {}) => {
+const emit = (urlPath, htmlStr, { priority = 0.6, sitemap = true, lastmod = null } = {}) => {
   let out = htmlStr;
   const m = out.match(/property="og:image" content="[^"]*\/assets\/img\/og\/([^"]+)"/);
   if (m && !ogExists(m[1])) out = out.replace(`/assets/img/og/${m[1]}`, '/assets/img/og/default.jpg');
   write(urlPath === '/404/' ? '404.html' : path.join(urlPath, 'index.html'), out);
-  if (sitemap) pages.push({ loc: site.url + urlPath, priority });
+  if (sitemap) pages.push({ loc: site.url + urlPath, priority, lastmod });
 };
 
 emit('/', homePage(), { priority: 1.0 });
@@ -62,6 +63,8 @@ for (const c of categories) emit(categoryUrl(c), categoryPage(c), { priority: 0.
 for (const p of products) emit(productUrl(p), productPage(p), { priority: 0.8 });
 emit('/industries/', industriesPage(), { priority: 0.7 });
 for (const i of industries) emit(`/industries/${i.slug}/`, industryPage(i), { priority: 0.7 });
+emit('/blog/', blogIndexPage(), { priority: 0.7 });
+for (const b of posts) emit(`/blog/${b.slug}/`, blogPostPage(b), { priority: 0.6, lastmod: b.updated || b.date });
 emit('/services/', servicesPage(), { priority: 0.7 });
 emit('/about/', aboutPage(), { priority: 0.6 });
 emit('/contact/', contactPage(), { priority: 0.8 });
@@ -75,7 +78,7 @@ emit('/404/', notFoundPage(), { sitemap: false });
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map((p) => `  <url><loc>${p.loc}</loc><lastmod>${today}</lastmod><priority>${p.priority.toFixed(1)}</priority></url>`).join('\n')}
+${pages.map((p) => `  <url><loc>${p.loc}</loc><lastmod>${p.lastmod || today}</lastmod><priority>${p.priority.toFixed(1)}</priority></url>`).join('\n')}
 </urlset>
 `);
 write('robots.txt', `User-agent: *

@@ -19,6 +19,7 @@ Requires Node 18+. No `npm install` needed.
 | `src/data/categories.mjs` | Machine categories (SEO titles, intros, catalog page numbers, accent colors) |
 | `src/data/industries.mjs` | Industry landing pages |
 | `src/data/site.mjs` | Contact details, line stages, finder questions, services, process, optional GTM ID |
+| `src/data/blog.mjs` | Blog posts (markdown subset; `p:`/`c:`/`i:` links resolve to machine, category and industry pages and are validated at build) |
 | `src/data/legacy-images.mjs` | Images still sourced from the old site (see launch checklist) |
 | `build/` | Generator: `layout.mjs` (head/SEO/header/footer), `pages*.mjs` (templates), `components.mjs` |
 | `src/assets/` | CSS, JS, fonts (self-hosted Oswald + Poppins), images, catalog PDF |
@@ -27,6 +28,10 @@ Requires Node 18+. No `npm install` needed.
 | `vercel.json` | Build settings, 301 redirects from every old URL, security & cache headers |
 
 Adding a machine = add an object to `products.mjs` (and an image in `src/assets/img/products/`). Its page, category listing, finder matching, industry pages, sitemap and quote-form dropdown all update on the next build. Re-run `python3 tools/og-images.py` to create its social image.
+
+## Blog
+
+`/blog/` holds problem- and FAQ-style buying guides. It's kept out of the main menu and linked from the footer, the home page, the quote page and a "Guides & answers" strip on every machine, category and industry page a post links to (computed automatically). Each post gets BlogPosting + FAQPage structured data, a table of contents, a share image and a sitemap entry with its publish date. To add a post, append to `src/data/blog.mjs`, then run `python3 tools/og-images.py` to generate its share image.
 
 ## The Machine Finder
 

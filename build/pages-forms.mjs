@@ -143,7 +143,7 @@ export function contactPage() {
     </div>
     <div class="panel panel--plain">
       <p class="h3">Not sure what to ask for?</p>
-      <p>The <a href="/machine-finder/">Machine Finder</a> walks you through it in four questions and fills in this form for you.</p>
+      <p>The <a href="/machine-finder/">Machine Finder</a> walks you through it in four questions and fills in this form for you. Wondering about budget? Read <a href="/blog/packaging-machine-cost/">what drives packaging machine cost</a>.</p>
     </div>
   </aside>
 </div></section>`;

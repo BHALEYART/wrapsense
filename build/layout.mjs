@@ -172,6 +172,7 @@ function footer(p) {
       ['/services/', 'Service & Support'],
       ['/about/', 'About WrapSense'],
       ['/contact/', 'Request a Quote'],
+      ['/blog/', 'Blog & Buying Guides'],
       ['/catalog/', '2026 Product Catalog'],
     ])}
   </div>
