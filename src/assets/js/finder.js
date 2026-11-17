@@ -5,6 +5,14 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var ICON = function (n, c) { return '<svg class="' + (c || 'icon') + '" aria-hidden="true" focusable="false"><use href="#i-' + n + '"></use></svg>'; };
 
+  /* ───────── Home industry strip: pause / play (WCAG 2.2.2) ───────── */
+  var mt = d.querySelector('[data-marquee-toggle]');
+  if (mt) mt.addEventListener('click', function () {
+    var bar = mt.closest('.ind-marquee'), paused = !bar.classList.contains('is-paused');
+    bar.classList.toggle('is-paused', paused);
+    mt.setAttribute('aria-pressed', String(paused));
+  });
+
   /* ───────── Wheel (home + finder step 1) ───────── */
   var FORM_EXAMPLES = {};
   d.querySelectorAll('[data-wheel] .wheel__item').forEach(function (li) {

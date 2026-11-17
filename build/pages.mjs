@@ -72,6 +72,18 @@ export function homePage() {
   </div>
 </section>
 
+<section class="ind-marquee" aria-labelledby="im-label">
+  <div class="container ind-marquee__inner">
+    <h2 id="im-label" class="ind-marquee__label">Or search by industry</h2>
+    <div class="ind-marquee__viewport" data-marquee>
+      <ul class="ind-marquee__track" role="list">
+        ${[0, 1].map((copy) => industries.map((i) => html`<li${copy ? ' aria-hidden="true"' : ''}><a class="ind-pill" href="/industries/${i.slug}/#what"${copy ? ' tabindex="-1"' : ''} data-track="home_industry_strip"><span class="ind-pill__img">${imgTag(i.image, '')}</span><span>${esc(i.name)}</span>${icon('arrow')}</a></li>`).join('')).join('')}
+      </ul>
+    </div>
+    <button type="button" class="ind-marquee__pause" aria-pressed="false" data-marquee-toggle>${icon('pause', 'icon icon--pause')}${icon('play', 'icon icon--play')}<span class="visually-hidden">Pause scrolling industries</span></button>
+  </div>
+</section>
+
 <section class="section section--tight" aria-labelledby="pkg-title">
   <div class="container">
     <div class="section-head section-head--row">

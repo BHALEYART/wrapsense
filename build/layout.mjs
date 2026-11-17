@@ -25,6 +25,8 @@ const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6zm-3.5 9 2.5 2.5 4.5-5"/></symbol>
 <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></g></symbol>
 <symbol id="i-sparkle" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zm6.5 0H17v14h-3.5z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l10-6.5z"/></symbol>
 <symbol id="i-restart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></symbol>
 <!-- product forms -->
 <symbol id="i-powder" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 38c3-9 9-15 16-15s13 6 16 15z"/><path d="M24 6v8M19 10l5 5 5-5"/><circle cx="18" cy="31" r=".6" fill="currentColor"/><circle cx="26" cy="29" r=".6" fill="currentColor"/><circle cx="31" cy="34" r=".6" fill="currentColor"/><circle cx="22" cy="35" r=".6" fill="currentColor"/></g></symbol>
