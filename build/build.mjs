@@ -30,6 +30,16 @@ const hash = (dir) => {
 };
 assetVersion.css = hash(path.join(SRC, 'assets/css'));
 assetVersion.js = hash(path.join(SRC, 'assets/js'));
+assetVersion.files = {};
+for (const dir of ['css', 'js']) {
+  for (const f of fs.readdirSync(path.join(DIST, 'assets', dir))) {
+    const buf = fs.readFileSync(path.join(DIST, 'assets', dir, f));
+    const h = crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
+    const hashed = f.replace(/\.(css|js)$/, `.${h}.$1`);
+    fs.renameSync(path.join(DIST, 'assets', dir, f), path.join(DIST, 'assets', dir, hashed));
+    assetVersion.files[f] = hashed;
+  }
+}
 
 // ── search index (versioned so browsers pick up changes) ──
 const searchJson = buildSearchIndex();

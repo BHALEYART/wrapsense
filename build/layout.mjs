@@ -4,6 +4,8 @@ import { industries } from '../src/data/industries.mjs';
 import { esc, html, icon, img, imgTag } from './lib.mjs';
 
 export const assetVersion = { css: '', js: '', search: '' };
+// Fingerprinted file names (site.3f2a9c1b.css) so no cache can ever pair new HTML with an old asset.
+export const assetFile = (name) => assetVersion.files?.[name] || name;
 
 const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <defs>
@@ -71,7 +73,7 @@ ${p.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="ro
 <link rel="preload" href="/assets/fonts/oswald-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${p.preloadImage ? `<link rel="preload" as="image" href="${esc(p.preloadImage)}" fetchpriority="high">` : ''}
-<link rel="stylesheet" href="/assets/css/site.css?v=${assetVersion.css}">
+<link rel="stylesheet" href="/assets/css/${assetFile('site.css')}">
 ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)}
 ${site.gtmId ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.gtmId}');</script>` : ''}`;
 }
@@ -243,9 +245,9 @@ ${footer(p)}
     </div>
   </div>
 </dialog>
-<script src="/assets/js/site.js?v=${assetVersion.js}" defer></script>
-<script src="/assets/js/search.js?v=${assetVersion.js}" defer></script>
-${(p.scripts || []).map((s) => `<script src="/assets/js/${s}?v=${assetVersion.js}" defer></script>`).join('\n')}
+<script src="/assets/js/${assetFile('site.js')}" defer></script>
+<script src="/assets/js/${assetFile('search.js')}" defer></script>
+${(p.scripts || []).map((s) => `<script src="/assets/js/${assetFile(s)}" defer></script>`).join('\n')}
 </body>
 </html>
 `;

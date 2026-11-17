@@ -96,7 +96,7 @@
     list.slice(1).forEach(function (e) { (groups[e.t] = groups[e.t] || []).push(e); });
     var hit = function (e) {
       return '<li><a class="search-hit" href="' + e.url + '" data-track="search_click">' +
-        (e.img ? '<span class="search-hit__img"><img src="' + esc(e.img) + '" alt="" loading="lazy"></span>' : '<span class="search-hit__img search-hit__img--type">' + esc(e.t.charAt(0)) + '</span>') +
+        (e.img ? '<span class="search-hit__img"><img src="' + esc(e.img) + '" alt="" width="52" height="52" style="width:52px;height:52px;max-width:52px;object-fit:contain" loading="lazy"></span>' : '<span class="search-hit__img search-hit__img--type">' + esc(e.t.charAt(0)) + '</span>') +
         '<span class="search-hit__text"><span class="search-hit__title">' + esc(e.title) + '</span><span class="search-hit__desc">' + esc(e.sub ? e.sub + ' · ' : '') + esc(e.desc || '') + '</span></span></a></li>';
     };
     return (corrected ? '<p class="search-corrected">Showing results for <strong>' + esc(corrected) + '</strong></p>' : '') +
@@ -136,7 +136,18 @@
   dialog.addEventListener('close', function () { d.body.classList.remove('search-open'); if (opener && opener.focus) opener.focus(); });
   d.querySelectorAll('[data-search-open]').forEach(function (b) { b.addEventListener('click', function () { open(); }); });
   dialog.querySelector('[data-search-close]').addEventListener('click', close);
-  dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); }); // backdrop
+  // Close on a backdrop click only: the press must start AND end outside the dialog box.
+  // (Checking coordinates, not just e.target, avoids Safari closing when a clicked element is re-rendered.)
+  var outside = function (e) {
+    var r = dialog.getBoundingClientRect();
+    return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+  };
+  var downOutside = false;
+  dialog.addEventListener('pointerdown', function (e) { downOutside = e.target === dialog && outside(e); });
+  dialog.addEventListener('click', function (e) {
+    if (downOutside && e.target === dialog && outside(e) && e.detail > 0) close();
+    downOutside = false;
+  });
   d.addEventListener('keydown', function (e) {
     var tag = (e.target.tagName || '').toLowerCase();
     if ((e.key === '/' && !/input|textarea|select/.test(tag) && !e.target.isContentEditable) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
@@ -147,7 +158,13 @@
   input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(function () { run(input.value, true); }, 120); });
   resultsEl.addEventListener('click', function (e) {
     var chip = e.target.closest('[data-search-term]');
-    if (chip) { input.value = chip.getAttribute('data-search-term'); run(input.value, true); input.focus(); }
+    if (!chip) return;
+    e.preventDefault();
+    e.stopPropagation();
+    input.value = chip.getAttribute('data-search-term');
+    input.focus();
+    // re-render after this click has finished dispatching
+    setTimeout(function () { run(input.value, true); }, 0);
   });
   form.addEventListener('submit', function (e) {
     if (!input.value.trim()) { e.preventDefault(); return; }
