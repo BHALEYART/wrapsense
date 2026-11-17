@@ -33,6 +33,10 @@ Adding a machine = add an object to `products.mjs` (and an image in `src/assets/
 
 `/blog/` holds problem- and FAQ-style buying guides. It's kept out of the main menu and linked from the footer, the home page, the quote page and a "Guides & answers" strip on every machine, category and industry page a post links to (computed automatically). Each post gets BlogPosting + FAQPage structured data, a table of contents, a share image and a sitemap entry with its publish date. To add a post, append to `src/data/blog.mjs`, then run `python3 tools/og-images.py` to generate its share image.
 
+## Site search
+
+The search icon in the header (or `/` or Ctrl/⌘ K) opens instant search across machines, categories, industries, blog guides and key pages. `build/search-index.mjs` writes `assets/search-index.json` at build time; it's fetched only when search is first opened. It includes common shop-talk aliases ("vffs", "taper", "combi", "doypack"…) and corrects small typos. Pressing Enter goes to `/search/?q=…` (noindex). Searches are pushed to `dataLayer` as `site_search`, so you can see what customers look for.
+
 ## The Machine Finder
 
 `/machine-finder/` asks four questions — product type (the radial wheel), package format, output, and add-ons — then ranks machines by product + package fit and speed overlap, and assembles a suggested line. Matching uses the `forms`, `packages`, `speed`, `role` fields on each product. Answers live in the URL (shareable, back-button friendly) and flow into the quote form.

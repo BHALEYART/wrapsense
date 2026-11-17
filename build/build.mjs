@@ -13,7 +13,8 @@ import {
   homePage, machinesPage, categoryPage, productPage, finderPage, industriesPage, industryPage, servicesPage, aboutPage,
 } from './pages.mjs';
 import { blogIndexPage, blogPostPage, posts } from './blog.mjs';
-import { contactPage, catalogPage, privacyPage, accessibilityPage, thankYouPage, notFoundPage } from './pages-forms.mjs';
+import { buildSearchIndex } from './search-index.mjs';
+import { contactPage, catalogPage, privacyPage, accessibilityPage, thankYouPage, notFoundPage, searchPage } from './pages-forms.mjs';
 
 const t0 = Date.now();
 fs.rmSync(DIST, { recursive: true, force: true });
@@ -29,6 +30,11 @@ const hash = (dir) => {
 };
 assetVersion.css = hash(path.join(SRC, 'assets/css'));
 assetVersion.js = hash(path.join(SRC, 'assets/js'));
+
+// ── search index (versioned so browsers pick up changes) ──
+const searchJson = buildSearchIndex();
+assetVersion.search = crypto.createHash('sha1').update(searchJson).digest('hex').slice(0, 10);
+write('assets/search-index.json', searchJson);
 
 // ── data integrity ──
 const catSlugs = new Set(categories.map((c) => c.slug));
@@ -73,6 +79,7 @@ emit('/catalog/', catalogPage(), { priority: 0.4 });
 emit('/privacy/', privacyPage(), { priority: 0.2 });
 emit('/accessibility/', accessibilityPage(), { priority: 0.2 });
 emit('/thank-you/', thankYouPage(), { sitemap: false });
+emit('/search/', searchPage(), { sitemap: false });
 emit('/404/', notFoundPage(), { sitemap: false });
 
 // ── sitemap / robots / manifest ──
@@ -86,6 +93,7 @@ write('robots.txt', `User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /thank-you/
+Disallow: /search/
 
 Sitemap: ${site.url}/sitemap.xml
 `);

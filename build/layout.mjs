@@ -3,7 +3,7 @@ import { categories } from '../src/data/categories.mjs';
 import { industries } from '../src/data/industries.mjs';
 import { esc, html, icon, img, imgTag } from './lib.mjs';
 
-export const assetVersion = { css: '', js: '' };
+export const assetVersion = { css: '', js: '', search: '' };
 
 const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
 <defs>
@@ -27,6 +27,7 @@ const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-sparkle" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></symbol>
 <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zm6.5 0H17v14h-3.5z"/></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l10-6.5z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></g></symbol>
 <symbol id="i-restart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4"/></symbol>
 <!-- product forms -->
 <symbol id="i-powder" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 38c3-9 9-15 16-15s13 6 16 15z"/><path d="M24 6v8M19 10l5 5 5-5"/><circle cx="18" cy="31" r=".6" fill="currentColor"/><circle cx="26" cy="29" r=".6" fill="currentColor"/><circle cx="31" cy="34" r=".6" fill="currentColor"/><circle cx="22" cy="35" r=".6" fill="currentColor"/></g></symbol>
@@ -134,6 +135,7 @@ function header(p) {
     <a class="brand" href="/" aria-label="WrapSense Packaging Machinery — home">
       <img src="/assets/img/brand/wrapsense-logo.png" alt="" width="${img('brand/wrapsense-logo.png').w}" height="${img('brand/wrapsense-logo.png').h}">
     </a>
+    <button class="search-toggle" type="button" aria-haspopup="dialog" aria-controls="site-search" data-search-open>${icon('search')}<span class="visually-hidden">Search the site</span></button>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
       ${icon('menu', 'icon icon--open')}${icon('close', 'icon icon--close')}<span class="visually-hidden">Menu</span>
     </button>
@@ -223,7 +225,26 @@ ${header(p)}
 ${p.body}
 </main>
 ${footer(p)}
+<dialog class="search-dialog" id="site-search" aria-labelledby="search-title" data-index="/assets/search-index.json?v=${assetVersion.search}">
+  <form class="search-form" role="search" action="/search/" method="get" data-search-form>
+    <h2 id="search-title" class="visually-hidden">Search WrapSense</h2>
+    <label class="search-form__field">
+      ${icon('search')}
+      <span class="visually-hidden">Search machines, industries and guides</span>
+      <input type="search" name="q" placeholder="Search machines, industries, guides…" autocomplete="off" spellcheck="false" aria-describedby="search-status" data-search-input>
+    </label>
+    <button type="button" class="search-form__close" data-search-close>${icon('close')}<span class="visually-hidden">Close search</span></button>
+  </form>
+  <p id="search-status" class="search-status" role="status" aria-live="polite" data-search-status></p>
+  <div class="search-results" data-search-results>
+    <div class="search-suggest">
+      <p class="search-suggest__title">Popular searches</p>
+      <ul class="search-suggest__list" role="list">${['VFFS bagger', 'stick pack', 'stand-up pouch', 'multihead weigher', 'flow wrapper', 'labeler', 'case erector', 'coffee', 'cannabis', 'machine cost'].map((t) => `<li><button type="button" class="search-chip" data-search-term="${esc(t)}">${esc(t)}</button></li>`).join('')}</ul>
+    </div>
+  </div>
+</dialog>
 <script src="/assets/js/site.js?v=${assetVersion.js}" defer></script>
+<script src="/assets/js/search.js?v=${assetVersion.js}" defer></script>
 ${(p.scripts || []).map((s) => `<script src="/assets/js/${s}?v=${assetVersion.js}" defer></script>`).join('\n')}
 </body>
 </html>

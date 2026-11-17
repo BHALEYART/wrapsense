@@ -231,6 +231,22 @@ export function accessibilityPage() {
   return layout({ path: '/accessibility/', title: 'Accessibility Statement', description: 'WrapSense Packaging’s commitment to an accessible website that meets WCAG 2.2 AA.', body, jsonld: [bc.ld] });
 }
 
+export function searchPage() {
+  const body = html`
+<section class="page-hero"><div class="container" data-search-page>
+  <h1 class="page-hero__title">Search</h1>
+  <form class="search-page-form" role="search" action="/search/" method="get">
+    <label class="visually-hidden" for="search-page-q">Search machines, industries and guides</label>
+    <input id="search-page-q" type="search" name="q" placeholder="Search machines, industries, guides…" autocomplete="off">
+    <button class="btn btn--primary" type="submit">${icon('search')} Search</button>
+  </form>
+  <p class="search-page-status" role="status" aria-live="polite" data-search-page-status></p>
+  <noscript><p class="notice">Search needs JavaScript. Browse <a href="/machines/">all machines</a>, <a href="/industries/">industries</a> or the <a href="/blog/">blog</a>.</p></noscript>
+  <div class="search-page-results" data-search-page-results></div>
+</div></section>`;
+  return layout({ path: '/search/', title: 'Search', description: 'Search WrapSense packaging machines, industries and buying guides.', body, noindex: true, footerCta: false });
+}
+
 export function thankYouPage() {
   const body = html`
 <section class="page-hero page-hero--thanks"><div class="container narrow">
