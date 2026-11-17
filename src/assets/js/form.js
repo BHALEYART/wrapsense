@@ -61,6 +61,9 @@
   setSelect('form', q.get('form')); setSelect('pkg', q.get('pkg')); setSelect('speed', q.get('speed'));
   if (q.get('samples')) setRadio('samples', q.get('samples'));
   (q.get('interest') || '').split(',').forEach(addInterest);
+  if (q.get('industry')) {
+    var hi = d.createElement('input'); hi.type = 'hidden'; hi.name = 'industry'; hi.value = q.get('industry'); form.appendChild(hi);
+  }
   if (q.get('category')) {
     var h = d.createElement('input'); h.type = 'hidden'; h.name = 'category'; h.value = q.get('category'); form.appendChild(h);
   }

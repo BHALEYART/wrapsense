@@ -557,61 +557,131 @@ export function industriesPage() {
 <section class="page-hero"><div class="container">
   ${bc.html}
   <h1 class="page-hero__title">Industries we serve</h1>
-  <p class="page-hero__lead">WrapSense machines package food, beverage, supplements, pharmaceuticals, cosmetics, cannabis and more. Pick your industry to see the machines and package formats that fit.</p>
+  <p class="page-hero__lead">WrapSense machines package food, beverage, supplements, pharmaceuticals, cosmetics, cannabis and non-food products. Pick your industry to see the machines for each stage of your line — weighing and filling, primary packaging, inspection, labeling and end of line.</p>
 </div></section>
 <section class="section"><div class="container">
   <ul class="grid grid--ind" role="list">
     ${industries.map((i) => {
-      const count = products.filter((p) => p.industries.includes(i.slug)).length;
+      const count = i.machines.length;
       return html`<li><article class="icard">
         <div class="icard__img">${imgTag(i.image, '')}</div>
         <div><h2 class="icard__title"><a href="/industries/${i.slug}/">${esc(i.name)}</a></h2>
-        <p>${esc(truncate(i.intro, 120))}</p><p class="icard__count">${count} recommended machines</p></div>
+        <p>${esc(truncate(i.intro, 130))}</p><p class="icard__count">${count} machines</p></div>
       </article></li>`;
     })}
   </ul>
 </div></section>
 ${ctaBand()}`;
-  return layout({ path: '/industries/', title: 'Packaging Machinery by Industry', description: 'Packaging machines for snacks, coffee, supplements, bakery, frozen foods, produce, pet food, spices, pharmaceuticals, cosmetics and cannabis.', body, jsonld: [bc.ld] });
+  return layout({ path: '/industries/', title: 'Packaging Machinery by Industry', description: 'Packaging machines by industry: snack food, candy, coffee, supplements, pharma, bakery, dairy, frozen, produce, pet food, spices, beverage, cosmetics, cannabis.', body, jsonld: [bc.ld] });
 }
+
+const INDUSTRY_FORM = { snacks: 'snacks', confectionery: 'snacks', 'coffee-tea': 'granular', nutrition: 'powder', pharmaceutical: 'powder', bakery: 'solid', dairy: 'solid', 'frozen-foods': 'snacks', produce: 'solid', 'pet-food': 'granular', spices: 'powder', beverage: 'powder', cosmetics: 'container', cannabis: 'cannabis', hardware: 'solid' };
+const IND_GROUPS = [
+  { id: 'dose', title: 'Weighing, filling & feeding', stages: ['feed', 'dose'] },
+  { id: 'pack', title: 'Primary packaging', stages: ['pack'] },
+  { id: 'inspect', title: 'Inspection', stages: ['inspect'] },
+  { id: 'finish', title: 'Labeling, capping & auxiliary', stages: ['finish'] },
+  { id: 'end', title: 'Secondary packaging & end of line', stages: ['end'] },
+  { id: 'specialty', title: 'Processing & packaging materials', stages: ['specialty'] },
+];
+const productStage = (p) => (p.category === 'specialty-machines' && p.role === 'primary' ? 'pack' : p.stageRole || catBySlug[p.category].stage);
 
 export function industryPage(i) {
   const bc = breadcrumbs([['Home', '/'], ['Industries', '/industries/'], [i.name, `/industries/${i.slug}/`]]);
-  const list = products.filter((p) => p.industries.includes(i.slug));
-  const primary = list.filter((p) => p.role === 'primary');
-  const support = list.filter((p) => p.role !== 'primary');
+  const list = i.machines.map((s) => bySlug[s]);
+  const groups = IND_GROUPS.map((g) => ({ ...g, items: list.filter((p) => g.stages.includes(productStage(p))) })).filter((g) => g.items.length);
+  const lc = i.name.toLowerCase();
+  const genericNote = { dose: 'Accurate dosing and steady product flow set the pace for the whole line.', pack: 'The core of the line — the machine that forms, fills and seals your package.', inspect: 'Catch contamination and off-weight packs before they leave your facility.', finish: 'Finish containers with caps, labels and inserts.', end: 'Carton, case, seal and palletize finished goods.', specialty: 'Processing equipment and the packaging materials that run on your machines.' };
+  const line = i.typicalLine.map((s) => bySlug[s]);
+  const guides = postsFor({ industry: i.slug });
+  const others = industries.filter((x) => x.slug !== i.slug);
   const body = html`
-<section class="page-hero page-hero--split"><div class="container page-hero__split">
+<section class="ind-hero"><div class="container ind-hero__inner">
   <div>
     ${bc.html}
-    <p class="eyebrow">Industry</p>
-    <h1 class="page-hero__title">${esc(i.name)} packaging machines</h1>
-    <p class="page-hero__lead">${esc(i.intro)}</p>
-    <a class="btn btn--primary" href="/machine-finder/?form=${i.forms[0]}" data-track="industry_finder">Find my machine ${icon('arrow')}</a>
+    <p class="eyebrow eyebrow--light">Industry</p>
+    <h1 class="ind-hero__title">${esc(i.name)} packaging machines</h1>
+    <p class="ind-hero__lead">${esc(i.intro)}</p>
+    <p>${esc(i.intro2)}</p>
+    <div class="hero__actions">
+      <a class="btn btn--light" href="/machine-finder/?form=${INDUSTRY_FORM[i.slug]}" data-track="industry_finder">Find my machine ${icon('arrow')}</a>
+      <a class="btn btn--ghost-light" href="/contact/?industry=${i.slug}" data-track="industry_quote">Request a quote</a>
+    </div>
   </div>
-  <div class="page-hero__img">${imgTag(i.image, '', { eager: true })}</div>
+  <div class="ind-hero__media">${imgTag(i.image, '', { eager: true, fetchpriority: 'high' })}</div>
 </div></section>
-<section class="section section--tight"><div class="container two-col">
-  <div><h2 class="h3">What matters in ${esc(i.name.toLowerCase())}</h2>
-  <ul class="checklist" role="list">${i.challenges.map((c) => `<li>${icon('check')}${esc(c)}</li>`)}</ul></div>
-  <div><h2 class="h3">Common package formats</h2>
-  <ul class="pkg-mini" role="list">${i.packages.map((x) => pkgById[x]).filter(Boolean).map((P) => html`<li>${P.image ? imgTag(P.image, '') : ''}<span>${esc(P.name)}</span></li>`)}</ul></div>
-</div></section>
-<section class="section section--alt" aria-labelledby="ip-title"><div class="container">
-  <h2 id="ip-title" class="section-title">Packaging machines for ${esc(i.name.toLowerCase())}</h2>
-  <ul class="grid grid--products" role="list">${primary.map((p) => `<li>${productCard(p)}</li>`)}</ul>
-  ${support.length ? html`<h2 class="section-title mt-lg">Weighing, inspection &amp; line equipment</h2>
-  <ul class="grid grid--products" role="list">${support.map((p) => `<li>${productCard(p)}</li>`)}</ul>` : ''}
-</div></section>
-${relatedGuides(postsFor({ industry: i.slug }))}
 
-${ctaBand({ title: `Packaging ${i.name.toLowerCase()}? Let’s talk.`, text: 'Send us your product details or samples and we’ll recommend a machine or full line.' })}`;
+<nav class="subnav" aria-label="On this page"><div class="container"><ul role="list">
+  <li><a href="#what">What we package</a></li>
+  ${groups.map((g) => `<li><a href="#stage-${g.id}">${esc(g.title)}</a></li>`)}
+  <li><a href="#line">Typical line</a></li>
+  <li><a href="#faq">FAQs</a></li>
+</ul></div></nav>
+
+<section class="section section--tight" id="what" aria-labelledby="what-title"><div class="container ind-what">
+  <div>
+    <h2 id="what-title" class="h3">${esc(i.name)} products we help package</h2>
+    <ul class="pill-list" role="list">${i.examples.map((e) => `<li>${esc(e)}</li>`)}</ul>
+  </div>
+  <div>
+    <h2 class="h3">Package formats</h2>
+    <ul class="pkg-mini" role="list">${i.packages.map((x) => pkgById[x]).filter(Boolean).map((P) => html`<li>${P.image ? imgTag(P.image, '') : ''}<span>${esc(P.name)}</span></li>`)}</ul>
+  </div>
+</div></section>
+
+<section class="section section--alt section--tight" aria-labelledby="why-title"><div class="container">
+  <h2 id="why-title" class="section-title">Why automate ${esc(lc)} packaging</h2>
+  <ul class="grid grid--4 benefits" role="list">${i.benefits.map(([t, d]) => `<li><strong>${esc(t)}</strong><span>${esc(d)}</span></li>`)}</ul>
+</div></section>
+
+${groups.map((g, n) => html`<section class="section ind-stage${n % 2 ? ' section--alt' : ''}" id="stage-${g.id}" aria-labelledby="sh-${g.id}"><div class="container">
+  <div class="ind-stage__head">
+    <span class="ind-stage__n" aria-hidden="true">${n + 1}</span>
+    <div>
+      <h2 id="sh-${g.id}" class="section-title">${esc(g.title)} <span class="ind-stage__for">for ${esc(lc)}</span></h2>
+      <p class="section-lead">${esc(i.stageNotes?.[g.id] || genericNote[g.id])}</p>
+    </div>
+  </div>
+  <ul class="grid grid--products" role="list">${g.items.map((p) => `<li>${productCard(p)}</li>`)}</ul>
+</div></section>`)}
+
+<section class="section section--dark" id="line" aria-labelledby="tl-title"><div class="container">
+  <p class="eyebrow eyebrow--light">Example setup</p>
+  <h2 id="tl-title" class="section-title">A typical ${esc(lc)} line</h2>
+  <p class="section-lead ind-line__lead">One way WrapSense equipment comes together for ${esc(lc)}. Every line is configured to your product, package and output — start with one machine and add the rest as you grow.</p>
+  <ol class="ind-line" role="list">
+    ${line.map((p, n) => html`<li><a class="ind-line__item" href="${productUrl(p)}"><span class="ind-line__n">${n + 1}</span><span class="ind-line__img">${imgTag(p.image, '')}</span><span class="ind-line__name">${esc(p.name)}</span><span class="ind-line__cat">${esc(catBySlug[p.category].short)}</span></a></li>`)}
+  </ol>
+  <div class="hero__actions"><a class="btn btn--light" href="/contact/?industry=${i.slug}&amp;interest=${i.typicalLine.join(',')}" data-track="industry_line_quote">Quote this line ${icon('arrow')}</a></div>
+</div></section>
+
+<section class="section" id="faq" aria-labelledby="faq-title"><div class="container narrow">
+  <h2 id="faq-title" class="section-title">${esc(i.name)} packaging FAQs</h2>
+  ${i.faqs.map(([q, a]) => html`<details class="faq__item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`)}
+</div></section>
+
+${relatedGuides(guides, { title: `${i.name} guides & answers` })}
+
+<section class="section section--tight" aria-labelledby="oi-title"><div class="container">
+  <h2 id="oi-title" class="h3">Other industries</h2>
+  <ul class="tag-list" role="list">${others.map((x) => `<li><a class="tag" href="/industries/${x.slug}/">${esc(x.name)}</a></li>`)}</ul>
+</div></section>
+
+${ctaBand({ title: `Packaging ${lc}? Let’s talk.`, text: 'Send us your product details or samples and we’ll recommend a machine or full line.' })}`;
+  const heroImg = img(i.image);
   return layout({
     path: `/industries/${i.slug}/`,
-    title: `${i.name} Packaging Machines`.length + 12 <= 60 ? `${i.name} Packaging Machines` : `${i.name} Packaging`,
-    description: truncate(`Packaging machines for ${i.name.toLowerCase()}: ${i.intro}`, 158),
+    title: i.seoTitle,
+    description: i.seoDescription,
     body,
-    jsonld: [bc.ld],
+    scripts: ['product.js'],
+    preloadImage: heroImg && !heroImg.remote ? heroImg.src : null,
+    ogImage: `/assets/img/og/industry-${i.slug}.jpg`,
+    jsonld: [bc.ld,
+      { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${i.name} packaging machines`, url: site.url + `/industries/${i.slug}/`, description: i.seoDescription, isPartOf: { '@id': site.url + '/#website' },
+        mainEntity: { '@type': 'ItemList', itemListElement: list.map((p, n) => ({ '@type': 'ListItem', position: n + 1, url: site.url + productUrl(p), name: p.fullName })) } },
+      { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: i.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+    ],
   });
 }
 

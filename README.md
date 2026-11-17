@@ -17,7 +17,7 @@ Requires Node 18+. No `npm install` needed.
 |---|---|
 | `src/data/products.mjs` | **Every machine** — specs, models, uses, package formats, finder tags, old URLs |
 | `src/data/categories.mjs` | Machine categories (SEO titles, intros, catalog page numbers, accent colors) |
-| `src/data/industries.mjs` | Industry landing pages |
+| `src/data/industries.mjs` | Industry pages: intro, benefits, stage notes, curated machine list, typical line, FAQs. **Source of truth for which machines belong to which industry** (mirrored onto products at build) |
 | `src/data/site.mjs` | Contact details, line stages, finder questions, services, process, optional GTM ID |
 | `src/data/blog.mjs` | Blog posts (markdown subset; `p:`/`c:`/`i:` links resolve to machine, category and industry pages and are validated at build) |
 | `src/data/legacy-images.mjs` | Images still sourced from the old site (see launch checklist) |

@@ -1,6 +1,7 @@
 import { site, stages } from '../src/data/site.mjs';
 import { categories } from '../src/data/categories.mjs';
-import { esc, html, icon, img } from './lib.mjs';
+import { industries } from '../src/data/industries.mjs';
+import { esc, html, icon, img, imgTag } from './lib.mjs';
 
 export const assetVersion = { css: '', js: '' };
 
@@ -96,6 +97,23 @@ function megaMenu() {
   </div>`;
 }
 
+function megaIndustries() {
+  return html`<div class="mega mega--industries" id="mega-industries" hidden>
+    <div class="container mega__inner">
+      <div>
+        <p class="mega__stage">Packaging machines by industry</p>
+        <ul class="mega-ind" role="list">${industries.map((i) => html`<li><a class="mega-ind__link" href="/industries/${i.slug}/"><span class="mega-ind__img">${imgTag(i.image, '')}</span><span>${esc(i.name)}</span></a></li>`)}</ul>
+      </div>
+      <aside class="mega__cta">
+        <p class="mega__cta-title">Every industry, every stage</p>
+        <p>See the weighing, packaging, inspection and end-of-line machines for your products — plus a typical line for your industry.</p>
+        <a class="btn btn--primary" href="/industries/" data-track="nav_industries">All industries ${icon('arrow')}</a>
+        <a class="mega__all" href="/machine-finder/">Or use the Machine Finder ${icon('arrow')}</a>
+      </aside>
+    </div>
+  </div>`;
+}
+
 function header(p) {
   const cur = (href) => (p.path === href || (href !== '/' && p.path.startsWith(href)) ? ' aria-current="page"' : '');
   return html`
@@ -124,7 +142,10 @@ function header(p) {
           ${megaMenu()}
         </li>
         <li><a class="site-nav__link" href="/machine-finder/"${cur('/machine-finder/')}>Machine Finder</a></li>
-        <li><a class="site-nav__link" href="/industries/"${cur('/industries/')}>Industries</a></li>
+        <li class="has-mega">
+          <button type="button" class="site-nav__link site-nav__trigger" aria-expanded="false" aria-controls="mega-industries"${p.path.startsWith('/industries') ? ' data-current="true"' : ''}>Industries ${icon('chevron')}</button>
+          ${megaIndustries()}
+        </li>
         <li><a class="site-nav__link" href="/services/"${cur('/services/')}>Service &amp; Support</a></li>
         <li><a class="site-nav__link" href="/about/"${cur('/about/')}>About</a></li>
         <li class="site-nav__phone"><a class="site-nav__link" href="${site.phoneHref}" data-track="phone_click">${icon('phone')} ${esc(site.phone)}</a></li>
@@ -165,6 +186,7 @@ function footer(p) {
     </div>
     ${col('Packaging', categories.filter((c) => c.stage === 'pack' || c.stage === 'dose').map((c) => [`/machines/${c.slug}/`, c.name]))}
     ${col('Line & end of line', categories.filter((c) => !['pack', 'dose'].includes(c.stage)).map((c) => [`/machines/${c.slug}/`, c.name]))}
+    ${col('Industries', industries.map((i) => [`/industries/${i.slug}/`, i.name]))}
     ${col('Company', [
       ['/machine-finder/', 'Machine Finder'],
       ['/machines/', 'All Machines'],

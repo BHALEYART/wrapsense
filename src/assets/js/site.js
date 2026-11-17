@@ -85,37 +85,41 @@
   var header = d.getElementById('site-header');
   var toggle = d.querySelector('.nav-toggle');
   var nav = d.getElementById('site-nav');
-  var trigger = d.querySelector('.site-nav__trigger');
-  var mega = d.getElementById('mega-machines');
+  var triggers = [].slice.call(d.querySelectorAll('.site-nav__trigger'));
   var mq = w.matchMedia('(max-width: 1080px)');
 
-  function setMega(open) {
-    if (!trigger || !mega) return;
-    trigger.setAttribute('aria-expanded', String(open));
-    mega.hidden = !open;
+  function setMega(t, open) {
+    triggers.forEach(function (o) {
+      var on = o === t && open;
+      o.setAttribute('aria-expanded', String(on));
+      d.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+    });
   }
+  var openTrigger = function () { return triggers.filter(function (t) { return t.getAttribute('aria-expanded') === 'true'; })[0]; };
   function setNav(open) {
     if (!toggle) return;
     if (open && header) d.documentElement.style.setProperty('--nav-top', Math.max(0, header.getBoundingClientRect().bottom) + 'px');
     toggle.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('is-open', open);
     d.body.classList.toggle('nav-open', open);
-    if (!open) setMega(false);
+    if (!open) setMega(null, false);
   }
   if (toggle) toggle.addEventListener('click', function () { setNav(toggle.getAttribute('aria-expanded') !== 'true'); });
-  if (trigger) trigger.addEventListener('click', function () { setMega(trigger.getAttribute('aria-expanded') !== 'true'); });
+  triggers.forEach(function (t) { t.addEventListener('click', function () { setMega(t, t.getAttribute('aria-expanded') !== 'true'); }); });
 
   d.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
-    if (trigger && trigger.getAttribute('aria-expanded') === 'true') { setMega(false); trigger.focus(); }
+    var ot = openTrigger();
+    if (ot) { setMega(null, false); ot.focus(); }
     else if (toggle && toggle.getAttribute('aria-expanded') === 'true') { setNav(false); toggle.focus(); }
   });
   d.addEventListener('click', function (e) {
-    if (!mq.matches && mega && !mega.hidden && !e.target.closest('.has-mega')) setMega(false);
+    if (!mq.matches && openTrigger() && !e.target.closest('.has-mega')) setMega(null, false);
   });
   // close the desktop mega menu when focus leaves it
-  if (mega) d.addEventListener('focusin', function (e) {
-    if (!mq.matches && !mega.hidden && !e.target.closest('.has-mega')) setMega(false);
+  d.addEventListener('focusin', function (e) {
+    var ot = openTrigger();
+    if (!mq.matches && ot && e.target.closest('.has-mega') !== ot.closest('.has-mega')) setMega(null, false);
   });
   mq.addEventListener && mq.addEventListener('change', function () { setNav(false); });
 

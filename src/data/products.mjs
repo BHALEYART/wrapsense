@@ -1,9 +1,12 @@
+import { industries } from './industries.mjs';
+
 // Every machine/product WrapSense offers. Sources: WrapSense Catalog 2026 (catalogPage = PDF page)
 // and product pages on the previous wrapsensepackaging.com site (legacyUrls → 301 redirects).
 //
 // forms     → product forms it suits (finder step 1)
 // packages  → package formats it produces or handles (finder step 2)
 // speed     → typical output range, packages (or units) per minute, for finder matching
+// industries → derived from the curated machine lists in industries.mjs (see bottom of file)
 // role      → 'primary' machines answer "what makes my package"; 'addon' machines extend a line
 
 const common = {
@@ -43,7 +46,6 @@ export const products = [
     uses: ['Potato chips and snacks', 'Coffee, nuts and granules', 'Frozen foods', 'Powders with an auger filler', 'Candy and gummies'],
     forms: ['snacks', 'granular', 'powder', 'cannabis'],
     packages: ['pillow-bag', 'gusseted-bag'],
-    industries: ['snacks', 'coffee-tea', 'nutrition', 'pet-food', 'dairy-frozen', 'spices', 'cannabis'],
     speed: { min: 20, max: 140 },
     models: [
       { name: 'FastPack Pro 430000HS', specs: { Speed: '20–140 bpm', 'Bag width': '2"–5.5"', 'Bag length': '2"–7.5"', 'Max. length (double pull)': '15.75"' } },
@@ -68,7 +70,6 @@ export const products = [
     uses: ['Snacks, cookies and bakery items', 'Coffee and tea', 'Protein powders and bulk supplements', 'Pet food and treats', 'Hardware and non-food items'],
     forms: ['snacks', 'granular', 'powder', 'solid', 'cannabis'],
     packages: ['pillow-bag', 'gusseted-bag'],
-    industries: ['snacks', 'coffee-tea', 'bakery', 'nutrition', 'pet-food', 'spices', 'cannabis'],
     speed: { min: 10, max: 80 },
     models: [
       { name: 'FastPack 43000', specs: { Speed: '20–80 bpm', 'Bag width': '2"–5.9"', 'Bag length': '2"–8.25"', 'Max. length': '15.75" (longer with double pull)' } },
@@ -96,7 +97,6 @@ export const products = [
     uses: ['Drink mixes and electrolytes', 'Sugar and sweeteners', 'Instant coffee', 'Protein and supplement samples', 'Honey and condiments'],
     forms: ['powder', 'granular', 'liquid'],
     packages: ['stick-pack', 'sachet'],
-    industries: ['nutrition', 'coffee-tea', 'pharmaceutical', 'spices', 'cosmetics'],
     speed: { min: 20, max: 100 },
     models: [
       { name: 'QuickStick Eco E1 (1 lane)', specs: { Speed: '20–50 bpm', 'Bag width': '17–90 mm', 'Bag length': 'Up to 200 mm' } },
@@ -121,7 +121,6 @@ export const products = [
     uses: ['Drink mixes and electrolytes', 'Sugar and sweeteners', 'Instant coffee', 'Supplements and vitamins', 'Condiments'],
     forms: ['powder', 'granular', 'liquid'],
     packages: ['stick-pack'],
-    industries: ['nutrition', 'coffee-tea', 'pharmaceutical', 'spices'],
     speed: { min: 120, max: 360 },
     models: [
       { name: 'QuickStick Pro 4 (4 lanes)', specs: { Speed: '120–180 bpm', 'Bag width': '16–50 mm', 'Bag length': 'Up to 200 mm' } },
@@ -147,7 +146,6 @@ export const products = [
     uses: ['Larger-dose drink mixes', 'Protein single-serves', 'Condiment and sauce sachets', 'Cosmetic samples'],
     forms: ['powder', 'granular', 'liquid'],
     packages: ['stick-pack', 'sachet'],
-    industries: ['nutrition', 'spices', 'cosmetics', 'pharmaceutical'],
     speed: { min: 120, max: 270 },
     models: [
       { name: 'QuickStick Pro 6 XL (6 lanes)', specs: { Speed: '120–180 bpm', 'Bag width': '40–95 mm', 'Bag length': 'Up to 200 mm' } },
@@ -174,7 +172,6 @@ export const products = [
     uses: ['Coffee and tea', 'Jerky and snacks', 'Supplements and powders', 'Pet treats', 'Cannabis flower and edibles'],
     forms: ['snacks', 'granular', 'powder', 'liquid', 'cannabis', 'solid'],
     packages: ['stand-up-pouch', 'flat-pouch', 'spout-pouch'],
-    industries: ['coffee-tea', 'snacks', 'nutrition', 'pet-food', 'cannabis', 'spices'],
     speed: { min: 6, max: 15 },
     models: [
       { name: 'RapidBagger Compact 1', specs: { Speed: '6–15 bpm', 'Pouch width': '2.75"–11"', 'Pouch length': '3.15"–12.6"' } },
@@ -200,7 +197,6 @@ export const products = [
     uses: ['Coffee and tea', 'Snacks and nuts', 'Powders and supplements', 'Pet food', 'Frozen foods'],
     forms: ['snacks', 'granular', 'powder', 'liquid', 'cannabis', 'solid'],
     packages: ['stand-up-pouch', 'flat-pouch', 'spout-pouch'],
-    industries: ['coffee-tea', 'snacks', 'nutrition', 'pet-food', 'dairy-frozen', 'cannabis'],
     speed: { min: 12, max: 25 },
     models: [
       { name: 'RapidBagger Inline 1', specs: { Speed: '12–25 bpm', 'Pouch width': '2.75"–8"', 'Pouch length': '4.3"–11.8"' } },
@@ -226,7 +222,6 @@ export const products = [
     uses: ['High-volume coffee and snacks', 'Pet food and treats', 'Supplements', 'Co-packing'],
     forms: ['snacks', 'granular', 'powder', 'liquid', 'solid'],
     packages: ['stand-up-pouch', 'flat-pouch', 'spout-pouch'],
-    industries: ['coffee-tea', 'snacks', 'pet-food', 'nutrition'],
     speed: { min: 30, max: 100 },
     models: [
       { name: 'RapidBagger RBX-HS-6', specs: { Speed: 'Up to 30–40 bpm', 'Pouch length': 'Up to 14.17"', 'Pouch width': '2.76"–7.09"' } },
@@ -252,7 +247,6 @@ export const products = [
     uses: ['Solid and bulky items', 'Frozen foods', 'Bakery items', 'Non-food goods'],
     forms: ['solid', 'snacks'],
     packages: ['stand-up-pouch', 'flat-pouch'],
-    industries: ['bakery', 'dairy-frozen', 'produce', 'snacks'],
     speed: { min: 12, max: 20 },
     models: [
       { name: 'RapidBagger SideLoad 1', specs: { Speed: '12–20 bpm', 'Pouch width': '2.75"–8"', 'Pouch length': '4.7"–11.8"' } },
@@ -281,7 +275,6 @@ export const products = [
     uses: ['Chips, snacks and candy', 'Coffee beans and nuts', 'Frozen foods', 'Pet food', 'Hardware and small parts'],
     forms: ['snacks', 'granular', 'cannabis', 'solid'],
     packages: ['pillow-bag', 'gusseted-bag', 'stand-up-pouch', 'flat-pouch', 'container'],
-    industries: ['snacks', 'coffee-tea', 'pet-food', 'dairy-frozen', 'produce', 'cannabis'],
     speed: { min: 10, max: 100 },
     models: [
       { name: 'SensiWeigh Pro 1.6 L / 2.5 L — 10 head', specs: { 'Weighing range': '10–1,000 g', Speed: 'Up to 50 cpm' } },
@@ -312,7 +305,6 @@ export const products = [
     uses: ['Cannabis flower', 'Loose-leaf tea', 'Gummies and small confections', 'Small hardware'],
     forms: ['snacks', 'granular', 'cannabis'],
     packages: ['stand-up-pouch', 'container', 'pillow-bag'],
-    industries: ['cannabis', 'coffee-tea', 'nutrition', 'snacks'],
     speed: { min: 20, max: 100 },
     models: [{ name: 'SensiWeigh Pro Mini 0.2 L / 0.5 L — 14 head', specs: { 'Weighing range': '2–200 g', Speed: 'Up to 100 cpm' } }],
     catalogPage: 11,
@@ -335,7 +327,6 @@ export const products = [
     uses: ['Coffee beans', 'Rice, grains and seeds', 'Sugar and salt', 'Pet food', 'Bulk bags up to 20 kg'],
     forms: ['granular'],
     packages: ['pillow-bag', 'gusseted-bag', 'stand-up-pouch', 'container'],
-    industries: ['coffee-tea', 'pet-food', 'spices', 'nutrition'],
     speed: { min: 12, max: 40 },
     models: [
       { name: 'SWL Mini (0.5 L)', specs: { Lanes: '4', 'Weighing range': '2–300 g', Speed: 'Up to 40 cpm' } },
@@ -363,7 +354,6 @@ export const products = [
     uses: ['Protein powders', 'Spices and seasonings', 'Coffee grounds', 'Flour and baking mixes', 'Pharmaceutical and nutraceutical powders'],
     forms: ['powder'],
     packages: ['pillow-bag', 'gusseted-bag', 'stand-up-pouch', 'container', 'stick-pack'],
-    industries: ['nutrition', 'spices', 'coffee-tea', 'pharmaceutical', 'bakery'],
     speed: { min: 20, max: 75 },
     models: [
       { name: 'ExactDose SA1 (25 L)', specs: { 'Fill range': '5 g–1 kg', Speed: 'Up to 75 cpm' } },
@@ -390,7 +380,6 @@ export const products = [
     uses: ['Granola and protein bars', 'Candy and chocolate', 'Cookies and wafers', 'Tortillas', 'Masks and small non-food items'],
     forms: ['solid', 'cannabis'],
     packages: ['flow-wrap'],
-    industries: ['bakery', 'snacks', 'nutrition', 'cannabis', 'cosmetics'],
     speed: { min: 30, max: 350 },
     models: [
       { name: '23000-3SP triple jaw', specs: { Speed: 'Up to 350 bpm', 'Film width': 'Up to 8.66"', 'Bag length': '2.36"–3.93"', 'Bag width': '0.5"–3.15"', 'Product height': 'Up to 1.2"' } },
@@ -415,7 +404,6 @@ export const products = [
     uses: ['Muffins and snack cakes', 'Brownies and pastries', 'Bars and cookies', 'Produce', 'Soap and non-food items'],
     forms: ['solid', 'cannabis'],
     packages: ['flow-wrap'],
-    industries: ['bakery', 'snacks', 'produce', 'cosmetics', 'cannabis'],
     speed: { min: 20, max: 180 },
     models: [{ name: 'TriServo 33000-3SP', specs: { Speed: 'Up to 180 bpm', 'Film width': 'Up to 15.75"', 'Bag length': '2.36"–11.8"', 'Bag width': '1.4"–6.3"', 'Product height': 'Up to 2"' } }],
     catalogPage: 13,
@@ -437,7 +425,6 @@ export const products = [
     uses: ['Breads and cakes', 'Trays and multipacks', 'Produce', 'Larger non-food items'],
     forms: ['solid'],
     packages: ['flow-wrap'],
-    industries: ['bakery', 'produce', 'dairy-frozen', 'cosmetics'],
     speed: { min: 20, max: 120 },
     models: [{ name: 'TriServo 63000-3SP', specs: { Speed: 'Up to 120 bpm', 'Film width': 'Up to 23.6"', 'Bag length': 'Up to 19.7"', 'Bag width': 'Up to 7.8"', 'Product height': 'Up to 3.15"' } }],
     catalogPage: 14,
@@ -459,7 +446,6 @@ export const products = [
     uses: ['Fresh produce', 'Soft baked goods', 'Loose or multi-piece items', 'Meal kits', 'Ice cream bars'],
     forms: ['solid'],
     packages: ['flow-wrap'],
-    industries: ['produce', 'bakery', 'dairy-frozen'],
     speed: { min: 20, max: 120 },
     models: [{ name: 'TriServo Inverted 33000-I3SP', specs: { Speed: 'Up to 120 bpm', 'Film width': 'Up to 15.75"', 'Bag length': 'Up to 19.7"', 'Bag width': 'Up to 6.3"', 'Product height': 'Up to 2"' } }],
     note: 'Additional inverted sizes, including 23000-I3SP and 43000-I3SP models, are available.',
@@ -482,7 +468,6 @@ export const products = [
     uses: ['Fresh produce', 'Breads', 'Trays and bundles', 'Larger soft or loose products'],
     forms: ['solid'],
     packages: ['flow-wrap'],
-    industries: ['produce', 'bakery', 'dairy-frozen'],
     speed: { min: 20, max: 120 },
     models: [{ name: 'TriServo Inverted 63000-I3SP', specs: { Speed: 'Up to 120 bpm', 'Film width': 'Up to 23.6"', 'Bag length': 'Up to 23.6"', 'Bag width': 'Up to 8.6"', 'Product height': 'Up to 3.15"' } }],
     catalogPage: 14,
@@ -504,7 +489,6 @@ export const products = [
     uses: ['Bulky baked goods', 'Trays and multipacks', 'Produce', 'Air fresheners and non-food items'],
     forms: ['solid'],
     packages: ['flow-wrap'],
-    industries: ['bakery', 'produce', 'cosmetics', 'dairy-frozen'],
     speed: { min: 20, max: 80 },
     models: [
       { name: 'WS-43000R3SP', specs: { Speed: '20–80 bpm', 'Max. film width': '430 mm', 'Bag length': '120–6,000 mm', 'Bag width': '50–160 mm', 'Product height': '5–80 mm', Power: '220 V, 3.825 kW' } },
@@ -533,7 +517,6 @@ export const products = [
     uses: ['Bakery and snacks', 'Dairy and frozen', 'Produce', 'Pet food', 'Supplements'],
     forms: ['snacks', 'granular', 'powder', 'solid', 'liquid', 'container', 'cases', 'cannabis'],
     packages: ['pillow-bag', 'gusseted-bag', 'stand-up-pouch', 'flat-pouch', 'flow-wrap', 'carton', 'sachet', 'stick-pack', 'container'],
-    industries: ['bakery', 'snacks', 'dairy-frozen', 'produce', 'pet-food', 'nutrition', 'pharmaceutical'],
     speed: { min: 0, max: 400 },
     specs: { 'Fe sensitivity': '0.0275"', 'Stainless sensitivity': '0.047"', 'Max. pack size': '11.8" W × 4.72" H', 'Max. weight': '11 lb', 'Belt speed': '98 ft/min', Power: '220 V / 60 Hz, single phase' },
     catalogPage: null,
@@ -556,7 +539,6 @@ export const products = [
     uses: ['Stick packs and sachets', 'Pharmaceuticals and supplements', 'Snack packs'],
     forms: ['powder', 'granular', 'snacks', 'solid', 'liquid', 'cannabis'],
     packages: ['stick-pack', 'sachet', 'pillow-bag', 'flow-wrap', 'carton'],
-    industries: ['pharmaceutical', 'nutrition', 'snacks'],
     speed: { min: 0, max: 400 },
     specs: { 'Weighing range': '0.18–7.05 oz', Accuracy: '±0.007 oz (test with your product)', 'Max. speed': '105 ft/min', 'Max. product size': '7.8" L × 3.9" W', Reject: 'Air blower', Power: '220 V AC, 400 W, 60 Hz', Dimensions: '49" L × 18" W × 47" H' },
     catalogPage: null,
@@ -581,7 +563,6 @@ export const products = [
     uses: ['Supplement and vitamin bottles', 'Sauces, honey and spice jars', 'Cosmetic jars', 'Cannabis containers'],
     forms: ['container'],
     packages: ['container'],
-    industries: ['nutrition', 'spices', 'cosmetics', 'pharmaceutical', 'cannabis'],
     speed: { min: 10, max: 35 },
     specs: { Speed: '10–35 units/min (depends on product and label size)', 'Container diameter': '0.25"–3.94"', 'Label width': '0.4"–4.7" standard, up to 7.1" optional', 'Label height': '1"–11.81"', 'Label length': '0.8"–15.75"' },
     catalogPage: 18,
@@ -604,7 +585,6 @@ export const products = [
     uses: ['Square and oval bottles', 'Cleaning and personal-care products', 'Supplement bottles', 'Sauces and beverages'],
     forms: ['container'],
     packages: ['container'],
-    industries: ['cosmetics', 'nutrition', 'spices', 'pharmaceutical'],
     speed: { min: 5, max: 80 },
     specs: { Speed: '5–80 pcs/min (depends on product and label size)', 'Container size': '0.8"–15.75" L × 1.2"–4.33" W × 2.36"–11" H', 'Label width': '0.8"–4.33" standard, up to 7.09" custom', 'Label length': '0.8"–15.75"' },
     catalogPage: 18,
@@ -627,7 +607,6 @@ export const products = [
     uses: ['Tub and tray lids', 'Food containers', 'Cartons and boxes', 'Tamper-evident seals'],
     forms: ['container', 'cases'],
     packages: ['container', 'carton'],
-    industries: ['dairy-frozen', 'produce', 'cannabis', 'cosmetics', 'bakery'],
     speed: { min: 0, max: 150 },
     specs: { Speed: '0–150 pcs/min (depends on product and label size)', 'Container size': '1.97"–15.75" L × 1.18"–11.81" W × 0.59"–3.94" H', 'Label width': '0.39"–4.33" standard, up to 7.09" custom', 'Label length': '0.4"–3.94"' },
     catalogPage: 18,
@@ -652,7 +631,6 @@ export const products = [
     uses: ['Supplement and vitamin bottles', 'Sauces and condiments', 'Cosmetics and personal care', 'Cannabis containers'],
     forms: ['container', 'liquid', 'powder'],
     packages: ['container'],
-    industries: ['nutrition', 'spices', 'cosmetics', 'pharmaceutical', 'cannabis'],
     speed: { min: 15, max: 40 },
     specs: { Speed: '15–40 bottles/min', 'Cap diameter': '1.18"–5.12"', Power: '220 V single phase, 50/60 Hz, 1.2 kW' },
     catalogPage: 19,
@@ -675,7 +653,6 @@ export const products = [
     uses: ['Supplement and pharmaceutical bottles', 'Jerky and dried foods', 'Coffee and nuts', 'Cannabis'],
     forms: ['container', 'snacks', 'granular', 'cannabis'],
     packages: ['container', 'stand-up-pouch', 'flat-pouch'],
-    industries: ['nutrition', 'pharmaceutical', 'snacks', 'coffee-tea', 'cannabis'],
     speed: { min: 10, max: 80 },
     specs: { Speed: '10–80 packs/min', 'Sachet length': '20–50 mm (adjustable)', 'Sachet width': '10–40 mm (adjustable)', Frame: 'Stainless steel' },
     catalogPage: 19,
@@ -700,7 +677,6 @@ export const products = [
     uses: ['Stick-pack and sachet multipacks', 'Bars and confections', 'Blister packs', 'Tubes and bottles laid flat'],
     forms: ['cases', 'container', 'solid'],
     packages: ['carton'],
-    industries: ['nutrition', 'pharmaceutical', 'cosmetics', 'bakery', 'snacks'],
     speed: { min: 30, max: 70 },
     specs: { Speed: '30–70 cartons/min', 'Min. carton (L×W×H)': '4.72" × 1.8" × 1.2"', 'Max. carton (L×W×H)': '9.84" × 7.09" × 3.94"' },
     catalogPage: 17,
@@ -723,7 +699,6 @@ export const products = [
     uses: ['Supplement bottles', 'Cosmetic jars and bottles', 'Spice and sauce jars', 'Vials'],
     forms: ['container', 'cases'],
     packages: ['carton'],
-    industries: ['nutrition', 'cosmetics', 'pharmaceutical', 'spices'],
     speed: { min: 20, max: 60 },
     specs: { Speed: '20–60 cartons/min', 'Min. carton (L×W×H)': '1.2" × 1.2" × 2.36"', 'Max. carton (L×W×H)': '4.7" × 4.7" × 9.44"' },
     catalogPage: 17,
@@ -748,7 +723,6 @@ export const products = [
     uses: ['Shipping cases for bags, pouches and cartons'],
     forms: ['cases'],
     packages: ['case'],
-    industries: [],
     speed: { min: 0, max: 15 },
     models: [
       { name: 'VP-500-15', specs: { Speed: 'Up to 15 cpm', 'Case length': '11"–19.7"', 'Case width': '5.9"–15.7"', 'Case height': '5.9"–15.7"' } },
@@ -774,7 +748,6 @@ export const products = [
     uses: ['Shipping cases for bags, pouches and cartons'],
     forms: ['cases'],
     packages: ['case'],
-    industries: [],
     speed: { min: 15, max: 25 },
     models: [
       { name: 'VU-400-25', specs: { Speed: 'Up to 25 cpm', 'Case length': '5.7"–16.5"', 'Case width': '3.1"–13.8"', 'Case height': '5.9"–13.8"' } },
@@ -800,7 +773,6 @@ export const products = [
     uses: ['High-volume shipping cases', 'Lines with several case sizes'],
     forms: ['cases'],
     packages: ['case'],
-    industries: [],
     speed: { min: 25, max: 30 },
     models: [
       { name: 'VT-400-30', specs: { Speed: 'Up to 30 cpm', 'Case length': '5.7"–15.7"', 'Case width': '3.1"–14.2"', 'Case height': '4.1"–13.8"' } },
@@ -827,7 +799,6 @@ export const products = [
     uses: ['Sealing shipping cases', 'E-commerce and distribution'],
     forms: ['cases'],
     packages: ['case'],
-    industries: [],
     speed: { min: 10, max: 20 },
     specs: { Speed: '10–20 cases/min', 'Case length': '7.87"–23.6"', 'Case width': '5.9"–19.68"', 'Case height': '5.9"–15.74"', 'Tape width': '1.9" / 2.36" / 2.95"', Power: '220 V, 50/60 Hz, single phase, 400 W', 'Air consumption': '450 NL/min', Weight: '550 lb' },
     catalogPage: 15,
@@ -850,7 +821,6 @@ export const products = [
     uses: ['Produce and snack shipping cases', 'Small-business pack-off'],
     forms: ['cases'],
     packages: ['case'],
-    industries: ['produce', 'snacks'],
     speed: { min: 0, max: 15 },
     specs: { 'Box length': '8"–18"', 'Box width': '6"–16"', 'Box height': '4"–14"', 'Belt speed': '0–60 ft/min', 'Tape width': '1.9", 2.4" or 2.8"', 'Working height': '24"–30"', Voltage: '110/220 V', Air: '5.5–6 kg/cm²', 'Machine size': '80" L × 76" W × 57" H', Weight: '880 lb' },
     catalogPage: null,
@@ -873,7 +843,6 @@ export const products = [
     uses: ['Palletizing sealed shipping cases'],
     forms: ['cases'],
     packages: ['pallet'],
-    industries: [],
     speed: { min: 8, max: 10 },
     specs: { Speed: '8–10 cases/min', 'Max. stack height': '6.5 ft', Payload: '66 lb' },
     catalogPage: 15,
@@ -898,7 +867,6 @@ export const products = [
     uses: ['Snack bags', 'Coffee and pet food pouches', 'Stick-pack cartons'],
     forms: ['cases'],
     packages: ['case'],
-    industries: ['snacks', 'coffee-tea', 'pet-food'],
     speed: { min: 30, max: 75 },
     specs: { 'Speed (3 oz products)': '60–75 /min', 'Speed (3 oz–2.2 lb)': '30–60 /min', 'Max. product size': '19.7" L × 17.7" W × 18.9" H', Payload: '5 lb' },
     catalogPage: 16,
@@ -921,7 +889,6 @@ export const products = [
     uses: ['Larger bags and pouches', 'Cartons and trays', 'Bulk products'],
     forms: ['cases'],
     packages: ['case'],
-    industries: ['pet-food', 'snacks', 'produce'],
     speed: { min: 10, max: 30 },
     specs: { Speed: 'Up to 30 cases/min', 'Max. product size': '15.75" W × 3.9" H', 'Case length': '11"–19.7"', 'Case width': '5.9"–15.75"', 'Case height': '5.9"–22.8"', Payload: '33 lb' },
     catalogPage: 16,
@@ -946,7 +913,6 @@ export const products = [
     uses: ['Feeding multihead weighers', 'Snacks, nuts and coffee', 'Frozen foods', 'Pet food'],
     forms: ['snacks', 'granular', 'cannabis', 'solid'],
     packages: [],
-    industries: ['snacks', 'coffee-tea', 'pet-food', 'dairy-frozen'],
     speed: { min: 0, max: 400 },
     specs: { Frame: '304 stainless steel', Buckets: 'Food-grade plastic', Power: '220 V single phase, 50/60 Hz', Motor: '0.75 kW standard', Size: 'Configured to your line' },
     catalogPage: null,
@@ -969,7 +935,6 @@ export const products = [
     uses: ['VFFS, premade pouch and stick-pack lines', 'Feeding inspection and pack-off'],
     forms: ['snacks', 'granular', 'powder', 'solid', 'liquid', 'cases', 'cannabis'],
     packages: [],
-    industries: [],
     speed: { min: 0, max: 400 },
     specs: { Speed: '30 m/min', Dimensions: '1,600 × 520 × 1,000 mm (L × W × H)', Power: '180 W, three-phase 380 V' },
     catalogPage: null,
@@ -993,7 +958,6 @@ export const products = [
     uses: ['Cannabis and hemp prerolls'],
     forms: ['cannabis'],
     packages: ['preroll'],
-    industries: ['cannabis'],
     speed: { min: 0, max: 1000 },
     specs: null,
     catalogPage: null,
@@ -1016,7 +980,6 @@ export const products = [
     uses: ['Layer cakes', 'Sponge and sheet cakes'],
     forms: ['solid'],
     packages: [],
-    industries: ['bakery'],
     speed: { min: 0, max: 1000 },
     specs: { Power: '1.5 kW, 220 V, 60 Hz', Dimensions: '60" L × 32" W × 46" H', Saws: 'One included (adjustable height), more optional' },
     catalogPage: null,
@@ -1039,10 +1002,12 @@ export const products = [
     uses: ['VFFS rollstock', 'Stick-pack and sachet film', 'Flow-wrap film'],
     forms: ['snacks', 'granular', 'powder', 'solid', 'liquid', 'cannabis'],
     packages: ['pillow-bag', 'gusseted-bag', 'stick-pack', 'sachet', 'flow-wrap'],
-    industries: ['snacks', 'coffee-tea', 'bakery', 'cannabis', 'nutrition'],
     speed: { min: 0, max: 1000 },
     specs: null,
     catalogPage: null,
     legacyUrls: [],
   },
 ];
+
+// Industries are curated per industry in industries.mjs; mirror them onto each product.
+for (const p of products) p.industries = industries.filter((i) => i.machines.includes(p.slug)).map((i) => i.slug);

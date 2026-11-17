@@ -57,7 +57,7 @@ function buildLead(b, type, req) {
     product: clean(b.product, 300), product_form: clean(b.form, 40), package: clean(b.pkg, 40), speed: clean(b.speed, 10),
     timeline: LABELS.timeline[b.timeline] || '', samples: clean(b.samples, 10),
     machine_model: clean(b.machine_model), serial: clean(b.serial, 100),
-    interest: clean(b.interest, 600).split(',').map((s) => s.trim()).filter((s) => PRODUCT[s]), category: clean(b.category, 80),
+    interest: clean(b.interest, 600).split(',').map((s) => s.trim()).filter((s) => PRODUCT[s]), category: clean(b.category, 80), industry: clean(b.industry, 80),
     message: clean(b.message, MAX.long), page: clean(b.page, 300),
     attribution: a,
     user_agent: clean(req.headers['user-agent'] || '', 300),
@@ -76,7 +76,7 @@ function emailHtml(L) {
     ${row('Name', `${L.first_name} ${L.last_name}`)}${row('Company', L.company)}${row('Email', L.email)}${row('Phone', L.phone)}${row('ZIP', L.zip)}${row('Prefers', L.contact_pref)}
     ${row('Packaging', L.product)}${row('Product type', L.product_form)}${row('Package', L.package)}${row('Target output', L.speed)}${row('Timeline', L.timeline)}${row('Samples for testing', L.samples)}
     ${row('Machine model', L.machine_model)}${row('Serial', L.serial)}
-    ${row('Interested in', L.interest.map((s) => PRODUCT[s]?.name || s).join(', '))}${row('Category', L.category)}
+    ${row('Interested in', L.interest.map((s) => PRODUCT[s]?.name || s).join(', '))}${row('Category', L.category)}${row('Industry page', L.industry)}
   </table>
   ${L.interest.length ? `<p>${L.interest.filter((s) => PRODUCT[s]).map((s) => `<a href="${site}${PRODUCT[s].url}">${escHtml(PRODUCT[s].name)}</a>`).join(' · ')}</p>` : ''}
   ${L.message ? `<h3 style="margin:20px 0 6px">Message</h3><p style="white-space:pre-wrap;margin:0">${escHtml(L.message)}</p>` : ''}

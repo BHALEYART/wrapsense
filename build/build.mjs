@@ -39,6 +39,7 @@ for (const p of products) {
   seen.add(p.slug);
 }
 for (const c of categories) if (!products.some((p) => p.category === c.slug)) throw new Error(`empty category ${c.slug}`);
+for (const i of industries) for (const s of [...i.machines, ...i.typicalLine]) if (!seen.has(s)) throw new Error(`industry ${i.slug}: unknown product ${s}`);
 for (const a of addons) for (const s of a.products || []) if (!seen.has(s)) throw new Error(`addon ${a.id}: unknown product ${s}`);
 for (const a of addons) for (const c of a.categories) if (!catSlugs.has(c)) throw new Error(`addon ${a.id}: unknown category ${c}`);
 

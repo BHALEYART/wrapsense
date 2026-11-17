@@ -333,7 +333,7 @@ See all [stick pack and sachet machines](c:stick-pack-sachet-machines), or tell 
   // ───────────────────────────────────────────────────────────────
   {
     slug: 'horizontal-vs-inverted-flow-wrapper',
-    industries: ['bakery', 'produce', 'dairy-frozen', 'cosmetics'],
+    industries: ['bakery', 'produce', 'frozen-foods', 'dairy', 'cosmetics'],
     title: 'Horizontal vs. Inverted Flow Wrappers: Which Does Your Product Need?',
     seoTitle: 'Horizontal vs. Inverted Flow Wrapper: How to Choose',
     description: 'Standard (horizontal) or inverted flow wrapper? How product shape, softness and stability decide the right flow wrapping machine — with examples.',
@@ -392,7 +392,7 @@ Browse all [flow wrappers](c:flow-wrappers), or send us your product dimensions 
   // ───────────────────────────────────────────────────────────────
   {
     slug: 'vffs-bag-seal-problems',
-    industries: ['snacks', 'dairy-frozen'],
+    industries: ['snacks', 'frozen-foods', 'dairy'],
     title: 'Why Is My Bagger Leaking? Common VFFS Seal Problems and How to Fix Them',
     seoTitle: 'VFFS Seal Problems: Causes & Fixes for Leaking Bags',
     description: 'Leaking, wrinkled or weak seals on your VFFS bagger? Troubleshoot temperature, dwell, pressure, product in the seal and film issues step by step.',
@@ -462,7 +462,7 @@ If you’ve worked through the list and seals still fail, it’s time for a tech
   // ───────────────────────────────────────────────────────────────
   {
     slug: 'metal-detectors-checkweighers-haccp-sqf',
-    industries: ['bakery', 'snacks', 'dairy-frozen', 'produce', 'pet-food', 'pharmaceutical', 'nutrition'],
+    industries: ['bakery', 'snacks', 'frozen-foods', 'dairy', 'produce', 'pet-food', 'pharmaceutical', 'nutrition'],
     title: 'Metal Detection and Checkweighing for HACCP and SQF Programs',
     seoTitle: 'Metal Detectors & Checkweighers for HACCP and SQF',
     description: 'How metal detectors and checkweighers fit into a food safety program — where to place them, what sensitivity means, reject systems and record keeping.',

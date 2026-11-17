@@ -16,7 +16,8 @@ def ttf(name, out):
 OSWALD, POPPINS = ttf('oswald-latin-wght-normal.woff2', 'o.ttf'), ttf('poppins-latin-500-normal.woff2', 'p.ttf')
 
 data = json.loads(subprocess.run(['node', '-e', """
-Promise.all([import('./src/data/products.mjs'), import('./src/data/categories.mjs'), import('./src/data/blog.mjs')]).then(([p, c, b]) => console.log(JSON.stringify({
+Promise.all([import('./src/data/products.mjs'), import('./src/data/categories.mjs'), import('./src/data/blog.mjs'), import('./src/data/industries.mjs')]).then(([p, c, b, ind]) => console.log(JSON.stringify({
+  industries: ind.industries.map(x => ({ slug: x.slug, name: x.name, image: x.image })),
   posts: b.posts.map(x => ({ slug: x.slug, title: x.title, image: x.image })),
   products: p.products.map(x => ({ slug: x.slug, name: x.fullName, tagline: x.tagline, image: x.image, category: x.category })),
   categories: c.categories.map(x => ({ slug: x.slug, name: x.name, accent: x.accent, image: x.image, series: x.series })) })));
@@ -85,4 +86,6 @@ for p in data['products']:
     card(p['name'], c['name'], p['tagline'], c['accent'], p['image']).save(os.path.join(OUT, f"{p['slug']}.jpg"), quality=80, optimize=True)
 for b in data['posts']:
     card(b['title'], 'WrapSense Packaging · Guide', None, ['#2448c8', '#3aaee0'], b['image']).save(os.path.join(OUT, f"blog-{b['slug']}.jpg"), quality=80, optimize=True)
+for i in data['industries']:
+    card(i['name'] + ' packaging machines', 'Industries · WrapSense Packaging', None, ['#2448c8', '#3aaee0'], i['image']).save(os.path.join(OUT, f"industry-{i['slug']}.jpg"), quality=80, optimize=True)
 print('OG images:', len(os.listdir(OUT)))
