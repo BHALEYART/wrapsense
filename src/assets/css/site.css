@@ -874,3 +874,6 @@ body.search-open { overflow: hidden; }
 .search-form__field input:focus-visible { box-shadow: none; }
 .search-hit__img img[src*='/photos/'], .search-hit__img img[src^='http'] { inset: 0; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 560px) { .search-dialog { inset: 0; margin: 0; width: 100%; max-height: none; height: 100%; } }
+/* Containers focused by script (finder steps, results, main) for screen readers: no visible ring.
+   Interactive controls keep their focus indicators. */
+[tabindex='-1']:focus, [tabindex='-1']:focus-visible, .fstep:focus, .results:focus { outline: none; box-shadow: none; }
