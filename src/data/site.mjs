@@ -40,31 +40,31 @@ export const stages = [
 
 // Product forms: step 1 of the machine finder ("What are you packaging?")
 export const forms = [
-  { id: 'powder', name: 'Powders', examples: 'Protein, spices, coffee grounds, flour, drink mixes', icon: 'powder' },
-  { id: 'granular', name: 'Granules & free-flowing', examples: 'Coffee beans, rice, seeds, nuts, pet kibble', icon: 'granular' },
-  { id: 'snacks', name: 'Snacks & irregular pieces', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks' },
-  { id: 'solid', name: 'Single solid items', examples: 'Bars, cookies, baked goods, produce, soap', icon: 'solid' },
-  { id: 'liquid', name: 'Liquids & pastes', examples: 'Sauces, gels, oils, honey, liquid supplements', icon: 'liquid' },
-  { id: 'container', name: 'Jars & bottles', examples: 'Filled jars, bottles and tubs that need caps, labels or cartons', icon: 'container' },
-  { id: 'cannabis', name: 'Cannabis & prerolls', examples: 'Prerolls, flower, edibles', icon: 'cannabis' },
-  { id: 'cases', name: 'Finished packs', examples: 'Bags, pouches or boxes that need cartoning, casing or palletizing', icon: 'cases' },
+  { id: 'powder', name: 'Powders', examples: 'Protein, spices, coffee grounds, flour, drink mixes', icon: 'powder', color: '#c2410c' },
+  { id: 'granular', name: 'Granules & free-flowing', examples: 'Coffee beans, rice, seeds, nuts, pet kibble', icon: 'granular', color: '#1d7a48' },
+  { id: 'snacks', name: 'Snacks & irregular pieces', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks', color: '#1a73c9' },
+  { id: 'solid', name: 'Single solid items', examples: 'Bars, cookies, baked goods, produce, soap', icon: 'solid', color: '#0f7f74' },
+  { id: 'liquid', name: 'Liquids & pastes', examples: 'Sauces, gels, oils, honey, liquid supplements', icon: 'liquid', color: '#7a3fc0' },
+  { id: 'container', name: 'Jars & bottles', examples: 'Filled jars, bottles and tubs that need caps, labels or cartons', icon: 'container', color: '#3d4fb8' },
+  { id: 'cannabis', name: 'Cannabis & prerolls', examples: 'Prerolls, flower, edibles', icon: 'cannabis', color: '#b0237a' },
+  { id: 'cases', name: 'Finished packs', examples: 'Bags, pouches or boxes that need cartoning, casing or palletizing', icon: 'cases', color: '#a85d00' },
 ];
 
 // Package formats: step 2 of the finder
 export const packages = [
-  { id: 'pillow-bag', name: 'Pillow bag', note: 'Classic chip-style bag', image: 'packages/pillow-bag.webp' },
-  { id: 'gusseted-bag', name: 'Gusseted bag', note: 'Stands up with side or bottom gussets', image: 'packages/weigh-fill.webp' },
-  { id: 'stick-pack', name: 'Stick pack', note: 'Single-serve narrow tube', image: 'packages/stick-pack.webp' },
-  { id: 'sachet', name: 'Sachet / 3-side seal', note: 'Flat single-serve packet', image: 'packages/sachet.webp' },
-  { id: 'stand-up-pouch', name: 'Stand-up / zipper pouch', note: 'Premade retail pouch', image: 'packages/stand-up-pouch.webp' },
-  { id: 'flat-pouch', name: 'Flat pouch', note: 'Premade lay-flat pouch', image: 'packages/flat-pouch.webp' },
-  { id: 'spout-pouch', name: 'Spout / shaped pouch', note: 'For liquids, gels and pastes', image: 'packages/spout-pouch.webp' },
-  { id: 'flow-wrap', name: 'Flow wrap', note: 'Wrapped bars, baked goods, single items', image: 'packages/flow-wrap-bag.webp' },
-  { id: 'container', name: 'Jar / bottle', note: 'Caps, labels and inserts', image: 'packages/label-cap.webp' },
-  { id: 'carton', name: 'Folding carton', note: 'Retail boxes', image: 'packages/carton.webp' },
-  { id: 'case', name: 'Shipping case', note: 'Corrugated cases, erected and sealed', image: 'packages/case-erect.webp' },
-  { id: 'pallet', name: 'Pallet', note: 'Stacked, ready for freight', image: 'packages/pallet.webp' },
-  { id: 'preroll', name: 'Preroll cone', note: 'Filled and closed cones', image: null },
+  { id: 'pillow-bag', name: 'Pillow bag', note: 'Classic chip-style bag', image: 'packages/pillow-bag.webp', category: 'vertical-form-fill-seal' },
+  { id: 'gusseted-bag', name: 'Gusseted bag', note: 'Stands up with side or bottom gussets', image: 'packages/weigh-fill.webp', category: 'vertical-form-fill-seal' },
+  { id: 'stick-pack', name: 'Stick pack', note: 'Single-serve narrow tube', image: 'packages/stick-pack.webp', category: 'stick-pack-sachet-machines' },
+  { id: 'sachet', name: 'Sachet / 3-side seal', note: 'Flat single-serve packet', image: 'packages/sachet.webp', category: 'stick-pack-sachet-machines' },
+  { id: 'stand-up-pouch', name: 'Stand-up / zipper pouch', note: 'Premade retail pouch', image: 'packages/stand-up-pouch.webp', category: 'premade-pouch-machines' },
+  { id: 'flat-pouch', name: 'Flat pouch', note: 'Premade lay-flat pouch', image: 'packages/flat-pouch.webp', category: 'premade-pouch-machines' },
+  { id: 'spout-pouch', name: 'Spout / shaped pouch', note: 'For liquids, gels and pastes', image: 'packages/spout-pouch.webp', category: 'premade-pouch-machines' },
+  { id: 'flow-wrap', name: 'Flow wrap', note: 'Wrapped bars, baked goods, single items', image: 'packages/flow-wrap-bag.webp', category: 'flow-wrappers' },
+  { id: 'container', name: 'Jar / bottle', note: 'Caps, labels and inserts', image: 'packages/label-cap.webp', category: 'labeling-machines' },
+  { id: 'carton', name: 'Folding carton', note: 'Retail boxes', image: 'packages/carton.webp', category: 'cartoning-machines' },
+  { id: 'case', name: 'Shipping case', note: 'Corrugated cases, erected and sealed', image: 'packages/case-erect.webp', category: 'case-erectors-sealers' },
+  { id: 'pallet', name: 'Pallet', note: 'Stacked, ready for freight', image: 'packages/pallet.webp', category: 'case-erectors-sealers' },
+  { id: 'preroll', name: 'Preroll cone', note: 'Filled and closed cones', image: null, category: 'specialty-machines' },
 ];
 
 export const speedBands = [

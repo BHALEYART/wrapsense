@@ -26,6 +26,9 @@
     inputs.forEach(function (inp, i) { if (inp.checked) { sel = i; name = inp.parentNode.querySelector('.wheel__name').textContent; } });
     wheel.classList.toggle('has-selection', sel > -1);
     if (sel > -1) wheel.style.setProperty('--sel', sel);
+    var selForm = sel > -1 ? inputs[sel].value : '';
+    wheel.querySelectorAll('.wheel__seg').forEach(function (seg) { seg.classList.toggle('is-on', seg.getAttribute('data-seg') === selForm); });
+    if (sel > -1) wheel.style.setProperty('--sel-c', inputs[sel].closest('.wheel__item').style.getPropertyValue('--c'));
     var pick = wheel.querySelector('[data-wheel-pick]');
     if (pick) pick.textContent = sel > -1 ? name : 'Pick a product type';
     var ex = wheel.querySelector('[data-wheel-examples]');
@@ -34,6 +37,15 @@
 
   d.querySelectorAll('[data-wheel]').forEach(function (wheel) {
     wheel.addEventListener('change', function () { syncWheel(wheel); });
+    // light up a product type's ring segment on hover/focus
+    var hl = function (id, on) { var seg = wheel.querySelector('.wheel__seg[data-seg="' + id + '"]'); if (seg) seg.classList.toggle('is-hover', on); };
+    wheel.querySelectorAll('.wheel__item').forEach(function (li) {
+      var id = li.getAttribute('data-form');
+      li.addEventListener('mouseenter', function () { hl(id, true); });
+      li.addEventListener('mouseleave', function () { hl(id, false); });
+      li.addEventListener('focusin', function () { hl(id, true); });
+      li.addEventListener('focusout', function () { hl(id, false); });
+    });
     syncWheel(wheel);
   });
 
@@ -232,7 +244,8 @@
       '<span class="pcard__go" aria-hidden="true">' + ICON('arrow') + '</span></article></li>';
   }
   function lineItem(p, note) {
-    return '<a class="build-line__item" href="' + p.url + '"><img src="' + esc(p.img) + '" alt="" width="' + p.w + '" height="' + p.h + '" loading="lazy"><span>' + esc(p.name) + (note ? '<small>' + esc(note) + '</small>' : '') + '</span></a>';
+    var c = CATS[p.category];
+    return '<a class="build-line__item" style="--a1:' + c.accent[0] + '" href="' + p.url + '"><img src="' + esc(p.img) + '" alt="" width="' + p.w + '" height="' + p.h + '" loading="lazy"><span>' + esc(p.name) + (note ? '<small>' + esc(note) + '</small>' : '') + '</span></a>';
   }
 
   function renderResults() {

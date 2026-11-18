@@ -60,16 +60,12 @@ export function wheel({ id = 'wheel', compact = false, legendTag = 'h2', stepLab
     <div class="wheel__stage">
       <div class="wheel__ring" aria-hidden="true">
         <svg viewBox="0 0 400 400" class="wheel__svg">
-          <defs>
-            <linearGradient id="${id}-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a73c9"/><stop offset="1" stop-color="#5ab4ee"/></linearGradient>
-          </defs>
-          <circle cx="200" cy="200" r="168" fill="none" stroke="url(#${id}-g)" stroke-width="56" opacity=".12"/>
+          ${forms.map((f, i) => `<circle class="wheel__seg" data-seg="${f.id}" cx="200" cy="200" r="168" fill="none" stroke="${f.color}" stroke-width="56" pathLength="${n}" stroke-dasharray="1 ${n - 1}" transform="rotate(${(i * 360) / n - 90 - 180 / n} 200 200)"/>`)}
           ${forms.map((_, i) => {
             const a = ((i / n) * 360 - 90 + 360 / n / 2) * (Math.PI / 180);
             const x1 = 200 + Math.cos(a) * 140, y1 = 200 + Math.sin(a) * 140, x2 = 200 + Math.cos(a) * 196, y2 = 200 + Math.sin(a) * 196;
-            return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#fff" stroke-width="3"/>`;
+            return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#fff" stroke-width="4"/>`;
           })}
-          <circle class="wheel__arc" cx="200" cy="200" r="168" fill="none" stroke="url(#${id}-g)" stroke-width="56" pathLength="${n}" stroke-dasharray="1 ${n - 1}"/>
         </svg>
       </div>
       <div class="wheel__hub" aria-hidden="true">
@@ -78,7 +74,7 @@ export function wheel({ id = 'wheel', compact = false, legendTag = 'h2', stepLab
         <span class="wheel__hub-pick" data-wheel-pick>Pick a product type</span>
       </div>
       <ul class="wheel__items" role="list">
-        ${forms.map((f, i) => html`<li class="wheel__item" style="--i:${i}">
+        ${forms.map((f, i) => html`<li class="wheel__item" style="--i:${i};--c:${f.color}" data-form="${f.id}">
           <input class="wheel__input visually-hidden" type="radio" name="form" id="${id}-${f.id}" value="${f.id}"${selected === f.id ? ' checked' : ''} required>
           <label class="wheel__label" for="${id}-${f.id}">
             ${icon(f.icon, 'wheel__icon')}

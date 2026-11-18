@@ -501,10 +501,10 @@ export function finderPage() {
       </div>
 
       ${step(2, 'What package do you want to make?', 'Showing formats that suit your product. Not sure? Pick the closest.', html`<div class="opt-grid opt-grid--pkg" data-pkg-options>
-        ${packages.map((P) => html`<div class="opt" data-pkg="${P.id}">
+        ${packages.map((P) => { const C = catBySlug[P.category]; return html`<div class="opt" data-pkg="${P.id}">
           <input class="visually-hidden" type="radio" name="pkg" id="pkg-${P.id}" value="${P.id}">
-          <label for="pkg-${P.id}" class="opt__card">${P.image ? `<span class="opt__img">${imgTag(P.image, '')}</span>` : `<span class="opt__img opt__img--icon">${icon('cannabis', 'opt__icon')}</span>`}<span class="opt__name">${esc(P.name)}</span><span class="opt__note">${esc(P.note)}</span></label>
-        </div>`)}
+          <label for="pkg-${P.id}" class="opt__card opt__card--pkg" style="${accentStyle(C)}">${P.image ? `<span class="opt__img">${imgTag(P.image, '')}</span>` : `<span class="opt__img opt__img--icon">${icon('cannabis', 'opt__icon')}</span>`}<span class="opt__name">${esc(P.name)}</span><span class="opt__note">${esc(P.note)}</span><span class="opt__made"><span class="opt__dot" aria-hidden="true"></span>Made on: ${esc(C.short)}</span></label>
+        </div>`; })}
       </div>`)}
 
       ${step(3, 'How many packages per minute do you need?', 'A rough target is fine — it helps us size the machine.', html`<div class="opt-grid opt-grid--speed">
