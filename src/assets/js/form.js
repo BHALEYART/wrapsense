@@ -77,6 +77,42 @@
     var note = d.createElement('p'); note.className = 'fine'; note.textContent = 'We’ve filled in your Machine Finder answers — adjust anything you like.';
     form.querySelector('.form-section').insertBefore(note, form.querySelector('.choice-group').nextSibling);
   }
+  // Came straight from a machine page without the machine in the link (e.g. browser back/forward)?
+  var fromProduct = '';
+  try {
+    var ref = d.referrer && new URL(d.referrer);
+    var m = ref && ref.host === location.host && ref.pathname.match(/^\/machines\/[^/]+\/([^/]+)\/$/);
+    if (m && names[m[1]] && !q.get('interest')) { fromProduct = m[1]; addInterest(m[1]); }
+  } catch (x) {}
+
+  /* ── recently viewed machines → one-tap suggestions ── */
+  var recentWrap = form.querySelector('[data-recent]');
+  var recentList = form.querySelector('[data-recent-list]');
+  var pdata = {};
+  try { pdata = JSON.parse(d.getElementById('product-data').textContent); } catch (x) {}
+  var viewed = ((window.WS && WS.store.get('interest')) || []).filter(function (s) { return names[s]; });
+  function renderRecent() {
+    var picks = viewed.filter(function (s) { return interest.indexOf(s) === -1; }).slice(0, 3);
+    recentWrap.hidden = !picks.length;
+    recentList.innerHTML = picks.map(function (s) {
+      var p = pdata[s] || { name: names[s] };
+      return '<li><button type="button" class="recent__btn" data-recent-add="' + s + '">' +
+        (p.img ? '<img src="' + esc(p.img) + '" alt="" width="40" height="40">' : '') +
+        '<span>' + esc(p.name) + '</span><span class="visually-hidden"> — add to request</span></button></li>';
+    }).join('');
+  }
+  recentList.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-recent-add]');
+    if (!b) return;
+    addInterest(b.getAttribute('data-recent-add'));
+    renderRecent();
+    var next = recentList.querySelector('button') || addSel;
+    next.focus();
+    window.WS && WS.track('quote_recent_added', { product: b.getAttribute('data-recent-add') });
+  });
+  var _render = renderChips;
+  renderChips = function () { _render(); if (recentList) renderRecent(); };
+
   renderChips();
   syncType();
 

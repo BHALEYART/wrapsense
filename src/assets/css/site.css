@@ -952,3 +952,12 @@ body.search-open { overflow: hidden; }
 .spec-cta p:last-child { margin-bottom: 0; }
 .spec-cta__models { color: var(--ink); }
 .spec-cta__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+/* quote form: recently viewed suggestions */
+.recent { margin: .25rem 0 .6rem; }
+.recent__title { margin: 0 0 .45rem; font-size: .85rem; color: var(--muted); }
+.recent__list { display: flex; flex-wrap: wrap; gap: .5rem; }
+.recent__btn { display: inline-flex; align-items: center; gap: .55rem; padding: .3rem .85rem .3rem .3rem; border-radius: 999px; border: 1.5px dashed var(--line-2); background: #fff; color: var(--ink); font-weight: 500; font-size: .9rem; cursor: pointer; }
+.recent__btn img { width: 34px; height: 34px; object-fit: contain; border-radius: 50%; background: var(--bg-tint); padding: 2px; }
+.recent__btn::after { content: '+'; font-size: 1.15rem; line-height: 1; color: var(--brand-text); }
+.recent__btn:hover { border-style: solid; border-color: var(--brand); background: var(--bg-tint); }

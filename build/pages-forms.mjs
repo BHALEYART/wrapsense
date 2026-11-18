@@ -1,4 +1,4 @@
-import { esc, html, icon, imgTag } from './lib.mjs';
+import { esc, html, icon, imgTag, img } from './lib.mjs';
 import { layout, breadcrumbs, orgLd } from './layout.mjs';
 import { site, forms, packages, speedBands } from '../src/data/site.mjs';
 import { products } from '../src/data/products.mjs';
@@ -59,6 +59,20 @@ export function contactPage() {
         <p class="field__error" id="type-err" hidden></p>
       </fieldset>
 
+      <div class="field field--full interest" data-interest-wrap>
+        <label for="interest-add">Machines you’re interested in <span class="opt-label">(optional)</span></label>
+        <ul class="interest__chips" role="list" data-interest-chips aria-live="polite"></ul>
+        <div class="recent" data-recent hidden>
+          <p class="recent__title" id="recent-title">Recently viewed — tap to add:</p>
+          <ul class="recent__list" role="list" aria-labelledby="recent-title" data-recent-list></ul>
+        </div>
+        <select id="interest-add" data-interest-add>
+          <option value="">Add a machine…</option>
+          ${machineOptions.map(({ c, list }) => `<optgroup label="${esc(c.name)}">${list.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join('')}</optgroup>`)}
+        </select>
+        <input type="hidden" name="interest" value="" data-interest-input>
+      </div>
+
       <div class="form-grid" data-show-for="new-machine line custom film financing">
         ${field({ id: 'product', label: 'What are you packaging?', required: true, hint: 'For example: “ground coffee, 12 oz bags” or “protein powder in 30 g stick packs”.', full: true, attrs: 'maxlength="300" data-required-for="new-machine line custom film"' })}
         ${select({ id: 'form', label: 'Product type', options: forms.map((f) => [f.id, f.name]) })}
@@ -81,15 +95,6 @@ export function contactPage() {
         ${field({ id: 'serial', label: 'Serial number', attrs: 'maxlength="100"' })}
       </div>
 
-      <div class="field field--full interest" data-interest-wrap>
-        <label for="interest-add">Machines you’re interested in <span class="opt-label">(optional)</span></label>
-        <ul class="interest__chips" role="list" data-interest-chips aria-live="polite"></ul>
-        <select id="interest-add" data-interest-add>
-          <option value="">Add a machine…</option>
-          ${machineOptions.map(({ c, list }) => `<optgroup label="${esc(c.name)}">${list.map((p) => `<option value="${p.slug}">${esc(p.name)}</option>`).join('')}</optgroup>`)}
-        </select>
-        <input type="hidden" name="interest" value="" data-interest-input>
-      </div>
 
       ${field({ id: 'message', label: 'Anything else we should know?', type: 'textarea', full: true, hint: 'Bag sizes, fill weights, current process, space constraints, budget — whatever helps.', attrs: 'maxlength="4000"' })}
     </fieldset>
@@ -147,7 +152,8 @@ export function contactPage() {
       <p>The <a href="/machine-finder/">Machine Finder</a> walks you through it in four questions and fills in this form for you. Wondering about budget? Read <a href="/blog/packaging-machine-cost/">what drives packaging machine cost</a>.</p>
     </div>
   </aside>
-</div></section>`;
+</div></section>
+<script type="application/json" id="product-data">${JSON.stringify(Object.fromEntries(products.map((p) => [p.slug, { name: p.name, img: img(p.image).src }]))).replace(/</g, '\\u003c')}</script>`;
   return layout({
     path: '/contact/',
     title: 'Request a Quote — Packaging Machines & Lines',

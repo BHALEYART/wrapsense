@@ -67,7 +67,16 @@
 
   // product pages: remember which machines were viewed
   var pm = location.pathname.match(/^\/machines\/[^/]+\/([^/]+)\/$/);
-  if (pm) WS.noteInterest(pm[1]);
+  if (pm) {
+    WS.noteInterest(pm[1]);
+    // Every quote link on a machine page (header, footer, banners) carries that machine into the form.
+    d.querySelectorAll('a[href^="/contact/"]').forEach(function (a) {
+      var u = new URL(a.getAttribute('href'), location.origin);
+      if (u.searchParams.get('type') === 'service' || u.searchParams.get('interest')) return;
+      u.searchParams.set('interest', pm[1]);
+      a.setAttribute('href', u.pathname + u.search + u.hash);
+    });
+  }
 
   // click tracking: [data-track] plus tel:/mailto:/pdf links
   d.addEventListener('click', function (e) {
