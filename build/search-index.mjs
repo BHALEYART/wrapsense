@@ -56,6 +56,7 @@ export function buildSearchIndex() {
   const pages = [
     ['Machine Finder', '/machine-finder/', 'Answer four questions to match a machine to your product.', 'finder quiz recommend which machine help choose wizard selector'],
     ['Request a quote', '/contact/', 'Tell us what you’re packaging and get a quote.', 'quote price pricing cost contact sales email phone call'],
+    ['Equipment financing', '/financing/', 'Finance machines and lines; estimate labor savings and payback.', 'financing finance lease loan payment monthly payments roi payback cost analysis calculator labor savings credit apply'],
     ['Service & support', '/services/', 'Installation, training, maintenance, parts and custom machines.', 'service repair parts spare parts maintenance installation training technician support warranty'],
     ['About WrapSense', '/about/', 'Packaging machinery and turn-key lines from Gaithersburg, Maryland.', 'about company who we are maryland gaithersburg'],
     ['2026 product catalog', '/catalog/', 'Download the full WrapSense catalog (PDF).', 'catalog catalogue brochure pdf download spec sheet'],

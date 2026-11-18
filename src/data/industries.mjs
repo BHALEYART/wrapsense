@@ -171,32 +171,6 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'dairy', name: 'Dairy & Cheese', short: 'Dairy & cheese', image: 'products/labelease-tbl.webp',
-    seoTitle: 'Dairy & Cheese Packaging Machines', seoDescription: 'Dairy and cheese packaging equipment: flow wrappers, weighers, pouch machines, tub and lid labeling, metal detection and end-of-line casing.',
-    intro: 'Cheese portions, shredded cheese, yogurt cups, ice cream bars and dairy snacks need packaging that seals reliably in cold, wet environments — and equipment built to be cleaned. WrapSense supplies wrapping, weighing, labeling and casing equipment for dairy producers.',
-    intro2: 'Tell us about your product, temperature and sanitation requirements and we’ll recommend materials and configurations to match.',
-    examples: ['Cheese sticks and portions', 'Shredded cheese', 'Ice cream bars', 'Yogurt and dairy tubs', 'Butter and spreads', 'Dairy snacks'],
-    benefits: [
-      ['Reliable cold seals', 'Servo-controlled sealing helps maintain consistent seals on chilled product.'],
-      ['Sanitary construction', 'Stainless steel frames and wash-down options are available.'],
-      ['Tub and lid labeling', 'Top-and-bottom labelers apply labels to lids and tubs at high speed.'],
-      ['Food safety', 'Metal detection protects customers and your brand.'],
-    ],
-    stageNotes: {
-      pack: 'Flow wrappers wrap cheese portions and ice cream bars; VFFS and pouch machines bag shredded cheese.',
-      finish: 'LabelEase TBL applies labels to tub lids and container tops.',
-    },
-    machines: ['sensiweigh-pro-multihead-weigher', 'fastpack-intermittent-motion-vffs', 'rapidbagger-inline', 'triservo-33000-3sp-flow-wrapper', 'triservo-inverted-33000-i3sp', 'triservo-63000-3sp-flow-wrapper', 'food-metal-detector', 'labelease-tbl-top-bottom-labeler', 'casemaster-velocity-ultra-case-erector', 'pickn-pack-casepacker-2', 'casemaster-fastseal-case-sealer'],
-    typicalLine: ['triservo-33000-3sp-flow-wrapper', 'food-metal-detector', 'casemaster-velocity-ultra-case-erector', 'casemaster-fastseal-case-sealer'],
-    packages: ['flow-wrap', 'pillow-bag', 'container'],
-    faqs: [
-      ['Can flow wrappers handle ice cream bars?', 'Yes — ice cream bars are a common flow-wrap application. Speed and film choice depend on the product and your freezer handling.'],
-      ['How do I label yogurt or dairy tub lids automatically?', 'A top-and-bottom labeler such as the LabelEase TBL applies labels to lids and tops at up to 150 pieces per minute, depending on size.'],
-      ['Is wash-down construction available?', 'Wash-down and stainless options are available on several machines, including conveyors and elevators. Tell us your sanitation requirements when you request a quote.'],
-    ],
-  },
-  // ─────────────────────────────────────────────
-  {
     slug: 'frozen-foods', name: 'Frozen Foods', short: 'Frozen foods', image: 'products/fastpack-line.webp',
     seoTitle: 'Frozen Food Packaging Machines', seoDescription: 'Frozen food packaging machines: multihead weighers, VFFS baggers, pouch machines, inspection and case packing for frozen vegetables, fruit and meals.',
     intro: 'Frozen vegetables, fruit, potato products, dumplings and prepared meals are bagged fast, often in cold and wet conditions. WrapSense frozen food lines combine combination weighing with VFFS baggers or pouch machines, inspection and automated casing.',

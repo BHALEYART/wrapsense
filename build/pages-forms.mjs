@@ -34,6 +34,7 @@ export function contactPage() {
     ['custom', 'A custom machine', 'sparkle'],
     ['service', 'Service, parts or support', 'wrench'],
     ['film', 'Packaging film', 'doc'],
+    ['financing', 'Equipment financing', 'flask'],
   ];
   const machineOptions = categories.map((c) => ({ c, list: products.filter((p) => p.category === c.slug) }));
   const body = html`
@@ -58,7 +59,7 @@ export function contactPage() {
         <p class="field__error" id="type-err" hidden></p>
       </fieldset>
 
-      <div class="form-grid" data-show-for="new-machine line custom film">
+      <div class="form-grid" data-show-for="new-machine line custom film financing">
         ${field({ id: 'product', label: 'What are you packaging?', required: true, hint: 'For example: “ground coffee, 12 oz bags” or “protein powder in 30 g stick packs”.', full: true, attrs: 'maxlength="300" data-required-for="new-machine line custom film"' })}
         ${select({ id: 'form', label: 'Product type', options: forms.map((f) => [f.id, f.name]) })}
         ${select({ id: 'pkg', label: 'Package format', options: packages.map((p) => [p.id, p.name]) })}
@@ -192,8 +193,8 @@ export function privacyPage() {
   <h2>How we track where leads come from</h2>
   <p>To understand which pages and campaigns help people find us, this site stores a small amount of information in your browser’s local storage (not a cookie): the page you first arrived on, the referring website, campaign tags in the link you followed (such as <code>utm_source</code> or ad click IDs), which machine pages you viewed and your Machine Finder answers. This information stays in your browser and is only sent to us if you submit a form, alongside your request.</p>
   <p>If your browser sends a Global Privacy Control signal, we keep this information only for your current visit. You can also clear it at any time by clearing your browser’s site data.</p>
-  <h2>Analytics and advertising</h2>
-  <p>We may use analytics or advertising tools (for example, Google Analytics or Google Tag Manager) to measure site performance. These tools may set their own cookies. You can block or delete cookies through your browser settings; some site features may not work as intended without them.</p>
+  <h2>Analytics, CRM and advertising</h2>
+  <p>We use HubSpot to manage inquiries; quote requests you submit are stored in our HubSpot account, and HubSpot’s tracking code may set cookies to connect your visits with your request. We may also use analytics or advertising tools (for example, Google Analytics or Google Tag Manager) to measure site performance. These tools may set their own cookies. You can block or delete cookies through your browser settings; some site features may not work as intended without them.</p>
   <h2>How we use and share information</h2>
   <p>We use your information to respond to inquiries, provide quotes, deliver products and services, and communicate with you. Service providers that help us run the site or our business (such as email delivery or CRM providers) may process data on our behalf and are not permitted to use it for other purposes. We do not sell your personal information.</p>
   <h2>Your choices</h2>

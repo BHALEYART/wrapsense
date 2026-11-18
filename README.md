@@ -41,25 +41,40 @@ The search icon in the header (or `/` or Ctrl/⌘ K) opens instant search across
 
 `/machine-finder/` asks four questions — product type (the radial wheel), package format, output, and add-ons — then ranks machines by product + package fit and speed overlap, and assembles a suggested line. Matching uses the `forms`, `packages`, `speed`, `role` fields on each product. Answers live in the URL (shareable, back-button friendly) and flow into the quote form.
 
+## HubSpot (quote form → HubSpot Contacts)
+
+1. In HubSpot, create a form (Marketing → Forms) with these fields: **First name, Last name, Email, Phone number, Company name, Postal code, Message**. You don't need to embed it anywhere. It only needs to exist.
+2. Copy the form's GUID (it's in the form's URL / embed code) and your Hub ID (Account → top-right menu).
+3. In Vercel → Settings → Environment Variables, set `HUBSPOT_PORTAL_ID` and `HUBSPOT_FORM_GUID`, then redeploy.
+
+Every quote/service/financing request is then submitted to that form, so it creates or updates a HubSpot contact, appears under the form's submissions, and can trigger HubSpot workflows (auto-replies, owner assignment, deal creation). The **Message** field holds the full project details plus lead source: product, package, output, timeline, machines of interest, UTM/ad-click source, Machine Finder answers and any financing-calculator estimate. To also fill custom HubSpot properties, add them to the form and set e.g. `HUBSPOT_EXTRA_FIELDS=timeline:purchase_timeline,product:packaging_product`.
+
+Setting `HUBSPOT_PORTAL_ID` also loads HubSpot's tracking code on every page (build time), so each contact's timeline shows the pages they viewed and their original traffic source. Turn on HubSpot's cookie banner under Settings → Privacy & Consent if you need consent before tracking.
+
 ## Lead delivery (set before launch)
 
 In Vercel → Project → Settings → Environment Variables:
 
 | Variable | Purpose |
 |---|---|
+| `HUBSPOT_PORTAL_ID` / `HUBSPOT_FORM_GUID` | HubSpot delivery (see above) |
 | `RESEND_API_KEY` | Email delivery via [Resend](https://resend.com) (verify the wrapsensepackaging.com domain there) |
 | `LEAD_TO_EMAIL` | Recipient(s), comma-separated. Default `sales@wrapsensepackaging.com` |
 | `LEAD_FROM_EMAIL` | e.g. `WrapSense Website <leads@wrapsensepackaging.com>` |
 | `LEAD_WEBHOOK_URL` | Optional: POSTs the full lead as JSON (GoHighLevel, HubSpot, Zapier, Make…) |
 | `LEAD_WEBHOOK_SECRET` | Optional: sent as `X-Webhook-Secret` |
 
-Use either or both. With neither set, the form shows a "call or email us" fallback and the lead is written to the function log, so set at least one before go-live.
+HubSpot, email and webhook can be used together; a lead counts as delivered if any one succeeds. With neither set, the form shows a "call or email us" fallback and the lead is written to the function log, so set at least one before go-live.
 
 ## Lead tracking
 
 `site.js` records first-party attribution in `localStorage` (no cookies): first touch and latest touch (UTM tags, `gclid`/`fbclid`/`msclkid`, referrer, landing page), visit count, pages this session, machines viewed and Machine Finder answers. It's attached to the lead when the form is submitted and shown in the lead email. With Global Privacy Control on, it's kept for the session only. Expect some leads to arrive without a source (blocked storage, other devices, private browsing) — attribution is never 100%.
 
 Events are also pushed to `window.dataLayer` (`generate_lead`, `finder_start`, `finder_complete`, `phone_click`, `email_click`, `catalog_download`, `form_start`, `form_error`, `machines_filter`, plus `data-track` CTA clicks). Add a GTM container ID in `src/data/site.mjs` to forward them to GA4 / Google Ads / Meta.
+
+## Financing
+
+`/financing/` has a cost-analysis calculator (labor savings, hours saved, added production, payment, payback) and "Apply" buttons. Set the lender's name and application URL in `financing` in `src/data/site.mjs`; until then, Apply goes to the quote form with *Equipment financing* selected. Calculator estimates are attached to the lead.
 
 ## Launch checklist
 

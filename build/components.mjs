@@ -61,7 +61,7 @@ export function wheel({ id = 'wheel', compact = false, legendTag = 'h2', stepLab
       <div class="wheel__ring" aria-hidden="true">
         <svg viewBox="0 0 400 400" class="wheel__svg">
           <defs>
-            <linearGradient id="${id}-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2448c8"/><stop offset="1" stop-color="#3aaee0"/></linearGradient>
+            <linearGradient id="${id}-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a73c9"/><stop offset="1" stop-color="#5ab4ee"/></linearGradient>
           </defs>
           <circle cx="200" cy="200" r="168" fill="none" stroke="url(#${id}-g)" stroke-width="56" opacity=".12"/>
           ${forms.map((_, i) => {
@@ -102,7 +102,6 @@ export function lineDiagram({ highlight = null, link = true } = {}) {
       return html`<li class="line__stage${active ? ' is-active' : ''}">
         <span class="line__num" aria-hidden="true">${i + 1}</span>
         <p class="line__name">${esc(s.name)}</p>
-        <p class="line__blurb">${esc(s.blurb)}</p>
         ${link ? html`<ul class="line__cats" role="list">${cats.map((c) => `<li><a href="${categoryUrl(c)}">${esc(c.short)}</a></li>`)}</ul>` : ''}
       </li>`;
     })}

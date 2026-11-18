@@ -58,6 +58,8 @@
     flat.viewed_machines = ((persist && get(persist, 'interest')) || []).join(',');
     var f = persist && get(persist, 'finder');
     if (f) flat.finder = f.summary || '';
+    var fin = persist && get(persist, 'financing');
+    if (fin) flat.financing_estimate = 'equipment $' + fin.cost + ', est. monthly benefit $' + fin.monthly_benefit + ', est. payment $' + fin.payment;
     flat.submitted_from = location.pathname;
     flat.gpc = GPC ? '1' : '0';
     return flat;

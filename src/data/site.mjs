@@ -20,6 +20,9 @@ export const site = {
   catalogPdf: '/assets/docs/WrapSense-Catalog-2026.pdf',
   // Optional analytics. Leave blank to load nothing. Example: 'GTM-XXXXXXX'
   gtmId: '',
+  // HubSpot tracking code (portal / Hub ID). Can also be set with the HUBSPOT_PORTAL_ID env var at build time.
+  // Loading it lets HubSpot attach page views and traffic source to each quote request.
+  hubspotPortalId: '',
   // Where finished leads are posted. See README → "Lead delivery".
   leadEndpoint: '/api/lead',
 };
@@ -128,3 +131,20 @@ export const services = [
     text: 'Send us your product and packaging. We can set up testing on our machines and discuss your application before you commit.',
   },
 ];
+
+// Homepage hero copy. Christopher is finalizing this; edit here and rebuild.
+export const hero = {
+  eyebrow: 'Packaging machinery · Gaithersburg, Maryland',
+  title: 'Packaging machines,',
+  highlight: 'matched to your product.',
+  lead: 'Turn-key machines and complete lines for small and medium-size businesses — built on value, quality and service.',
+  promptLabel: 'What are you packaging?',
+  promptPlaceholder: 'e.g. 150 bags/min of snack chips',
+};
+
+// Equipment financing. Add the partner's application URL when it's confirmed;
+// until then "Apply" buttons go to the quote form with financing selected.
+export const financing = {
+  partner: '',            // e.g. 'American Packaging Capital'
+  applyUrl: '',           // the partner's online application link
+};

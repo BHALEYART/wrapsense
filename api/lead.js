@@ -8,13 +8,21 @@
 //   LEAD_FROM_EMAIL    – verified sender, e.g. "WrapSense Website <leads@wrapsensepackaging.com>"
 //   LEAD_WEBHOOK_URL   – optional; receives the full lead as JSON
 //   LEAD_WEBHOOK_SECRET– optional; sent as the X-Webhook-Secret header
+//   HUBSPOT_PORTAL_ID  – HubSpot account (Hub) ID        ┐ submits each lead to a HubSpot form so it
+//   HUBSPOT_FORM_GUID  – the HubSpot form's ID (GUID)    ┘ lands in Contacts with full tracking history
+//   HUBSPOT_EXTRA_FIELDS – optional "ourField:hubspot_property,…" to map extra fields onto
+//                          custom properties you've added to that HubSpot form
 
 import { products } from '../src/data/products.mjs';
+import { forms, packages, speedBands } from '../src/data/site.mjs';
+
+const NAME = Object.fromEntries([...forms, ...packages, ...speedBands].map((x) => [x.id, x.name]));
+const label = (v) => NAME[v] || v;
 
 const PRODUCT = Object.fromEntries(products.map((p) => [p.slug, { name: p.fullName, url: `/machines/${p.category}/${p.slug}/` }]));
 const MAX = { short: 200, long: 4000 };
 const LABELS = {
-  type: { 'new-machine': 'A packaging machine', line: 'A complete packaging line', custom: 'A custom machine', service: 'Service, parts or support', film: 'Packaging film' },
+  type: { 'new-machine': 'A packaging machine', line: 'A complete packaging line', custom: 'A custom machine', service: 'Service, parts or support', film: 'Packaging film', financing: 'Equipment financing' },
   timeline: { asap: 'As soon as possible', '1-3': '1–3 months', '3-6': '3–6 months', '6+': '6+ months', research: 'Just researching' },
 };
 
@@ -36,12 +44,13 @@ async function readBody(req) {
 function validate(b) {
   const fields = {};
   const type = LABELS.type[b.type] ? b.type : 'new-machine';
+  const needsProduct = !['service', 'financing'].includes(type);
   if (!clean(b.first_name)) fields.first_name = 'First name is required.';
   if (!clean(b.last_name)) fields.last_name = 'Last name is required.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(b.email))) fields.email = 'Enter a valid email address.';
   if (clean(b.phone).replace(/\D/g, '').length < 7) fields.phone = 'Enter a valid phone number.';
   if (type === 'service') { if (!clean(b.machine_model)) fields.machine_model = 'Machine make / model is required.'; }
-  else if (!clean(b.product, 300)) fields.product = 'Tell us what you’re packaging.';
+  else if (needsProduct && !clean(b.product, 300)) fields.product = 'Tell us what you’re packaging.';
   return { type, fields };
 }
 
@@ -74,7 +83,7 @@ function emailHtml(L) {
   <p style="margin:0 0 16px;color:#5a6380">${escHtml(L.received_at)}</p>
   <table cellpadding="0" cellspacing="0">
     ${row('Name', `${L.first_name} ${L.last_name}`)}${row('Company', L.company)}${row('Email', L.email)}${row('Phone', L.phone)}${row('ZIP', L.zip)}${row('Prefers', L.contact_pref)}
-    ${row('Packaging', L.product)}${row('Product type', L.product_form)}${row('Package', L.package)}${row('Target output', L.speed)}${row('Timeline', L.timeline)}${row('Samples for testing', L.samples)}
+    ${row('Packaging', L.product)}${row('Product type', label(L.product_form))}${row('Package', label(L.package))}${row('Target output', label(L.speed))}${row('Timeline', L.timeline)}${row('Samples for testing', L.samples)}
     ${row('Machine model', L.machine_model)}${row('Serial', L.serial)}
     ${row('Interested in', L.interest.map((s) => PRODUCT[s]?.name || s).join(', '))}${row('Category', L.category)}${row('Industry page', L.industry)}
   </table>
@@ -85,7 +94,7 @@ function emailHtml(L) {
     ${row('First touch', origin)}${row('First landing page', src.ft_landing)}${row('First referrer', src.ft_referrer)}
     ${row('Latest campaign', src.lt_utm_source ? `${src.lt_utm_source} / ${src.lt_utm_medium || '—'} / ${src.lt_utm_campaign || '—'}` : src.lt_source)}
     ${row('Ad click ID', src.ft_gclid || src.lt_gclid || src.ft_fbclid || src.lt_fbclid || src.ft_msclkid || src.lt_msclkid)}
-    ${row('Visits', src.visits)}${row('Machine Finder', src.finder)}${row('Machines viewed', src.viewed_machines)}${row('Pages this visit', src.pages)}${row('Submitted from', L.page)}
+    ${row('Visits', src.visits)}${row('Machine Finder', src.finder)}${row('Financing calculator', src.financing_estimate)}${row('Machines viewed', src.viewed_machines)}${row('Pages this visit', src.pages)}${row('Submitted from', L.page)}
   </table>
   <p style="color:#5a6380;font-size:12px;margin-top:20px">Source tracking is based on what the visitor’s browser recorded; some visits (blocked storage, private browsing, other devices) arrive without it.</p>
 </div>`;
@@ -103,6 +112,52 @@ async function sendEmail(L) {
     body: JSON.stringify({ from, to, reply_to: L.email, subject, html: emailHtml(L) }),
   });
   if (!r.ok) throw new Error('email ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  return { sent: true };
+}
+
+// One readable block with everything a salesperson needs, stored in HubSpot's "message" field.
+function summaryText(L) {
+  const a = L.attribution, line = (k, v) => (v ? `${k}: ${v}\n` : '');
+  return [
+    line('Request', L.type_label), line('Packaging', L.product), line('Product type', label(L.product_form)), line('Package', label(L.package)),
+    line('Target output', label(L.speed)), line('Timeline', L.timeline), line('Samples for testing', L.samples),
+    line('Machine model', L.machine_model), line('Serial', L.serial),
+    line('Interested in', L.interest.map((s) => PRODUCT[s]?.name || s).join(', ')), line('Category', L.category), line('Industry page', L.industry),
+    L.message ? `\nMessage:\n${L.message}\n` : '',
+    '\n— Lead source —\n',
+    line('First touch', a.ft_utm_source ? `${a.ft_utm_source} / ${a.ft_utm_medium || '-'} / ${a.ft_utm_campaign || '-'}` : a.ft_source),
+    line('First landing page', a.ft_landing), line('Latest campaign', a.lt_utm_source ? `${a.lt_utm_source} / ${a.lt_utm_medium || '-'} / ${a.lt_utm_campaign || '-'}` : ''),
+    line('Ad click ID', a.ft_gclid || a.lt_gclid || a.ft_fbclid || a.lt_fbclid || a.ft_msclkid || a.lt_msclkid),
+    line('Machine Finder', a.finder), line('Financing calculator', a.financing_estimate), line('Machines viewed', a.viewed_machines), line('Submitted from', L.page),
+  ].join('').trim();
+}
+
+async function sendHubSpot(L, b, req) {
+  const portal = process.env.HUBSPOT_PORTAL_ID, form = process.env.HUBSPOT_FORM_GUID;
+  if (!portal || !form) return { skipped: true };
+  const f = (name, value) => (value ? { objectTypeId: '0-1', name, value: String(value).slice(0, 10000) } : null);
+  const fields = [
+    f('firstname', L.first_name), f('lastname', L.last_name), f('email', L.email), f('phone', L.phone),
+    f('company', L.company), f('zip', L.zip), f('message', summaryText(L)),
+  ];
+  // Optional: map our fields onto custom HubSpot properties, e.g. "product:packaging_product,timeline:purchase_timeline"
+  for (const pair of (process.env.HUBSPOT_EXTRA_FIELDS || '').split(',').filter(Boolean)) {
+    const [ours, theirs] = pair.split(':').map((x) => x.trim());
+    const v = Array.isArray(L[ours]) ? L[ours].join(', ') : L[ours] ?? L.attribution[ours];
+    if (theirs) fields.push(f(theirs, v));
+  }
+  const hutk = clean(b.hutk, 100);
+  const context = {
+    pageUri: 'https://www.wrapsensepackaging.com' + (L.page || '/contact/'),
+    pageName: L.type === 'service' ? 'Service request' : 'Request a quote',
+    ...(hutk ? { hutk } : {}),
+    ...(req.headers['x-forwarded-for'] ? { ipAddress: String(req.headers['x-forwarded-for']).split(',')[0].trim() } : {}),
+  };
+  const r = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portal}/${form}`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: fields.filter(Boolean), context }),
+  });
+  if (!r.ok) throw new Error('hubspot ' + r.status + ' ' + (await r.text()).slice(0, 300));
   return { sent: true };
 }
 
@@ -137,12 +192,13 @@ export default async function handler(req, res) {
   if (Object.keys(fields).length) return reply(422, { error: 'Some fields need attention.', fields });
 
   const lead = buildLead(b, type, req);
-  if (!process.env.RESEND_API_KEY && !process.env.LEAD_WEBHOOK_URL) {
-    console.error('[lead] No delivery configured (set RESEND_API_KEY and/or LEAD_WEBHOOK_URL). Lead:', JSON.stringify(lead));
+  const hubspotOn = process.env.HUBSPOT_PORTAL_ID && process.env.HUBSPOT_FORM_GUID;
+  if (!hubspotOn && !process.env.RESEND_API_KEY && !process.env.LEAD_WEBHOOK_URL) {
+    console.error('[lead] No delivery configured (set HUBSPOT_PORTAL_ID + HUBSPOT_FORM_GUID, RESEND_API_KEY and/or LEAD_WEBHOOK_URL). Lead:', JSON.stringify(lead));
     return reply(503, { error: 'Our form isn’t connected yet.' });
   }
 
-  const results = await Promise.allSettled([sendEmail(lead), sendWebhook(lead)]);
+  const results = await Promise.allSettled([sendHubSpot(lead, b, req), sendEmail(lead), sendWebhook(lead)]);
   const delivered = results.some((r) => r.status === 'fulfilled' && r.value.sent);
   results.forEach((r) => r.status === 'rejected' && console.error('[lead] delivery failed:', r.reason?.message));
   if (!delivered) { console.error('[lead] undelivered lead:', JSON.stringify(lead)); return reply(502, { error: 'We couldn’t deliver your request.' }); }

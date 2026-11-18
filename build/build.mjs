@@ -14,6 +14,7 @@ import {
 } from './pages.mjs';
 import { blogIndexPage, blogPostPage, posts } from './blog.mjs';
 import { buildSearchIndex } from './search-index.mjs';
+import { financingPage } from './pages-financing.mjs';
 import { contactPage, catalogPage, privacyPage, accessibilityPage, thankYouPage, notFoundPage, searchPage } from './pages-forms.mjs';
 
 const t0 = Date.now();
@@ -83,6 +84,7 @@ for (const i of industries) emit(`/industries/${i.slug}/`, industryPage(i), { pr
 emit('/blog/', blogIndexPage(), { priority: 0.7 });
 for (const b of posts) emit(`/blog/${b.slug}/`, blogPostPage(b), { priority: 0.6, lastmod: b.updated || b.date });
 emit('/services/', servicesPage(), { priority: 0.7 });
+emit('/financing/', financingPage(), { priority: 0.7 });
 emit('/about/', aboutPage(), { priority: 0.6 });
 emit('/contact/', contactPage(), { priority: 0.8 });
 emit('/catalog/', catalogPage(), { priority: 0.4 });

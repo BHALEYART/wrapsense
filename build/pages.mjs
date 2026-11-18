@@ -1,6 +1,6 @@
 import { esc, html, icon, imgTag, img, truncate } from './lib.mjs';
 import { layout, breadcrumbs, orgLd } from './layout.mjs';
-import { site, stages, forms, packages, speedBands, addons, process, services } from '../src/data/site.mjs';
+import { site, stages, forms, packages, speedBands, addons, process, services, hero } from '../src/data/site.mjs';
 import { categories } from '../src/data/categories.mjs';
 import { products } from '../src/data/products.mjs';
 import { industries } from '../src/data/industries.mjs';
@@ -49,18 +49,19 @@ export function homePage() {
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow eyebrow--light">Packaging machinery · Gaithersburg, Maryland</p>
-      <h1 id="hero-title" class="hero__title">Packaging machines, matched to <span class="hl">your product.</span></h1>
-      <p class="hero__lead">WrapSense designs, builds and services automated packaging machines and complete lines for small and medium-size businesses — from your first bagger to a fully automated end of line.</p>
-      <ul class="hero__proof" role="list">
-        <li>${icon('check')} Testing with your product samples</li>
-        <li>${icon('check')} Installation, training &amp; service from our technicians</li>
-        <li>${icon('check')} Standard or fully custom machines</li>
-      </ul>
-      <div class="hero__actions">
-        <a class="btn btn--light" href="/machines/" data-track="hero_browse">Browse all machines</a>
-        <a class="btn btn--ghost-light" href="/contact/" data-track="hero_quote">Request a quote</a>
-      </div>
+      <p class="eyebrow eyebrow--light">${esc(hero.eyebrow)}</p>
+      <h1 id="hero-title" class="hero__title">${esc(hero.title)} <span class="hl">${esc(hero.highlight)}</span></h1>
+      <p class="hero__lead">${esc(hero.lead)}</p>
+      <ul class="hero__values" role="list" aria-label="Our values">${site.values.map((v) => `<li>${icon('check')}${esc(v)}</li>`)}</ul>
+      <form class="hero__prompt" action="/contact/" method="get" data-hero-prompt>
+        <label for="hero-prompt" class="hero__prompt-label">${esc(hero.promptLabel)}</label>
+        <div class="hero__prompt-row">
+          <input id="hero-prompt" name="product" type="text" placeholder="${esc(hero.promptPlaceholder)}" autocomplete="off" maxlength="200">
+          <input type="hidden" name="from" value="hero">
+          <button class="btn btn--primary" type="submit" data-track="hero_prompt">Get a setup quote ${icon('arrow')}</button>
+        </div>
+        <p class="hero__prompt-alt">or call <a href="${site.phoneHref}" data-track="phone_click">${esc(site.phone)}</a> · <a href="/machines/">browse machines</a></p>
+      </form>
     </div>
     <form class="hero__finder card-glass" action="/machine-finder/" method="get" data-wheel-launch>
       ${wheel({ id: 'home-wheel', stepLabel: 'Machine Finder' })}
@@ -109,9 +110,8 @@ export function homePage() {
 <section class="section section--alt" aria-labelledby="line-title">
   <div class="container">
     <div class="section-head">
-      <p class="eyebrow">Step 1: pack your products · Step 2: automate additional processes</p>
+      <p class="eyebrow">From feeding to pallet</p>
       <h2 id="line-title" class="section-title">Build a complete packaging line</h2>
-      <p class="section-lead">Most lines start with one packaging machine and grow. Every WrapSense machine is designed to connect — from feeding and weighing through inspection, cartoning, casing and palletizing.</p>
     </div>
     ${lineDiagram()}
   </div>
@@ -127,35 +127,18 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section section--dark" aria-labelledby="ind-title">
+<section class="section section--alt" aria-labelledby="how-title">
   <div class="container">
     <div class="section-head section-head--row">
-      <div><p class="eyebrow eyebrow--light">Industries</p><h2 id="ind-title" class="section-title">Built for what you make</h2></div>
-      <a class="link-arrow link-arrow--light" href="/industries/">All industries ${icon('arrow')}</a>
+      <div><p class="eyebrow">Value · Quality · Service</p><h2 id="how-title" class="section-title">A complete process, not just a machine</h2></div>
+      <a class="link-arrow" href="/services/">Service &amp; support ${icon('arrow')}</a>
     </div>
-    <ul class="ind-grid" role="list">
-      ${industries.map((i) => html`<li><a class="ind-tile" href="/industries/${i.slug}/"><span class="ind-tile__img">${imgTag(i.image, '')}</span><span class="ind-tile__name">${esc(i.name)}</span>${icon('arrow')}</a></li>`)}
-    </ul>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="how-title">
-  <div class="container split">
-    <div class="split__media">
-      ${imgTag('photos/technician.webp', 'WrapSense service technician working on a packaging machine control panel', { cls: 'rounded' })}
-      <div class="values" aria-label="Built on value, quality and service">
-        ${site.values.map((v) => `<span>${icon('check')} ${esc(v)}</span>`)}
-      </div>
-    </div>
-    <div class="split__copy">
-      <p class="eyebrow">How we work</p>
-      <h2 id="how-title" class="section-title">From first conversation to long-term support</h2>
-      <p class="section-lead">We take your project from idea through manufacturing, testing and installation — then stay with you after the machine is running.</p>
-      <ol class="steps" role="list">
-        ${process.map((s, i) => html`<li class="steps__item"><span class="steps__n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><div><h3 class="steps__title">${esc(s.name)}</h3><p>${esc(s.text)}</p></div></li>`)}
-      </ol>
-      <a class="btn btn--outline" href="/services/">Service &amp; support ${icon('arrow')}</a>
-    </div>
+    <ol class="how4" role="list">
+      <li><span class="how4__icon">${icon('users')}</span><h3>Consult</h3><p>We learn your product, package and goals.</p></li>
+      <li><span class="how4__icon">${icon('flask')}</span><h3>Test</h3><p>We run your samples before you buy.</p></li>
+      <li><span class="how4__icon">${icon('wrench')}</span><h3>Install &amp; train</h3><p>Our techs set up the line and train your team.</p></li>
+      <li><span class="how4__icon">${icon('shield')}</span><h3>Support</h3><p>Parts, maintenance and service after launch.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -316,6 +299,11 @@ ${ctaBand({ title: `Not sure which ${c.short.replace(/s$/, '')} fits?`, text: 'T
 }
 
 // ════════════════════════════ PRODUCT ════════════════════════════
+// Meeting (Nov 18): keep public pages light — no bag sizes or fill ranges. Speeds stay.
+const MEASURE = /\d[\d,.]*\s*(?:"|mm\b|cm\b|kg\b|g\b|lb\b|oz\b|ft\b|L\b|m\/min|ft\/min|°)/;
+const SPEED = /per minute|\/min|\bbpm\b|\bcpm\b/i;
+export const publicHighlight = (h) => SPEED.test(h) || !MEASURE.test(h);
+
 export function productPage(p) {
   const c = catBySlug[p.category];
   const bc = breadcrumbs([['Home', '/'], ['Machines', '/machines/'], [c.name, categoryUrl(c)], [p.name, productUrl(p)]]);
@@ -357,7 +345,7 @@ export function productPage(p) {
       </div>
       <ul class="product-hero__links" role="list">
         <li><a href="${site.phoneHref}" data-track="phone_click">${icon('phone')} Call ${esc(site.phone)}</a></li>
-        ${p.catalogPage ? `<li><a href="${catalogLink(p.catalogPage)}" data-track="catalog_download" data-product="${p.slug}">${icon('doc')} Catalog spec page (PDF)</a></li>` : ''}
+        <li><a href="/financing/" data-track="product_financing" data-product="${p.slug}">${icon('box')} Financing available</a></li>
       </ul>
     </div>
   </div>
@@ -366,7 +354,7 @@ export function productPage(p) {
 <nav class="subnav" aria-label="On this page">
   <div class="container"><ul role="list">
     <li><a href="#overview">Overview</a></li>
-    ${p.models || p.specs ? '<li><a href="#specs">Specifications</a></li>' : ''}
+    <li><a href="#specs">Specs &amp; sizing</a></li>
     <li><a href="#applications">Applications</a></li>
     ${pairs.length ? '<li><a href="#line">Complete the line</a></li>' : ''}
   </ul></div>
@@ -376,7 +364,7 @@ export function productPage(p) {
   <div class="container two-col">
     <div>
       <h2 id="ov-title" class="section-title">Highlights</h2>
-      <ul class="checklist checklist--cols" role="list">${p.highlights.map((h) => `<li>${icon('check')}${esc(h)}</li>`)}</ul>
+      <ul class="checklist checklist--cols" role="list">${p.highlights.filter(publicHighlight).map((h) => `<li>${icon('check')}${esc(h)}</li>`)}</ul>
     </div>
     ${p.options?.length ? html`<aside class="panel">
       <h2 class="h3">Options &amp; integrations</h2>
@@ -386,13 +374,19 @@ export function productPage(p) {
   </div>
 </section>
 
-${p.models || p.specs ? html`<section class="section section--alt" id="specs" aria-labelledby="spec-title">
-  <div class="container">
-    <h2 id="spec-title" class="section-title">Specifications</h2>
-    ${p.models ? modelsTable(p) : specTable(p.specs, `${p.name} specifications`)}
-    <p class="fine">${p.note ? esc(p.note) + ' ' : ''}Speeds and size ranges depend on your product, film and package. We confirm performance by testing with your samples.</p>
+<section class="section section--alt section--tight" id="specs" aria-labelledby="spec-title">
+  <div class="container spec-cta">
+    <div>
+      <h2 id="spec-title" class="h3">Specs &amp; sizing</h2>
+      ${p.models ? html`<p class="spec-cta__models"><strong>Available models:</strong> ${p.models.map((m) => esc(m.name)).join(' · ')}</p>` : ''}
+      <p>Bag sizes, fill ranges and the right model depend on your product. Tell us what you’re packaging and we’ll send the full specifications with your quote${p.note ? ' — additional sizes are available' : ''}.</p>
+    </div>
+    <div class="spec-cta__actions">
+      <a class="btn btn--primary" href="/contact/?interest=${p.slug}" data-track="product_specs" data-product="${p.slug}">Get specs &amp; a quote ${icon('arrow')}</a>
+      <a class="btn btn--outline" href="${site.phoneHref}" data-track="phone_click">${icon('phone')} ${esc(site.phone)}</a>
+    </div>
   </div>
-</section>` : ''}
+</section>
 
 <section class="section" id="applications" aria-labelledby="app-title">
   <div class="container two-col">
@@ -543,7 +537,7 @@ export function finderPage() {
             <h3 class="h3">Get a quote for this setup</h3>
             <p>We’ll send your selections to a WrapSense specialist so you don’t have to repeat yourself.</p>
           </div>
-          <a class="btn btn--primary" href="/contact/" data-quote-link data-track="finder_quote">Send to a specialist ${icon('arrow')}</a>
+          <div class="results__cta-actions"><a class="btn btn--primary" href="/contact/" data-quote-link data-track="finder_quote">Send to a specialist ${icon('arrow')}</a><a class="btn btn--ghost-light" href="/financing/" data-track="finder_financing">Financing options</a></div>
         </div>
       </section>
     </form>

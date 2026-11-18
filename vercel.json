@@ -6,6 +6,11 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/industries/dairy",
+      "destination": "/industries/",
+      "permanent": true
+    },
+    {
       "source": "/packaging-machines/vertical-form-fill-seal/vertical-form-fill-and-seal-wrapsense",
       "destination": "/machines/vertical-form-fill-seal/fastpack-intermittent-motion-vffs/",
       "permanent": true

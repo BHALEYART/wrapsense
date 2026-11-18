@@ -60,6 +60,7 @@
   if (q.get('type')) setRadio('type', q.get('type'));
   setSelect('form', q.get('form')); setSelect('pkg', q.get('pkg')); setSelect('speed', q.get('speed'));
   if (q.get('samples')) setRadio('samples', q.get('samples'));
+  if (q.get('product')) form.elements.product.value = q.get('product').slice(0, 300);
   (q.get('interest') || '').split(',').forEach(addInterest);
   if (q.get('industry')) {
     var hi = d.createElement('input'); hi.type = 'hidden'; hi.name = 'industry'; hi.value = q.get('industry'); form.appendChild(hi);
@@ -125,6 +126,8 @@
     var attr = window.WS ? WS.attribution() : {};
     data.attribution = attr;
     data.page = location.pathname + location.search;
+    var hutk = document.cookie.match(/(?:^|; )hubspotutk=([^;]+)/);
+    if (hutk) data.hutk = decodeURIComponent(hutk[1]);
 
     submitBtn.classList.add('is-loading');
     submitBtn.setAttribute('aria-disabled', 'true');

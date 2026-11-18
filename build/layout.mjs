@@ -42,6 +42,8 @@ const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 <symbol id="i-cases" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 16 24 8l18 8v18l-18 8-18-8z"/><path d="M6 16l18 8 18-8M24 24v18M15 12l18 8"/></g></symbol>
 </defs></svg>`;
 
+const hubspotId = process.env.HUBSPOT_PORTAL_ID || site.hubspotPortalId;
+
 function headTags(p) {
   const url = site.url + p.path;
   // Keep titles ≤ 60 characters where possible: full brand → short brand → none.
@@ -75,6 +77,7 @@ ${p.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="ro
 ${p.preloadImage ? `<link rel="preload" as="image" href="${esc(p.preloadImage)}" fetchpriority="high">` : ''}
 <link rel="stylesheet" href="/assets/css/${assetFile('site.css')}">
 ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)}
+${hubspotId ? `<script id="hs-script-loader" async defer src="https://js.hs-scripts.com/${hubspotId}.js"></script>` : ''}
 ${site.gtmId ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.gtmId}');</script>` : ''}`;
 }
 
@@ -152,7 +155,8 @@ function header(p) {
           <button type="button" class="site-nav__link site-nav__trigger" aria-expanded="false" aria-controls="mega-industries"${p.path.startsWith('/industries') ? ' data-current="true"' : ''}>Industries ${icon('chevron')}</button>
           ${megaIndustries()}
         </li>
-        <li><a class="site-nav__link" href="/services/"${cur('/services/')}>Service &amp; Support</a></li>
+        <li><a class="site-nav__link" href="/services/"${cur('/services/')}>Service</a></li>
+        <li><a class="site-nav__link" href="/financing/"${cur('/financing/')}>Financing</a></li>
         <li><a class="site-nav__link" href="/about/"${cur('/about/')}>About</a></li>
         <li class="site-nav__phone"><a class="site-nav__link" href="${site.phoneHref}" data-track="phone_click">${icon('phone')} ${esc(site.phone)}</a></li>
       </ul>
@@ -198,6 +202,7 @@ function footer(p) {
       ['/machines/', 'All Machines'],
       ['/industries/', 'Industries'],
       ['/services/', 'Service & Support'],
+      ['/financing/', 'Equipment Financing'],
       ['/about/', 'About WrapSense'],
       ['/contact/', 'Request a Quote'],
       ['/blog/', 'Blog & Buying Guides'],
