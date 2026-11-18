@@ -1,6 +1,7 @@
 import { site, stages } from '../src/data/site.mjs';
 import { categories } from '../src/data/categories.mjs';
 import { industries } from '../src/data/industries.mjs';
+import { visibleCaseStudies } from '../src/data/case-studies.mjs';
 import { esc, html, icon, img, imgTag } from './lib.mjs';
 
 export const assetVersion = { css: '', js: '', search: '' };
@@ -207,6 +208,7 @@ function footer(p) {
       ['/about/', 'About WrapSense'],
       ['/contact/', 'Request a Quote'],
       ['/blog/', 'Blog & Buying Guides'],
+      ...(visibleCaseStudies.length ? [['/case-studies/', 'Case Studies']] : []),
       ['/catalog/', '2026 Product Catalog'],
     ])}
   </div>

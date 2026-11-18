@@ -87,3 +87,19 @@ Events are also pushed to `window.dataLayer` (`generate_lead`, `finder_start`, `
 ## Accessibility & SEO
 
 WCAG 2.2 AA target, with zero axe-core violations on the audited templates at desktop and mobile. Native form controls drive the wheel and finder, so they work with a keyboard and screen readers. The site has skip links, landmarks, visible focus, reduced-motion support and accessible error summaries. Every page gets a unique title and description, a canonical URL, Open Graph and Twitter tags with per-machine share images, JSON-LD (Organization, WebSite, BreadcrumbList, CollectionPage/ItemList, Service, ContactPage), an XML sitemap and robots.txt. The catalog PDF is served `noindex` so it doesn't compete with the machine pages.
+
+
+## Case studies
+
+Data: `src/data/case-studies.mjs` (body copy uses the blog link syntax `[text](p:|c:|i:slug)`, validated at build).
+Pages: `/case-studies/` and `/case-studies/<slug>/`, plus case-study strips on the home page and on matching
+industry, category and product pages, a footer link and search entries.
+
+The three current entries come from the client prototype and are **placeholders** (made-up customers, numbers
+and quotes), so they're marked `draft: true`:
+
+- Local and Vercel **preview** builds show them with a "placeholder" banner, `noindex`, and no sitemap/search entries.
+- **Production** builds (`VERCEL_ENV=production`) leave them out completely: no pages, links, sitemap or search.
+- Override with `SHOW_DRAFTS=1` or `SHOW_DRAFTS=0`.
+
+To publish one: replace the customer, numbers and quote with real, approved details and delete `draft: true`.

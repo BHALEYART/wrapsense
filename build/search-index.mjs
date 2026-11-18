@@ -4,6 +4,7 @@ import { categories } from '../src/data/categories.mjs';
 import { industries } from '../src/data/industries.mjs';
 import { packages, forms } from '../src/data/site.mjs';
 import { posts } from './blog.mjs';
+import { cases, caseUrl } from './case-studies.mjs';
 import { productUrl, categoryUrl, categoryImage } from './components.mjs';
 import { img } from './lib.mjs';
 
@@ -52,6 +53,9 @@ export function buildSearchIndex() {
   }
   for (const b of posts) {
     out.push({ t: 'Guide', title: b.title, sub: `${b.minutes} min read`, url: `/blog/${b.slug}/`, desc: b.description, kw: [b.seoTitle, b.toc.map((x) => x.text).join(' '), (b.faqs || []).map((f) => f[0]).join(' ')].join(' '), body: clip(strip(b.body) + ' ' + (b.faqs || []).map((f) => f[1]).join(' '), 3500) });
+  }
+  for (const c of cases.filter((x) => !x.draft)) {
+    out.push({ t: 'Case study', img: img(c.image).src, title: c.title, sub: 'Case study', url: caseUrl(c), desc: c.summary, kw: [c.product, c.stats.map((x) => x.label).join(' ')].join(' '), body: clip(strip([c.challenge, c.solution, c.result].join(' ')), 2000) });
   }
   const pages = [
     ['Machine Finder', '/machine-finder/', 'Answer four questions to match a machine to your product.', 'finder quiz recommend which machine help choose wizard selector'],

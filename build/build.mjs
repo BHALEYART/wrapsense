@@ -13,6 +13,7 @@ import {
   homePage, machinesPage, categoryPage, productPage, finderPage, industriesPage, industryPage, servicesPage, aboutPage,
 } from './pages.mjs';
 import { blogIndexPage, blogPostPage, posts } from './blog.mjs';
+import { caseIndexPage, casePage, cases, caseUrl } from './case-studies.mjs';
 import { buildSearchIndex } from './search-index.mjs';
 import { financingPage } from './pages-financing.mjs';
 import { contactPage, catalogPage, privacyPage, accessibilityPage, thankYouPage, notFoundPage, searchPage } from './pages-forms.mjs';
@@ -83,6 +84,10 @@ emit('/industries/', industriesPage(), { priority: 0.7 });
 for (const i of industries) emit(`/industries/${i.slug}/`, industryPage(i), { priority: 0.7 });
 emit('/blog/', blogIndexPage(), { priority: 0.7 });
 for (const b of posts) emit(`/blog/${b.slug}/`, blogPostPage(b), { priority: 0.6, lastmod: b.updated || b.date });
+if (cases.length) {
+  emit('/case-studies/', caseIndexPage(), { priority: 0.6, sitemap: cases.some((c) => !c.draft) });
+  for (const c of cases) emit(caseUrl(c), casePage(c), { priority: 0.6, sitemap: !c.draft });
+}
 emit('/services/', servicesPage(), { priority: 0.7 });
 emit('/financing/', financingPage(), { priority: 0.7 });
 emit('/about/', aboutPage(), { priority: 0.6 });

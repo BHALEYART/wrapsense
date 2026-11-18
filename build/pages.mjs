@@ -9,6 +9,7 @@ import {
   productCard, categoryCard, wheel, lineDiagram, specTable, modelsTable, ctaBand,
 } from './components.mjs';
 import { relatedGuides, postsFor, homeGuides } from './blog.mjs';
+import { caseStrip, casesFor, homeCases } from './case-studies.mjs';
 
 const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
 const indBySlug = Object.fromEntries(industries.map((i) => [i.slug, i]));
@@ -194,6 +195,8 @@ ${familyShowcase()}
   </div>
 </section>
 
+${homeCases()}
+
 ${homeGuides()}
 
 ${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 'We can set up testing with your products and packaging so you can see results before you invest.' })}
@@ -326,6 +329,7 @@ ${pairs.length ? html`<section class="section" aria-labelledby="pairs-title">
   </div>
 </section>` : ''}
 
+${caseStrip(casesFor({ category: c.slug }), { title: 'Case studies' })}
 ${relatedGuides(postsFor({ category: c.slug }), { title: `${c.short.charAt(0).toUpperCase() + c.short.slice(1)}: guides & answers` })}
 
 ${related.length ? html`<section class="section section--tight" aria-labelledby="rel-title"><div class="container">
@@ -472,6 +476,7 @@ ${pairs.length ? html`<section class="section section--alt" id="line" aria-label
   </div>
 </section>` : ''}
 
+${caseStrip(casesFor({ product: p.slug }), { title: 'Seen on a real line' })}
 ${relatedGuides(postsFor({ product: p.slug }), { title: 'Guides & answers' })}
 
 ${siblings.length ? html`<section class="section" aria-labelledby="sib-title">
@@ -718,6 +723,7 @@ ${groups.map((g, n) => html`<section class="section ind-stage${n % 2 ? ' section
   ${i.faqs.map(([q, a]) => html`<details class="faq__item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`)}
 </div></section>
 
+${caseStrip(casesFor({ industry: i.slug }), { title: `${i.name} case studies` })}
 ${relatedGuides(guides, { title: `${i.name} guides & answers` })}
 
 <section class="section section--tight" aria-labelledby="oi-title"><div class="container">
