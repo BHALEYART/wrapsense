@@ -156,9 +156,7 @@ export function homePage() {
   </div>
 </section>
 
-${familyShowcase()}
-
-<section class="section" aria-labelledby="line-title">
+<section class="section section--alt" aria-labelledby="line-title">
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">From feeding to pallet</p>
@@ -167,6 +165,8 @@ ${familyShowcase()}
     ${lineDiagram()}
   </div>
 </section>
+
+${familyShowcase()}
 
 <section class="section section--alt" aria-labelledby="qvs-title">
   <div class="container">
