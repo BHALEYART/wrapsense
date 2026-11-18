@@ -27,15 +27,15 @@ export const site = {
   leadEndpoint: '/api/lead',
 };
 
-// Line stages drive the machine navigation, the finder and the "build your line" diagrams.
+// Line stages drive the machine navigation (grad = stage colour, from the client's family gradients), the finder and the "build your line" diagrams.
 export const stages = [
-  { id: 'feed', name: 'Feed & convey', short: 'Feed', blurb: 'Lift and move product into your line and finished packs out of it.' },
-  { id: 'dose', name: 'Weigh & fill', short: 'Weigh & fill', blurb: 'Portion product accurately by weight, volume or count.' },
-  { id: 'pack', name: 'Form & seal', short: 'Pack', blurb: 'Bag, pouch, stick-pack or flow-wrap your product.' },
-  { id: 'inspect', name: 'Inspect', short: 'Inspect', blurb: 'Catch metal contamination and off-weight packs before they ship.' },
-  { id: 'finish', name: 'Label & cap', short: 'Label & cap', blurb: 'Cap, label and insert for jars, bottles and containers.' },
-  { id: 'end', name: 'End of line', short: 'End of line', blurb: 'Carton, case, seal and palletize finished goods.' },
-  { id: 'specialty', name: 'Specialty & materials', short: 'Specialty', blurb: 'Custom machines, specialty processes and printed film.' },
+  { id: 'feed', name: 'Feed & convey', short: 'Feed', blurb: 'Lift and move product into your line and finished packs out of it.', grad: ['#15295a', '#1c79ae', '#2db89f'] },
+  { id: 'dose', name: 'Weigh & fill', short: 'Weigh & fill', blurb: 'Portion product accurately by weight, volume or count.', grad: ['#3dc1a8', '#1ca896', '#0f7f88'] },
+  { id: 'pack', name: 'Form & seal', short: 'Pack', blurb: 'Bag, pouch, stick-pack or flow-wrap your product.', grad: ['#1c3a7c', '#2e7ad6'] },
+  { id: 'inspect', name: 'Inspect', short: 'Inspect', blurb: 'Catch metal contamination and off-weight packs before they ship.', grad: ['#2b2280', '#5b6bd6'] },
+  { id: 'finish', name: 'Label & cap', short: 'Label & cap', blurb: 'Cap, label and insert for jars, bottles and containers.', grad: ['#1c3a7c', '#5a2c99', '#9a4ec4'] },
+  { id: 'end', name: 'End of line', short: 'End of line', blurb: 'Carton, case, seal and palletize finished goods.', grad: ['#1c2a8e', '#9a1d6b', '#e02626'] },
+  { id: 'specialty', name: 'Specialty & materials', short: 'Specialty', blurb: 'Custom machines, specialty processes and printed film.', grad: ['#2a3fb8', '#1fae6a'] },
 ];
 
 // Product forms: step 1 of the machine finder ("What are you packaging?")

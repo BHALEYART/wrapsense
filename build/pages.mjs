@@ -42,8 +42,51 @@ const PACKAGE_LINKS = {
 const catalogLink = (page) => `${site.catalogPdf}#page=${page}`;
 
 // ════════════════════════════ HOME ════════════════════════════
+// Home: machine-family showcase (tabs). Families = categories with a catalog series name.
+function familyShowcase() {
+  const fams = categories.filter((c) => c.series && c.image);
+  const firstSentence = (t) => (t.match(/^.*?[.!?](\s|$)/) || [t])[0].trim();
+  return html`<section class="section section--dark fam" aria-labelledby="fam-title">
+  <div class="container">
+    <div class="section-head section-head--row">
+      <div>
+        <p class="eyebrow eyebrow--light">${fams.length} machine families · one partner</p>
+        <h2 id="fam-title" class="section-title section-title--xl">Machines designed for modularity <span class="hl">and expansion — not just single machines.</span></h2>
+        <p class="fam__lead">Vetted, integrated and supported for the long haul. Pick a family to see what’s inside.</p>
+      </div>
+      <a class="btn btn--ghost-light" href="/machines/">All ${products.length} machines ${icon('arrow')}</a>
+    </div>
+    <div class="fam__body" data-tabs>
+      <div class="fam__list" role="tablist" aria-label="Machine families" aria-orientation="vertical">
+        ${fams.map((c, k) => html`<button type="button" role="tab" class="fam__tab" id="fam-tab-${c.slug}" aria-controls="fam-${c.slug}" aria-selected="${k === 0}"${k ? ' tabindex="-1"' : ''} style="--a1:${c.accent[0]}"><span class="fam__series">${esc(c.series)}</span><span class="fam__type">${esc(c.short)}</span></button>`)}
+      </div>
+      ${fams.map((c, k) => {
+        const ps = productsIn(c.slug);
+        const max = Math.max(...ps.map((p) => p.speed.max).filter((v) => v > 0 && v < 1000));
+        const inds = new Set(ps.flatMap((p) => p.industries || []));
+        return html`<div class="fam__panel" role="tabpanel" id="fam-${c.slug}" aria-labelledby="fam-tab-${c.slug}"${k ? ' hidden' : ''} style="${accentStyle(c)}">
+        <div class="fam__copy">
+          <p class="fam__kicker">${esc(c.name)}</p>
+          <h3 class="fam__name">${esc(c.series)}</h3>
+          <p class="fam__sum">${esc(firstSentence(c.intro))}</p>
+        </div>
+        <div class="fam__img">${imgTag(c.image, '', { sizes: '(max-width: 900px) 90vw, 640px' })}</div>
+        <div class="fam__foot">
+          <dl class="fam__stats">
+            ${Number.isFinite(max) ? `<div><dt>Throughput</dt><dd>Up to ${max}/min</dd></div>` : ''}
+            <div><dt>Machines</dt><dd>${ps.length}</dd></div>
+            ${inds.size ? `<div><dt>Industries</dt><dd>${inds.size}</dd></div>` : ''}
+          </dl>
+          <a class="btn btn--white" href="${categoryUrl(c)}" data-track="home_family">View ${esc(c.series)} ${icon('arrow')}</a>
+        </div>
+      </div>`;
+      })}
+    </div>
+  </div>
+</section>`;
+}
+
 export function homePage() {
-  const packCats = categories.filter((c) => ['pack', 'dose', 'finish', 'end'].includes(c.stage)).slice(0, 8);
   const body = html`
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__bg" aria-hidden="true"></div>
@@ -107,7 +150,9 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="line-title">
+${familyShowcase()}
+
+<section class="section" aria-labelledby="line-title">
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">From feeding to pallet</p>
@@ -117,27 +162,17 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section" aria-labelledby="cats-title">
+<section class="section section--alt" aria-labelledby="qvs-title">
   <div class="container">
-    <div class="section-head section-head--row">
-      <div><p class="eyebrow">Our automated solutions</p><h2 id="cats-title" class="section-title">Machines for every stage</h2></div>
-      <a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>
+    <div class="section-head">
+      <p class="eyebrow">Quality · Value · Service</p>
+      <h2 id="qvs-title" class="section-title section-title--xl">The Toyota of packaging machinery.</h2>
+      <p class="section-lead">You don’t need a Ferrari on your first packaging machine purchase. You need a Toyota — practical, dependable, and supportable.</p>
     </div>
-    <ul class="grid grid--cats" role="list">${packCats.map((c) => `<li>${categoryCard(c)}</li>`)}</ul>
-  </div>
-</section>
-
-<section class="section section--alt" aria-labelledby="how-title">
-  <div class="container">
-    <div class="section-head section-head--row">
-      <div><p class="eyebrow">Value · Quality · Service</p><h2 id="how-title" class="section-title">A complete process, not just a machine</h2></div>
-      <a class="link-arrow" href="/services/">Service &amp; support ${icon('arrow')}</a>
-    </div>
-    <ol class="how4" role="list">
-      <li><span class="how4__icon">${icon('users')}</span><h3>Consult</h3><p>We learn your product, package and goals.</p></li>
-      <li><span class="how4__icon">${icon('flask')}</span><h3>Test</h3><p>We run your samples before you buy.</p></li>
-      <li><span class="how4__icon">${icon('wrench')}</span><h3>Install &amp; train</h3><p>Our techs set up the line and train your team.</p></li>
-      <li><span class="how4__icon">${icon('shield')}</span><h3>Support</h3><p>Parts, maintenance and service after launch.</p></li>
+    <ol class="qvs" role="list">
+      <li><span class="qvs__icon">${icon('shield')}</span><span class="qvs__n">01</span><h3>Quality.</h3><p>Industrial-grade builds with proven, widely available components — specified sensibly for the job, not over-engineered.</p></li>
+      <li><span class="qvs__icon">${icon('gauge')}</span><span class="qvs__n">02</span><h3>Value.</h3><p>Priced to pay back. Start with the options your line needs and add modules as you grow — no forced bundles.</p></li>
+      <li><span class="qvs__icon">${icon('wrench')}</span><span class="qvs__n">03</span><h3>Service.</h3><p>We test your samples, install the line, train your team and keep it running with parts and service. <a href="/services/">Service &amp; support</a></p></li>
     </ol>
   </div>
 </section>

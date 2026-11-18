@@ -95,8 +95,10 @@ export function lineDiagram({ highlight = null, link = true } = {}) {
     ${shown.map((s, i) => {
       const cats = categories.filter((c) => c.stage === s.id);
       const active = highlight === s.id;
+      const n = String(i + 1).padStart(2, '0');
       return html`<li class="line__stage${active ? ' is-active' : ''}">
-        <span class="line__num" aria-hidden="true">${i + 1}</span>
+        <span class="line__tile" style="background:linear-gradient(100deg, ${s.grad.join(', ')})" aria-hidden="true">${n}</span>
+        <p class="line__step">Stage ${n}</p>
         <p class="line__name">${esc(s.name)}</p>
         ${link ? html`<ul class="line__cats" role="list">${cats.map((c) => `<li><a href="${categoryUrl(c)}">${esc(c.short)}</a></li>`)}</ul>` : ''}
       </li>`;
