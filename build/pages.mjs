@@ -87,6 +87,7 @@ function familyShowcase() {
 }
 
 export function homePage() {
+  const packCats = categories.filter((c) => ['pack', 'dose', 'finish', 'end'].includes(c.stage)).slice(0, 8);
   const body = html`
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__bg" aria-hidden="true"></div>
@@ -134,7 +135,19 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section section--tight" aria-labelledby="pkg-title">
+<section class="section" aria-labelledby="line-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">From feeding to pallet</p>
+      <h2 id="line-title" class="section-title">Build a complete packaging line</h2>
+    </div>
+    ${lineDiagram()}
+  </div>
+</section>
+
+${familyShowcase()}
+
+<section class="section section--alt" aria-labelledby="pkg-title">
   <div class="container">
     <div class="section-head section-head--row">
       <div>
@@ -156,17 +169,15 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="line-title">
+<section class="section" aria-labelledby="cats-title">
   <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">From feeding to pallet</p>
-      <h2 id="line-title" class="section-title">Build a complete packaging line</h2>
+    <div class="section-head section-head--row">
+      <div><p class="eyebrow">Our automated solutions</p><h2 id="cats-title" class="section-title">Machines for every stage</h2></div>
+      <a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>
     </div>
-    ${lineDiagram()}
+    <ul class="grid grid--cats" role="list">${packCats.map((c) => `<li>${categoryCard(c)}</li>`)}</ul>
   </div>
 </section>
-
-${familyShowcase()}
 
 <section class="section section--alt" aria-labelledby="qvs-title">
   <div class="container">
