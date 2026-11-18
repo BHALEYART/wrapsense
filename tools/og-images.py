@@ -78,14 +78,14 @@ def card(title, kicker, sub, accent, image):
             d.text((64, y), l, font=f_s, fill=(201, 212, 255)); y += 38
     return im.convert('RGB')
 
-card('Packaging machines matched to your product', 'Packaging machinery · Gaithersburg, MD', 'Turn-key packaging solutions for small & medium-size enterprises', ['#1a73c9', '#5ab4ee'], 'products/fastpack-line.webp').save(os.path.join(OUT, 'default.jpg'), quality=86, optimize=True)
+card('Packaging machines matched to your product', 'Packaging machinery · Gaithersburg, MD', 'Turn-key packaging solutions for small & medium-size enterprises', ['#2553b2', '#2f6fd6'], 'products/fastpack-line.webp').save(os.path.join(OUT, 'default.jpg'), quality=86, optimize=True)
 for c in data['categories']:
     card(c['name'], c['series'] or 'WrapSense Packaging', None, c['accent'], c['image']).save(os.path.join(OUT, f"category-{c['slug']}.jpg"), quality=80, optimize=True)
 for p in data['products']:
     c = cats[p['category']]
     card(p['name'], c['name'], p['tagline'], c['accent'], p['image']).save(os.path.join(OUT, f"{p['slug']}.jpg"), quality=80, optimize=True)
 for b in data['posts']:
-    card(b['title'], 'WrapSense Packaging · Guide', None, ['#1a73c9', '#5ab4ee'], b['image']).save(os.path.join(OUT, f"blog-{b['slug']}.jpg"), quality=80, optimize=True)
+    card(b['title'], 'WrapSense Packaging · Guide', None, ['#2553b2', '#2f6fd6'], b['image']).save(os.path.join(OUT, f"blog-{b['slug']}.jpg"), quality=80, optimize=True)
 for i in data['industries']:
-    card(i['name'] + ' packaging machines', 'Industries · WrapSense Packaging', None, ['#1a73c9', '#5ab4ee'], i['image']).save(os.path.join(OUT, f"industry-{i['slug']}.jpg"), quality=80, optimize=True)
+    card(i['name'] + ' packaging machines', 'Industries · WrapSense Packaging', None, ['#2553b2', '#2f6fd6'], i['image']).save(os.path.join(OUT, f"industry-{i['slug']}.jpg"), quality=80, optimize=True)
 print('OG images:', len(os.listdir(OUT)))

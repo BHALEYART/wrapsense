@@ -110,7 +110,7 @@ Disallow: /search/
 Sitemap: ${site.url}/sitemap.xml
 `);
 write('site.webmanifest', JSON.stringify({
-  name: site.name, short_name: 'WrapSense', start_url: '/', display: 'browser', background_color: '#ffffff', theme_color: '#0d1533',
+  name: site.name, short_name: 'WrapSense', start_url: '/', display: 'browser', background_color: '#ffffff', theme_color: '#2553b2',
   icons: [{ src: '/assets/img/brand/w-mark-192.png', sizes: '192x192', type: 'image/png' }, { src: '/assets/img/brand/w-mark-512.png', sizes: '512x512', type: 'image/png' }],
 }, null, 2));
 

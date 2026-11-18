@@ -67,7 +67,7 @@ ${p.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="ro
 <meta property="og:image:alt" content="${esc(p.ogImageAlt || p.title)}">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0d1533">
+<meta name="theme-color" content="#2553b2">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/assets/img/brand/w-mark-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/img/brand/apple-touch-icon.png">

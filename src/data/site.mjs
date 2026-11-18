@@ -42,7 +42,7 @@ export const stages = [
 export const forms = [
   { id: 'powder', name: 'Powders', examples: 'Protein, spices, coffee grounds, flour, drink mixes', icon: 'powder', color: '#c2410c' },
   { id: 'granular', name: 'Granules & free-flowing', examples: 'Coffee beans, rice, seeds, nuts, pet kibble', icon: 'granular', color: '#1d7a48' },
-  { id: 'snacks', name: 'Snacks & irregular pieces', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks', color: '#1a73c9' },
+  { id: 'snacks', name: 'Snacks & irregular pieces', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks', color: '#2553b2' },
   { id: 'solid', name: 'Single solid items', examples: 'Bars, cookies, baked goods, produce, soap', icon: 'solid', color: '#0f7f74' },
   { id: 'liquid', name: 'Liquids & pastes', examples: 'Sauces, gels, oils, honey, liquid supplements', icon: 'liquid', color: '#7a3fc0' },
   { id: 'container', name: 'Jars & bottles', examples: 'Filled jars, bottles and tubs that need caps, labels or cartons', icon: 'container', color: '#3d4fb8' },
