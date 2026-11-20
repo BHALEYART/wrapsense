@@ -201,3 +201,45 @@
     io.observe(el);
   });
 })();
+
+// Phones: Toyota cards carousel — snaps to the next card every few seconds (loops); tap a card or a dot to switch
+(function () {
+  var list = document.querySelector('[data-qvs-carousel]');
+  if (!list) return;
+  var dotsWrap = list.parentNode.querySelector('.qvs-dots');
+  var dots = dotsWrap ? Array.prototype.slice.call(dotsWrap.querySelectorAll('[data-qvs-dot]')) : [];
+  var cards = Array.prototype.slice.call(list.children);
+  var mq = window.matchMedia('(max-width: 700px)');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var idx = 0, timer = null, holdUntil = 0, visible = false;
+  function go(i, user) {
+    idx = (i + cards.length) % cards.length;
+    list.scrollTo({ left: cards[idx].offsetLeft - list.offsetLeft, behavior: still ? 'auto' : 'smooth' });
+    mark();
+    if (user) holdUntil = Date.now() + 9000; // let them read after a manual switch
+  }
+  function mark() { dots.forEach(function (d, k) { if (k === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); }); }
+  function tick() { if (!mq.matches || !visible || document.hidden || Date.now() < holdUntil) return; go(idx + 1); }
+  function start() { stop(); if (!still) timer = setInterval(tick, 3800); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+  function setup() {
+    if (dotsWrap) dotsWrap.hidden = !mq.matches;
+    if (mq.matches) start(); else stop();
+  }
+  // keep dots in sync with manual swipes
+  var st;
+  list.addEventListener('scroll', function () {
+    clearTimeout(st);
+    st = setTimeout(function () {
+      var x = list.scrollLeft, best = 0, bd = Infinity;
+      cards.forEach(function (c, k) { var d = Math.abs(c.offsetLeft - list.offsetLeft - x); if (d < bd) { bd = d; best = k; } });
+      idx = best; mark();
+    }, 80);
+  }, { passive: true });
+  list.addEventListener('touchstart', function () { holdUntil = Date.now() + 9000; }, { passive: true });
+  list.addEventListener('click', function (e) { if (!mq.matches || e.target.closest('a')) return; go(idx + 1, true); });
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k, true); }); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(list); else visible = true;
+  if (mq.addEventListener) mq.addEventListener('change', setup);
+  setup();
+})();

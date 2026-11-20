@@ -90,6 +90,10 @@ function familyShowcase() {
 </section>`;
 }
 
+// Mobile marquee helpers: a hidden duplicate copy (for a seamless loop) and a pause button, both only shown on phones
+const mqDup = (items) => items.replace(/<li\b/g, '<li class="mq-dup" aria-hidden="true"').replace(/<a\b/g, '<a tabindex="-1"');
+const mqPause = (what, light = false) => `<button type="button" class="ind-marquee__pause mq-pause${light ? ' mq-pause--light' : ''}" aria-pressed="false" data-marquee-toggle>${icon('pause', 'icon icon--pause')}${icon('play', 'icon icon--play')}<span class="visually-hidden">Pause scrolling ${what}</span></button>`;
+
 export function homePage() {
   const packCats = categories.filter((c) => ['pack', 'dose', 'finish', 'end'].includes(c.stage)).slice(0, 8);
   const body = html`
@@ -152,36 +156,36 @@ export function homePage() {
 
 ${familyShowcase()}
 
-<section class="section section--dark pkg-sec" aria-labelledby="pkg-title" data-reveal>
+<section class="section section--dark pkg-sec mq-m" aria-labelledby="pkg-title" data-reveal data-mq>
   <div class="container">
     <div class="section-head section-head--row">
       <div>
         <p class="eyebrow eyebrow--light">Shop by package</p>
         <h2 id="pkg-title" class="section-title">Already know your package?</h2>
       </div>
-      <a class="link-arrow link-arrow--light" href="/machines/">All machine categories ${icon('arrow')}</a>
+      <div class="mq-head-actions"><a class="link-arrow link-arrow--light" href="/machines/">All machine categories ${icon('arrow')}</a>${mqPause('package types', true)}</div>
     </div>
-    <ul class="pkg-strip" role="list">
-      ${Object.entries(PACKAGE_LINKS).map(([pk, cat], i) => {
+    <div class="mq-m__viewport"><ul class="pkg-strip mq-m__track" role="list">
+      ${(() => { const items = Object.entries(PACKAGE_LINKS).map(([pk, cat], i) => {
         const P = pkgById[pk];
         return html`<li style="--i:${i}"><a class="pkg-tile" href="${categoryUrl(cat)}${pk === 'pallet' ? '#casemaster-palletstakr-palletizer' : ''}">
           <span class="pkg-tile__img">${imgTag(P.image, '')}</span>
           <span class="pkg-tile__name">${esc(P.name)}</span>
           <span class="pkg-tile__cat">${esc(catBySlug[cat].short)}</span>
         </a></li>`;
-      })}
-    </ul>
+      }).join(''); return items + mqDup(items); })()}
+    </ul></div>
   </div>
 </section>
 
-<section class="section line-fx cats-fx" aria-labelledby="cats-title" data-line-fx data-fx-axis="xy" data-fx-bursts="off">
+<section class="section line-fx cats-fx mq-m" aria-labelledby="cats-title" data-line-fx data-fx-axis="xy" data-fx-bursts="off" data-mq>
   <canvas class="line-fx__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="section-head section-head--row">
       <div><p class="eyebrow">Our automated solutions</p><h2 id="cats-title" class="section-title">Machines for every stage</h2></div>
-      <a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>
+      <div class="mq-head-actions"><a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>${mqPause('machine categories')}</div>
     </div>
-    <ul class="grid grid--cats" role="list">${packCats.map((c, i) => `<li style="--i:${i}" data-colors="${c.accent.join(' ')}">${categoryCard(c)}</li>`)}</ul>
+    <div class="mq-m__viewport"><ul class="grid grid--cats mq-m__track" role="list">${(() => { const items = packCats.map((c, i) => `<li style="--i:${i}" data-colors="${c.accent.join(' ')}">${categoryCard(c)}</li>`).join(''); return items + mqDup(items.replace(/ data-colors="[^"]*"/g, '')); })()}</ul></div>
   </div>
 </section>
 
@@ -195,11 +199,12 @@ ${familyShowcase()}
       <h2 id="qvs-title" class="section-title section-title--xl">The Toyota of packaging machinery.</h2>
       <p class="section-lead">You don’t need a Ferrari on your first packaging machine purchase. You need a Toyota — practical, dependable, and supportable.</p>
     </div>
-    <ol class="qvs" role="list">
+    <ol class="qvs" role="list" data-qvs-carousel>
       <li style="--i:0"><span class="qvs__icon">${icon('shield')}</span><span class="qvs__n">01</span><h3>Quality.</h3><p>Industrial-grade builds with proven, widely available components — specified sensibly for the job, not over-engineered.</p></li>
       <li style="--i:1"><span class="qvs__icon">${icon('gauge')}</span><span class="qvs__n">02</span><h3>Value.</h3><p>Priced to pay back. Start with the options your line needs and add modules as you grow — no forced bundles.</p></li>
       <li style="--i:2"><span class="qvs__icon">${icon('wrench')}</span><span class="qvs__n">03</span><h3>Service.</h3><p>We test your samples, install the line, train your team and keep it running with parts and service. <a href="/services/">Service &amp; support</a></p></li>
     </ol>
+    <div class="qvs-dots" role="group" aria-label="Show card" hidden>${['Quality', 'Value', 'Service'].map((n, k) => `<button type="button" aria-label="${n}"${k ? '' : ' aria-current="true"'} data-qvs-dot="${k}"></button>`).join('')}</div>
   </div>
 </section>
 
