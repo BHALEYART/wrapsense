@@ -71,7 +71,7 @@
   var finder = window.WS && WS.store.get('finder');
   if (finder && !q.get('form') && !q.get('interest')) {
     setSelect('form', finder.form); setSelect('pkg', finder.pkg); setSelect('speed', finder.speed);
-    (finder.slugs || []).slice(0, 4).forEach(addInterest);
+    (finder.slugs || []).forEach(addInterest); // every machine from the finder's line
   }
   if (q.get('from') === 'finder' || (finder && !q.toString())) {
     var note = d.createElement('p'); note.className = 'fine'; note.textContent = 'We’ve filled in your Machine Finder answers — adjust anything you like.';

@@ -305,7 +305,7 @@
     if (dose) slugs.push(dose.slug);
     picks.forEach(function (x) { x.picks.forEach(function (p) { if (slugs.indexOf(p.slug) === -1) slugs.push(p.slug); }); });
     var q = new URLSearchParams({ from: 'finder', form: s.form, pkg: s.pkg, speed: s.speed });
-    if (slugs.length) q.set('interest', slugs.slice(0, 6).join(','));
+    if (slugs.length) q.set('interest', slugs.join(',')); // the whole line, not just the first few
     finder.querySelector('[data-quote-link]').href = '/contact/?' + q.toString();
 
     var summaryText = summary.join(' · ') + (s.add.length ? ' · add-ons: ' + s.add.map(function (a) { return ADDONS[a].name; }).join(', ') : '') + (top ? ' → ' + top.name : '');

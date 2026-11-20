@@ -66,7 +66,7 @@ function buildLead(b, type, req) {
     product: clean(b.product, 300), product_form: clean(b.form, 40), package: clean(b.pkg, 40), speed: clean(b.speed, 10),
     timeline: LABELS.timeline[b.timeline] || '', samples: clean(b.samples, 10),
     machine_model: clean(b.machine_model), serial: clean(b.serial, 100),
-    interest: clean(b.interest, 600).split(',').map((s) => s.trim()).filter((s) => PRODUCT[s]), category: clean(b.category, 80), industry: clean(b.industry, 80),
+    interest: clean(b.interest, 2000).split(',').map((s) => s.trim()).filter((s) => PRODUCT[s]), category: clean(b.category, 80), industry: clean(b.industry, 80),
     message: clean(b.message, MAX.long), page: clean(b.page, 300),
     attribution: a,
     user_agent: clean(req.headers['user-agent'] || '', 300),
