@@ -1122,3 +1122,10 @@ body.search-open { overflow: hidden; }
   .line-fx--armed .line__stage, .line-fx--armed .line__tile { opacity: 1; transform: none; }
   .line-fx .line__tile::after { display: none; }
 }
+
+/* ───── machine-family showcase: background video (muted) under a 75% near-black cover ───── */
+.fam { position: relative; overflow: hidden; isolation: isolate; }
+.fam__video { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.fam__video video { width: 100%; height: 100%; object-fit: cover; }
+.fam__video::after { content: ''; position: absolute; inset: 0; background: rgba(11, 15, 23, .75); } /* 75% cover, same treatment as the hero */
+.fam > .container { position: relative; z-index: 1; }

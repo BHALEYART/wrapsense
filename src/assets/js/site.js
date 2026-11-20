@@ -170,3 +170,22 @@
     });
   });
 })();
+
+// Background videos: load only near the viewport, pause off-screen; poster only for reduced motion / data saver
+(function () {
+  var vids = document.querySelectorAll('video[data-bg-video]');
+  if (!vids.length) return;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData);
+  if (still || !('IntersectionObserver' in window)) return;
+  vids.forEach(function (v) {
+    var loaded = false;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!loaded) { v.src = window.matchMedia('(max-width: 900px)').matches ? v.getAttribute('data-src-sm') : v.getAttribute('data-src-lg'); loaded = true; }
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        } else if (loaded) v.pause();
+      });
+    }, { rootMargin: '300px 0px' }).observe(v);
+  });
+})();

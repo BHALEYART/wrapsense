@@ -48,6 +48,9 @@ function familyShowcase() {
   const fams = categories.filter((c) => c.series && c.image);
   const firstSentence = (t) => (t.match(/^.*?[.!?](\s|$)/) || [t])[0].trim();
   return html`<section class="section section--dark fam" aria-labelledby="fam-title">
+  <div class="fam__video" aria-hidden="true">
+    <video muted loop playsinline preload="none" poster="/assets/video/conveyor-poster.webp" data-bg-video data-src-sm="/assets/video/conveyor-720.mp4" data-src-lg="/assets/video/conveyor-1080.mp4"></video>
+  </div>
   <div class="container">
     <div class="section-head section-head--row">
       <div>
