@@ -55,7 +55,7 @@
 
   function ring(x, y, rgb, opts) {
     opts = opts || {};
-    rings.push({ x: x, y: y, rgb: rgb, r: opts.r0 || 6, max: opts.max || 150, life: 0, dur: opts.dur || 1100, a: opts.a || 0.38, fill: opts.fill !== false });
+    rings.push({ x: x, y: y, rgb: rgb, r: opts.r0 || 6, max: opts.max || 150, life: 0, dur: opts.dur || 1100, a: opts.a || 0.15, fill: opts.fill !== false });
     if (rings.length > 90) rings.shift();
     if (!running) { running = true; requestAnimationFrame(frame); }
   }
@@ -63,7 +63,7 @@
     var b = tileBox(i), c = colors[i];
     for (var k = 0; k < 3; k++) {
       (function (k) {
-        setTimeout(function () { ring(b.x, b.y, c[Math.min(k, c.length - 1)], { r0: b.w * 0.25, max: b.w * (0.9 + k * 0.35) * (strength || 1), dur: 1300 + k * 250, a: 0.32 - k * 0.07 }); }, k * 140);
+        setTimeout(function () { ring(b.x, b.y, c[Math.min(k, c.length - 1)], { r0: b.w * 0.25, max: b.w * (0.9 + k * 0.35) * (strength || 1), dur: 1300 + k * 250, a: 0.14 - k * 0.035 }); }, k * 140);
       })(k);
     }
   }
@@ -89,7 +89,7 @@
         ctx.beginPath(); ctx.arc(g.x, g.y, r, 0, Math.PI * 2); ctx.fill();
       }
       ctx.strokeStyle = 'rgba(' + col + ',' + alpha + ')';
-      ctx.lineWidth = 2 + 2 * (1 - p);
+      ctx.lineWidth = 1.25 + 1 * (1 - p);
       ctx.beginPath(); ctx.arc(g.x, g.y, r, 0, Math.PI * 2); ctx.stroke();
     }
     if (rings.length) requestAnimationFrame(frame); else { running = false; ctx.clearRect(0, 0, W, H); }
@@ -125,7 +125,7 @@
       var i = stageAtX(x);
       setCurrent(i);
       var now = performance.now(), dx = x - lx, dy = y - ly;
-      if (dx * dx + dy * dy > 900 || now - lt > 120) { // every ~30px or 120ms
+      if (dx * dx + dy * dy > 6400 && now - lt > 220) { // every ~80px of travel, at most ~4 per second
         ring(x, y, colorAt(i, x), { max: 120 + Math.random() * 60, dur: 1000 + Math.random() * 300 });
         lx = x; ly = y; lt = now;
       }
@@ -133,7 +133,7 @@
     root.addEventListener('pointerleave', function () { setCurrent(-1); });
     root.addEventListener('pointerdown', function (e) {
       var b = root.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, i = stageAtX(x);
-      ring(x, y, colorAt(i, x), { max: 260, dur: 1400, a: 0.45 });
+      ring(x, y, colorAt(i, x), { max: 240, dur: 1400, a: 0.2 });
     });
   } else {
     /* ── touch: ripples from the stage nearest the middle of the screen while scrolling; tap to burst ── */
@@ -141,13 +141,13 @@
     window.addEventListener('scroll', function () {
       if (!inView || !revealed) return;
       var now = performance.now();
-      if (now - lastScroll < 260) return;
+      if (now - lastScroll < 650) return;
       lastScroll = now;
       var mid = window.innerHeight / 2, best = 0, bd = Infinity;
       stages.forEach(function (li, i) { var r = li.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = i; } });
       setCurrent(best);
       var bx = tileBox(best);
-      ring(bx.x + (Math.random() - 0.5) * bx.w * 0.6, bx.y, colors[best][Math.floor(Math.random() * colors[best].length)], { r0: bx.w * 0.2, max: bx.w * 1.2, dur: 1200, a: 0.34 });
+      ring(bx.x + (Math.random() - 0.5) * bx.w * 0.6, bx.y, colors[best][Math.floor(Math.random() * colors[best].length)], { r0: bx.w * 0.2, max: bx.w * 1.2, dur: 1300, a: 0.14 });
     }, { passive: true });
     stages.forEach(function (li, i) {
       li.addEventListener('touchstart', function () { setCurrent(i); burst(i, 1.3); }, { passive: true });
