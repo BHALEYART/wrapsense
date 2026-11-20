@@ -91,7 +91,7 @@ export function homePage() {
   const packCats = categories.filter((c) => ['pack', 'dose', 'finish', 'end'].includes(c.stage)).slice(0, 8);
   const body = html`
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__bg" aria-hidden="true"><img src="/assets/img/photos/hero-flow-wrapper-1280.webp" srcset="/assets/img/photos/hero-flow-wrapper-800.webp 800w, /assets/img/photos/hero-flow-wrapper-1280.webp 1280w, /assets/img/photos/hero-flow-wrapper-2400.webp 2400w" sizes="100vw" width="2400" height="800" alt="" fetchpriority="high" decoding="async"></div>
   <div class="container hero__inner">
     <div class="hero__copy">
       <p class="eyebrow eyebrow--light">${esc(hero.eyebrow)}</p>

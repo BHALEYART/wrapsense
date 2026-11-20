@@ -40,14 +40,14 @@ export const stages = [
 
 // Product forms: step 1 of the machine finder ("What are you packaging?")
 export const forms = [
-  { id: 'powder', name: 'Powders', examples: 'Protein, spices, coffee grounds, flour, drink mixes', icon: 'powder', color: '#c2410c' },
-  { id: 'granular', name: 'Granules & free-flowing', examples: 'Coffee beans, rice, seeds, nuts, pet kibble', icon: 'granular', color: '#1d7a48' },
-  { id: 'snacks', name: 'Snacks & irregular pieces', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks', color: '#2553b2' },
-  { id: 'solid', name: 'Single solid items', examples: 'Bars, cookies, baked goods, produce, soap', icon: 'solid', color: '#0f7f74' },
-  { id: 'liquid', name: 'Liquids & pastes', examples: 'Sauces, gels, oils, honey, liquid supplements', icon: 'liquid', color: '#7a3fc0' },
-  { id: 'container', name: 'Jars & bottles', examples: 'Filled jars, bottles and tubs that need caps, labels or cartons', icon: 'container', color: '#3d4fb8' },
-  { id: 'cannabis', name: 'Cannabis & prerolls', examples: 'Prerolls, flower, edibles', icon: 'cannabis', color: '#b0237a' },
-  { id: 'cases', name: 'Finished packs', examples: 'Bags, pouches or boxes that need cartoning, casing or palletizing', icon: 'cases', color: '#a85d00' },
+  { id: 'powder', name: 'Powders', short: 'Powders', examples: 'Protein, spices, coffee grounds, flour, drink mixes', icon: 'powder', color: '#c2410c' },
+  { id: 'granular', name: 'Granules & free-flowing', short: 'Granules', examples: 'Coffee beans, rice, seeds, nuts, pet kibble', icon: 'granular', color: '#1d7a48' },
+  { id: 'snacks', name: 'Snacks & irregular pieces', short: 'Snacks', examples: 'Chips, jerky, candy, gummies, frozen pieces', icon: 'snacks', color: '#2553b2' },
+  { id: 'solid', name: 'Single solid items', short: 'Solids', examples: 'Bars, cookies, baked goods, produce, soap', icon: 'solid', color: '#0f7f74' },
+  { id: 'liquid', name: 'Liquids & pastes', short: 'Liquids', examples: 'Sauces, gels, oils, honey, liquid supplements', icon: 'liquid', color: '#7a3fc0' },
+  { id: 'container', name: 'Jars & bottles', short: 'Jars', examples: 'Filled jars, bottles and tubs that need caps, labels or cartons', icon: 'container', color: '#3d4fb8' },
+  { id: 'cannabis', name: 'Cannabis & prerolls', short: 'Cannabis', examples: 'Prerolls, flower, edibles', icon: 'cannabis', color: '#b0237a' },
+  { id: 'cases', name: 'Finished packs', short: 'Packs', examples: 'Bags, pouches or boxes that need cartoning, casing or palletizing', icon: 'cases', color: '#a85d00' },
 ];
 
 // Package formats: step 2 of the finder
@@ -134,7 +134,7 @@ export const services = [
 
 // Homepage hero copy. Christopher is finalizing this; edit here and rebuild.
 export const hero = {
-  eyebrow: 'Packaging machinery · Gaithersburg, Maryland',
+  eyebrow: 'Packaging machinery · Design your line',
   title: 'Packaging machines,',
   highlight: 'matched to your product.',
   lead: 'Turn-key machines and complete lines for small and medium-size businesses — built on value, quality and service.',

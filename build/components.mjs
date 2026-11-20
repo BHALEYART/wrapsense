@@ -78,7 +78,7 @@ export function wheel({ id = 'wheel', compact = false, legendTag = 'h2', stepLab
           <input class="wheel__input visually-hidden" type="radio" name="form" id="${id}-${f.id}" value="${f.id}"${selected === f.id ? ' checked' : ''} required>
           <label class="wheel__label" for="${id}-${f.id}">
             ${icon(f.icon, 'wheel__icon')}
-            <span class="wheel__name">${esc(f.name)}</span>
+            <span class="wheel__name">${esc(f.name)}</span><span class="wheel__short">${esc(f.short)}</span>
             <span class="wheel__ex visually-hidden">${esc(f.examples)}</span>
           </label>
         </li>`)}
