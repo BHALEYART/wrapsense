@@ -98,7 +98,7 @@ export function homePage() {
   <div class="container hero__inner">
     <div class="hero__copy">
       <p class="eyebrow eyebrow--light">${esc(hero.eyebrow)}</p>
-      <h1 id="hero-title" class="hero__title">${esc(hero.title)} <span class="hl">${esc(hero.highlight)}</span></h1>
+      <h1 id="hero-title" class="hero__title">${hero.title.split(' ').map((w, i) => `<span class="hw" style="--w:${i}">${esc(w)}</span>`).join(' ')} <span class="hl">${hero.highlight.split(' ').map((w, i) => `<span class="hr"><span style="--w:${i}">${esc(w)}</span></span>`).join(' ')}</span></h1>
       <p class="hero__lead">${esc(hero.lead)}</p>
       <ul class="hero__values" role="list" aria-label="Our values">${site.values.map((v) => `<li>${icon('check')}${esc(v)}</li>`)}</ul>
       <form class="hero__prompt" action="/contact/" method="get" data-hero-prompt>
@@ -112,7 +112,7 @@ export function homePage() {
       </form>
     </div>
     <form class="hero__finder card-glass" action="/machine-finder/" method="get" data-wheel-launch>
-      ${wheel({ id: 'home-wheel', stepLabel: 'Machine Finder' })}
+      ${wheel({ id: 'home-wheel', stepLabel: 'Design your packaging line' })}
       <div class="hero__finder-foot">
         <p>Pick what you’re packaging to see machines that fit.</p>
         <button class="btn btn--primary" type="submit" data-track="hero_finder_continue">Continue ${icon('arrow')}</button>

@@ -206,14 +206,14 @@ main:focus { outline: none; }
 .wheel__stage { position: relative; width: min(460px, 100%); aspect-ratio: 1; margin-inline: auto; container-type: inline-size; }
 .wheel__ring, .wheel__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .wheel__hub { position: absolute; inset: 29%; border-radius: 50%; background: var(--surface); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1rem; box-shadow: inset 0 0 0 6px rgba(255, 255, 255, .06), 0 16px 32px -12px rgba(14, 30, 60, .5); }
-.wheel__hub-step { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sky-light); font-weight: 600; line-height: 1.3; }
+.wheel__hub-step { text-wrap: balance; max-width: 92%; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sky-light); font-weight: 600; line-height: 1.3; }
 .wheel__hub-q { font-family: var(--display); text-transform: uppercase; font-size: clamp(1rem, 5cqi, 1.5rem); line-height: 1.1; margin: .3rem 0 .4rem; }
 .wheel__hub-pick { font-size: .75rem; color: #e6ecff; line-height: 1.3; }
 .wheel__items { position: absolute; inset: 0; }
 .wheel__item { position: absolute; left: 50%; top: 50%; width: 25%; aspect-ratio: 1; --a: calc(var(--i) * 360deg / var(--n)); transform: translate(-50%, -50%) rotate(var(--a)) translateY(-41.5cqi) rotate(calc(var(--a) * -1)); }
 .wheel__label { width: 100%; height: 100%; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; text-align: center; padding: .4rem; background: #fff; color: var(--ink); border: 2px solid var(--line); box-shadow: var(--shadow); cursor: pointer; transition: transform .2s, background .2s, color .2s, border-color .2s, box-shadow .2s; }
 .wheel__icon { width: 38%; height: 38%; color: var(--brand-text); transition: color .2s; }
-.wheel__name { font-size: clamp(.6rem, 2.6cqi, .78rem); font-weight: 600; line-height: 1.15; }
+.wheel__name { max-width: 80%; font-size: clamp(.58rem, 2.35cqi, .74rem); font-weight: 600; line-height: 1.12; text-wrap: balance; } /* stays inside the circle */
 .wheel__label:hover { transform: scale(1.06); border-color: var(--brand-2); }
 .wheel__input:focus-visible + .wheel__label { box-shadow: var(--focus); }
 .wheel__input:checked + .wheel__label { background: var(--grad); color: #fff; border-color: transparent; transform: scale(1.1); box-shadow: 0 10px 24px -8px rgba(42, 117, 209, .7); }
@@ -1129,3 +1129,31 @@ body.search-open { overflow: hidden; }
 .fam__video video { width: 100%; height: 100%; object-fit: cover; }
 .fam__video::after { content: ''; position: absolute; inset: 0; background: rgba(11, 15, 23, .75); } /* 75% cover, same treatment as the hero */
 .fam > .container { position: relative; z-index: 1; }
+
+/* ───── hero entrance (CSS only; backwards fill so hover/selected states take over after) ───── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .eyebrow { animation: hero-fade .8s ease .05s backwards; }
+  /* white words slide in from the left */
+  .hero__title .hw { display: inline-block; animation: hero-slide-l .9s cubic-bezier(.2, .8, .2, 1) calc(.12s + var(--w) * .09s) backwards; }
+  /* blue words rise from behind an invisible wall (each word masked) */
+  .hero__title .hr { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+  .hero__title .hr > span { display: inline-block; animation: hero-rise 1s cubic-bezier(.2, .8, .2, 1) calc(.5s + var(--w) * .1s) backwards; }
+  .hero__lead, .hero__values { animation: hero-up .9s ease .9s backwards; }
+  /* quote bar: slow fade + slide */
+  .hero__prompt { animation: hero-up-slow 1.6s cubic-bezier(.2, .7, .2, 1) 1.05s backwards; }
+  /* wheel card: swings in from the right with blur + fade, then the wheel assembles */
+  .hero__inner { perspective: 1600px; }
+  .hero__finder { animation: hero-card-in 1.2s cubic-bezier(.16, .84, .24, 1) .3s backwards; transform-origin: 100% 50%; }
+  .hero .wheel__svg { animation: hero-spin-in 1.4s cubic-bezier(.2, .8, .2, 1) .7s backwards; }
+  .hero .wheel__hub { animation: hero-pop .8s cubic-bezier(.3, 1.5, .5, 1) .95s backwards; }
+  .hero .wheel__label { animation: hero-pop .7s cubic-bezier(.3, 1.6, .5, 1) calc(1s + var(--i) * .07s) backwards; }
+  .hero__finder-foot { animation: hero-fade .8s ease 1.6s backwards; }
+}
+@keyframes hero-fade { from { opacity: 0; } }
+@keyframes hero-slide-l { from { opacity: 0; transform: translateX(-70px); } }
+@keyframes hero-rise { from { transform: translateY(110%); } }
+@keyframes hero-up { from { opacity: 0; transform: translateY(18px); } }
+@keyframes hero-up-slow { from { opacity: 0; transform: translateY(46px); } }
+@keyframes hero-card-in { from { opacity: 0; transform: translateX(140px) rotateY(-22deg) scale(.92); filter: blur(12px); } 60% { filter: blur(0); } }
+@keyframes hero-spin-in { from { opacity: 0; transform: rotate(-120deg) scale(.7); } }
+@keyframes hero-pop { from { opacity: 0; transform: scale(.4); } }
