@@ -136,7 +136,8 @@ export function homePage() {
   </div>
 </section>
 
-<section class="section" aria-labelledby="line-title">
+<section class="section line-fx" aria-labelledby="line-title" data-line-fx>
+  <canvas class="line-fx__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">From feeding to pallet</p>
@@ -206,7 +207,7 @@ ${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 
     title: 'Packaging Machines & Turn-Key Lines | WrapSense Packaging',
     description: 'Packaging machines and turn-key lines for small and medium businesses: VFFS, stick pack, pouch, flow wrap, weighing, labeling, cartoning and case packing.',
     body,
-    scripts: ['finder.js'],
+    scripts: ['finder.js', 'line-fx.js'],
     jsonld: [orgLd, { '@context': 'https://schema.org', '@type': 'WebSite', '@id': site.url + '/#website', url: site.url + '/', name: site.name, publisher: { '@id': site.url + '/#organization' } }],
     bodyClass: 'page-home',
   });

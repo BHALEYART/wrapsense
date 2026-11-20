@@ -96,7 +96,7 @@ export function lineDiagram({ highlight = null, link = true } = {}) {
       const cats = categories.filter((c) => c.stage === s.id);
       const active = highlight === s.id;
       const n = String(i + 1).padStart(2, '0');
-      return html`<li class="line__stage${active ? ' is-active' : ''}">
+      return html`<li class="line__stage${active ? ' is-active' : ''}" style="--i:${i}" data-colors="${s.grad.join(' ')}">
         <span class="line__tile" style="background:linear-gradient(100deg, ${s.grad.join(', ')})" aria-hidden="true">${n}</span>
         <p class="line__step">Stage ${n}</p>
         <p class="line__name">${esc(s.name)}</p>
