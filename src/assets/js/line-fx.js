@@ -108,7 +108,7 @@
       if (en.isIntersecting && !revealed && en.intersectionRatio > 0.25) {
         revealed = true;
         root.classList.add('is-revealed');
-        stages.forEach(function (_, i) { setTimeout(function () { burst(i, 1.1); }, 180 + i * 140); });
+        if (root.getAttribute('data-fx-bursts') !== 'off') stages.forEach(function (_, i) { setTimeout(function () { burst(i, 1.1); }, 180 + i * 140); });
       }
     });
   }, { threshold: [0, 0.25, 0.5] });

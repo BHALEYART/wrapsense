@@ -1161,11 +1161,11 @@ body.search-open { overflow: hidden; }
 @keyframes hero-pop { from { opacity: 0; transform: scale(.4); } }
 
 /* ───── home machine grid: ripples (line-fx.js) + swooping reveal ───── */
-.cats-fx .grid--cats > li { perspective: 900px; }
+.cats-fx .grid--cats > li { will-change: transform, opacity; }
 .cats-fx .grid--cats > li.is-hot .ccard { transform: translateY(-6px); box-shadow: var(--shadow-lg, 0 22px 40px -18px rgba(11, 15, 23, .35)); border-color: var(--a1); }
-.cats-fx.line-fx--armed .grid--cats > li { opacity: 0; transform: translate(-70px, 90px) rotate(-7deg) scale(.88); transform-origin: 0 100%; filter: blur(6px); }
-.cats-fx.line-fx--armed.is-revealed .grid--cats > li { opacity: 1; transform: none; filter: none;
-  transition: opacity .7s ease calc(var(--i) * 95ms), transform 1.1s cubic-bezier(.17, 1.15, .3, 1) calc(var(--i) * 95ms), filter .8s ease calc(var(--i) * 95ms); }
+.cats-fx.line-fx--armed .grid--cats > li { opacity: 0; transform: translate(-70px, 90px) rotate(-7deg) scale(.88); transform-origin: 0 100%; }
+.cats-fx.line-fx--armed.is-revealed .grid--cats > li { opacity: 1; transform: none;
+  transition: opacity .7s ease calc(var(--i) * 95ms), transform 1.1s cubic-bezier(.17, 1.15, .3, 1) calc(var(--i) * 95ms); }
 @media (prefers-reduced-motion: reduce) { .cats-fx.line-fx--armed .grid--cats > li { opacity: 1; transform: none; filter: none; } }
 
 /* ───── home "Already know your package?": dark navy band, tiles fade up quickly on scroll ───── */

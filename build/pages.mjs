@@ -174,7 +174,7 @@ ${familyShowcase()}
   </div>
 </section>
 
-<section class="section line-fx cats-fx" aria-labelledby="cats-title" data-line-fx data-fx-axis="xy">
+<section class="section line-fx cats-fx" aria-labelledby="cats-title" data-line-fx data-fx-axis="xy" data-fx-bursts="off">
   <canvas class="line-fx__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="section-head section-head--row">
