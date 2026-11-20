@@ -47,8 +47,8 @@ const catalogLink = (page) => `${site.catalogPdf}#page=${page}`;
 function familyShowcase() {
   const fams = categories.filter((c) => c.series && c.image);
   const firstSentence = (t) => (t.match(/^.*?[.!?](\s|$)/) || [t])[0].trim();
-  return html`<section class="section section--dark fam" aria-labelledby="fam-title">
-  <div class="fam__video" aria-hidden="true">
+  return html`<section class="section section--dark bgv fam" aria-labelledby="fam-title">
+  <div class="bgv__media" aria-hidden="true">
     <video muted loop playsinline preload="none" poster="/assets/video/conveyor-poster.webp" data-bg-video data-src-sm="/assets/video/conveyor-720.mp4" data-src-lg="/assets/video/conveyor-1080.mp4"></video>
   </div>
   <div class="container">
@@ -184,10 +184,13 @@ ${familyShowcase()}
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="qvs-title">
+<section class="section section--dark bgv qvs-sec" aria-labelledby="qvs-title">
+  <div class="bgv__media" aria-hidden="true">
+    <video muted loop playsinline preload="none" poster="/assets/video/weigher-poster.webp" data-bg-video data-src-sm="/assets/video/weigher-720.mp4" data-src-lg="/assets/video/weigher-1440.mp4"></video>
+  </div>
   <div class="container">
     <div class="section-head">
-      <p class="eyebrow">Quality · Value · Service</p>
+      <p class="eyebrow eyebrow--light">Quality · Value · Service</p>
       <h2 id="qvs-title" class="section-title section-title--xl">The Toyota of packaging machinery.</h2>
       <p class="section-lead">You don’t need a Ferrari on your first packaging machine purchase. You need a Toyota — practical, dependable, and supportable.</p>
     </div>

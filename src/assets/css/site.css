@@ -1123,12 +1123,14 @@ body.search-open { overflow: hidden; }
   .line-fx .line__tile::after { display: none; }
 }
 
-/* ───── machine-family showcase: background video (muted) under a 75% near-black cover ───── */
-.fam { position: relative; overflow: hidden; isolation: isolate; }
-.fam__video { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.fam__video video { width: 100%; height: 100%; object-fit: cover; }
-.fam__video::after { content: ''; position: absolute; inset: 0; background: rgba(11, 15, 23, .75); } /* 75% cover, same treatment as the hero */
-.fam > .container { position: relative; z-index: 1; }
+/* ───── background-video sections (machine showcase, Toyota): muted video under a 75% near-black cover ───── */
+.bgv { position: relative; overflow: hidden; isolation: isolate; }
+.bgv__media { position: absolute; inset: 0; z-index: 0; pointer-events: none; background: var(--black); }
+.bgv__media video { width: 100%; height: 100%; object-fit: cover; object-position: var(--bgv-pos, 50% 50%); }
+.bgv__media::after { content: ''; position: absolute; inset: 0; background: rgba(11, 15, 23, .75); }
+.bgv > .container { position: relative; z-index: 1; }
+.qvs-sec { --bgv-pos: 50% 42%; } /* vertical clip: keep the hopper + weigher in frame */
+.section--dark .section-lead { color: #d3d9e3; }
 
 /* ───── hero entrance (CSS only; backwards fill so hover/selected states take over after) ───── */
 @media (prefers-reduced-motion: no-preference) {
