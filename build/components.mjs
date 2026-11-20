@@ -122,10 +122,10 @@ export function modelsTable(p) {
   </table></div>`;
 }
 
-export function ctaBand({ title = 'Talk to a packaging specialist', text = 'Tell us about your product and we’ll recommend the right machine — or set up a test run with your samples.', interest = '' } = {}) {
+export function ctaBand({ title = 'Talk to a packaging specialist', text = 'Tell us about your product and we’ll recommend the right machine — or set up a test run with your samples.', interest = '', financing = true } = {}) {
   return html`<section class="cta-band" aria-labelledby="cta-band-title">
     <div class="container cta-band__inner">
-      <div><h2 id="cta-band-title" class="cta-band__title">${esc(title)}</h2><p>${esc(text)}</p></div>
+      <div><h2 id="cta-band-title" class="cta-band__title">${esc(title)}</h2><p>${esc(text)}</p>${financing ? `<p class="cta-band__fin">${icon('gauge')}<span><strong>Financing available.</strong> <a href="/financing/#calculator" data-track="cta_band_financing">Estimate your monthly payment and payback</a></span></p>` : ''}</div>
       <div class="cta-band__actions">
         <a class="btn btn--primary" href="/contact/${interest ? `?interest=${encodeURIComponent(interest)}` : ''}" data-track="cta_band_quote">Request a Quote ${icon('arrow')}</a>
         <a class="btn btn--outline" href="/machine-finder/" data-track="cta_band_finder">Use the Machine Finder</a>

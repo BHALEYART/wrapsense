@@ -1246,3 +1246,6 @@ body.search-open { overflow: hidden; }
 @media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
   .mq-m [data-mq-auto] .mq-m__track > .mq-dup { display: flex; }
 }
+.cta-band__fin { display: flex; align-items: center; gap: .55rem; margin-top: .9rem; font-size: .95rem; color: var(--ink-2); }
+.cta-band__fin .icon { flex: none; width: 22px; height: 22px; color: var(--brand-text); }
+.cta-band__fin a { color: var(--brand-text); font-weight: 600; }
