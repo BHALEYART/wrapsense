@@ -174,13 +174,14 @@ ${familyShowcase()}
   </div>
 </section>
 
-<section class="section" aria-labelledby="cats-title">
+<section class="section line-fx cats-fx" aria-labelledby="cats-title" data-line-fx data-fx-axis="xy">
+  <canvas class="line-fx__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="section-head section-head--row">
       <div><p class="eyebrow">Our automated solutions</p><h2 id="cats-title" class="section-title">Machines for every stage</h2></div>
       <a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>
     </div>
-    <ul class="grid grid--cats" role="list">${packCats.map((c) => `<li>${categoryCard(c)}</li>`)}</ul>
+    <ul class="grid grid--cats" role="list">${packCats.map((c, i) => `<li style="--i:${i}" data-colors="${c.accent.join(' ')}">${categoryCard(c)}</li>`)}</ul>
   </div>
 </section>
 

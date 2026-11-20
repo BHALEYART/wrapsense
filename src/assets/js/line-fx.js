@@ -1,18 +1,22 @@
-/* "Build a complete packaging line" — interactive background.
+/* Interactive ripple backgrounds — any section with [data-line-fx] (home: packaging line, machine grid).
+   Items carry data-colors; data-fx-axis="xy" picks the nearest item in 2D instead of the nearest column.
    Desktop: expanding, fading circles follow the pointer, coloured by the stage column the pointer lines up with.
    All devices: stages cascade in when the section scrolls into view, each firing a burst in its colour.
    Touch: while scrolling, ripples rise from the stage nearest the middle of the screen; tapping a stage bursts it.
    prefers-reduced-motion: none of this runs (the section is shown as-is). */
 (function () {
   'use strict';
-  var root = document.querySelector('[data-line-fx]');
-  if (!root || !window.requestAnimationFrame) return;
+  if (!window.requestAnimationFrame) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (reduce.matches) return;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-line-fx]'), setup);
+
+  function setup(root) {
+  var axisX = root.getAttribute('data-fx-axis') !== 'xy'; // line: nearest column; grids: nearest card
 
   var canvas = root.querySelector('.line-fx__canvas');
   var ctx = canvas && canvas.getContext('2d');
-  var stages = Array.prototype.slice.call(root.querySelectorAll('.line__stage'));
+  var stages = Array.prototype.slice.call(root.querySelectorAll('[data-colors]'));
   if (!ctx || !stages.length) return;
 
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -34,14 +38,14 @@
 
   // tile geometry relative to the section
   function tileBox(i) {
-    var t = stages[i].querySelector('.line__tile') || stages[i];
+    var t = stages[i].querySelector('.line__tile, [data-fx-tile]') || stages[i];
     var a = t.getBoundingClientRect(), b = root.getBoundingClientRect();
     return { x: a.left - b.left + a.width / 2, y: a.top - b.top + a.height / 2, w: a.width, h: a.height, left: a.left - b.left, right: a.right - b.left };
   }
   // stage whose column the x position lines up with (nearest tile centre)
-  function stageAtX(x) {
+  function stageAt(x, y) {
     var best = 0, bd = Infinity;
-    for (var i = 0; i < stages.length; i++) { var c = tileBox(i), d = Math.abs(c.x - x); if (d < bd) { bd = d; best = i; } }
+    for (var i = 0; i < stages.length; i++) { var c = tileBox(i), d = axisX ? Math.abs(c.x - x) : Math.hypot(c.x - x, c.y - y); if (d < bd) { bd = d; best = i; } }
     return best;
   }
   // blend across a tile's gradient by horizontal position inside it
@@ -122,7 +126,7 @@
     var lx = -999, ly = -999, lt = 0;
     root.addEventListener('pointermove', function (e) {
       var b = root.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
-      var i = stageAtX(x);
+      var i = stageAt(x, y);
       setCurrent(i);
       var now = performance.now(), dx = x - lx, dy = y - ly;
       if (dx * dx + dy * dy > 6400 && now - lt > 220) { // every ~80px of travel, at most ~4 per second
@@ -132,7 +136,7 @@
     });
     root.addEventListener('pointerleave', function () { setCurrent(-1); });
     root.addEventListener('pointerdown', function (e) {
-      var b = root.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, i = stageAtX(x);
+      var b = root.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, i = stageAt(x, y);
       ring(x, y, colorAt(i, x), { max: 240, dur: 1400, a: 0.2 });
     });
   } else {
@@ -156,4 +160,5 @@
 
   // stop if the user switches on reduced motion mid-visit
   if (reduce.addEventListener) reduce.addEventListener('change', function (e) { if (e.matches) { rings = []; root.classList.add('is-revealed'); } });
+  }
 })();
