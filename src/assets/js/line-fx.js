@@ -102,17 +102,32 @@
   /* ── reveal: stages cascade in, each bursting in its colour ── */
   root.classList.add('line-fx--armed');
   var revealed = false;
+  // Trigger once the section's top passes 80% of the viewport — not a fraction of the section,
+  // which a tall stacked section on a phone may never reach.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
       inView = en.isIntersecting;
-      if (en.isIntersecting && !revealed && en.intersectionRatio > 0.25) {
+      if (en.isIntersecting && !revealed) {
         revealed = true;
         root.classList.add('is-revealed');
         if (root.getAttribute('data-fx-bursts') !== 'off') stages.forEach(function (_, i) { setTimeout(function () { burst(i, 1.1); }, 180 + i * 140); });
       }
     });
-  }, { threshold: [0, 0.25, 0.5] });
+  }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
   io.observe(root);
+  // Grids: each card reveals as it scrolls in (staggered within each batch), so cards further down a phone screen aren't revealed off-screen
+  if (!axisX) {
+    var itemIO = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.style.setProperty('--d', (n++ * 90) + 'ms');
+        en.target.classList.add('is-in');
+        itemIO.unobserve(en.target);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    stages.forEach(function (li) { itemIO.observe(li); });
+  }
 
   /* ── desktop: ripples follow the pointer ── */
   var current = -1;

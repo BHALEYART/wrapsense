@@ -197,7 +197,7 @@
     el.classList.add('reveal-armed');
     var io = new IntersectionObserver(function (es) {
       if (es[0].isIntersecting) { el.classList.add('is-revealed'); io.disconnect(); }
-    }, { threshold: 0.2 });
+    }, { threshold: 0, rootMargin: '0px 0px -20% 0px' }); // top past 80% of the viewport (works for tall sections too)
     io.observe(el);
   });
 })();
