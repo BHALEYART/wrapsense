@@ -185,7 +185,7 @@ ${familyShowcase()}
   </div>
 </section>
 
-<section class="section section--dark bgv qvs-sec" aria-labelledby="qvs-title">
+<section class="section section--dark bgv qvs-sec" aria-labelledby="qvs-title" data-reveal>
   <div class="bgv__media" aria-hidden="true">
     <video muted loop playsinline preload="none" poster="/assets/video/weigher-poster.webp" data-bg-video data-src-sm="/assets/video/weigher-720.mp4" data-src-lg="/assets/video/weigher-1440.mp4"></video>
   </div>
@@ -196,9 +196,9 @@ ${familyShowcase()}
       <p class="section-lead">You don’t need a Ferrari on your first packaging machine purchase. You need a Toyota — practical, dependable, and supportable.</p>
     </div>
     <ol class="qvs" role="list">
-      <li><span class="qvs__icon">${icon('shield')}</span><span class="qvs__n">01</span><h3>Quality.</h3><p>Industrial-grade builds with proven, widely available components — specified sensibly for the job, not over-engineered.</p></li>
-      <li><span class="qvs__icon">${icon('gauge')}</span><span class="qvs__n">02</span><h3>Value.</h3><p>Priced to pay back. Start with the options your line needs and add modules as you grow — no forced bundles.</p></li>
-      <li><span class="qvs__icon">${icon('wrench')}</span><span class="qvs__n">03</span><h3>Service.</h3><p>We test your samples, install the line, train your team and keep it running with parts and service. <a href="/services/">Service &amp; support</a></p></li>
+      <li style="--i:0"><span class="qvs__icon">${icon('shield')}</span><span class="qvs__n">01</span><h3>Quality.</h3><p>Industrial-grade builds with proven, widely available components — specified sensibly for the job, not over-engineered.</p></li>
+      <li style="--i:1"><span class="qvs__icon">${icon('gauge')}</span><span class="qvs__n">02</span><h3>Value.</h3><p>Priced to pay back. Start with the options your line needs and add modules as you grow — no forced bundles.</p></li>
+      <li style="--i:2"><span class="qvs__icon">${icon('wrench')}</span><span class="qvs__n">03</span><h3>Service.</h3><p>We test your samples, install the line, train your team and keep it running with parts and service. <a href="/services/">Service &amp; support</a></p></li>
     </ol>
   </div>
 </section>

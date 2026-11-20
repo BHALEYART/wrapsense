@@ -1129,7 +1129,7 @@ body.search-open { overflow: hidden; }
 .bgv__media video { width: 100%; height: 100%; object-fit: cover; object-position: var(--bgv-pos, 50% 50%); }
 .bgv__media::after { content: ''; position: absolute; inset: 0; background: rgba(11, 15, 23, .75); }
 .bgv > .container { position: relative; z-index: 1; }
-.qvs-sec { --bgv-pos: 50% 42%; } /* vertical clip: keep the hopper + weigher in frame */
+.qvs-sec { --bgv-pos: 50% 88%; } /* vertical clip: anchored to the lower part (weigher frame + bag) */
 .section--dark .section-lead { color: #d3d9e3; }
 
 /* ───── hero entrance (CSS only; backwards fill so hover/selected states take over after) ───── */
@@ -1173,3 +1173,15 @@ body.search-open { overflow: hidden; }
 .reveal-armed .pkg-strip > li { opacity: 0; transform: translateY(26px); }
 .reveal-armed.is-revealed .pkg-strip > li { opacity: 1; transform: none; transition: opacity .45s ease calc(var(--i) * 55ms), transform .5s cubic-bezier(.2, .8, .2, 1) calc(var(--i) * 55ms); }
 @media (prefers-reduced-motion: reduce) { .reveal-armed .pkg-strip > li { opacity: 1; transform: none; } }
+
+/* Toyota cards: fade up in turn, then each headline is drawn in by a blue strike line with a blue pulse */
+.qvs h3 { position: relative; display: inline-block; }
+.qvs h3::after { content: ''; position: absolute; left: -.08em; right: -.08em; top: 50%; height: .16em; margin-top: -.08em; background: var(--brand); border-radius: 2px; clip-path: inset(0 100% 0 0); pointer-events: none; }
+.reveal-armed .qvs > li { opacity: 0; transform: translateY(28px); }
+.reveal-armed .qvs h3 { clip-path: inset(-20% 100% -20% 0); }
+.reveal-armed.is-revealed .qvs > li { opacity: 1; transform: none; transition: opacity .6s ease calc(var(--i) * 160ms), transform .7s cubic-bezier(.2, .8, .2, 1) calc(var(--i) * 160ms); }
+.reveal-armed.is-revealed .qvs h3 { animation: qvs-write .55s cubic-bezier(.6, 0, .3, 1) calc(.45s + var(--i) * 160ms) forwards, qvs-pulse 1.1s ease calc(.75s + var(--i) * 160ms); }
+.reveal-armed.is-revealed .qvs h3::after { animation: qvs-strike 1.15s cubic-bezier(.6, 0, .3, 1) calc(.35s + var(--i) * 160ms); }
+@keyframes qvs-write { to { clip-path: inset(-20% -5% -20% 0); } }
+@keyframes qvs-strike { 0% { clip-path: inset(0 100% 0 0); } 45% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 0 100%); } }
+@keyframes qvs-pulse { 0%, 100% { color: var(--ink); text-shadow: none; } 35% { color: var(--brand); text-shadow: 0 0 18px rgba(42, 117, 209, .55), 0 0 2px rgba(42, 117, 209, .4); } }
