@@ -1236,3 +1236,13 @@ body.search-open { overflow: hidden; }
   .qvs-dots button[aria-current='true']::before { width: 28px; background: #fff; }
   .qvs-dots button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 }
+
+/* ───── phones: strips auto-scroll via JS on a swipeable row (drag left/right; resumes after release) ───── */
+@media (max-width: 700px) {
+  [data-mq-auto] { overflow-x: auto !important; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
+  [data-mq-auto]::-webkit-scrollbar { display: none; }
+  [data-mq-auto] .ind-marquee__track, [data-mq-auto] .mq-m__track { animation: none !important; }
+}
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .mq-m [data-mq-auto] .mq-m__track > .mq-dup { display: flex; }
+}

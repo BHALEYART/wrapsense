@@ -136,7 +136,7 @@ export function homePage() {
       <button type="button" class="ind-marquee__pause" aria-pressed="false" data-marquee-toggle>${icon('pause', 'icon icon--pause')}${icon('play', 'icon icon--play')}<span class="visually-hidden">Pause scrolling industries</span></button>
     </div>
   </div>
-  <div class="ind-marquee__viewport" data-marquee>
+  <div class="ind-marquee__viewport" data-marquee data-mq-auto="40">
     <ul class="ind-marquee__track" role="list">
       ${[0, 1].map((copy) => industries.map((i) => html`<li${copy ? ' aria-hidden="true"' : ''}><a class="ind-card" href="/industries/${i.slug}/#what"${copy ? ' tabindex="-1"' : ''} data-track="home_industry_strip"><span class="ind-card__img">${imgTag(i.image, '')}</span><span class="ind-card__name">${esc(i.name)} ${icon('arrow')}</span></a></li>`).join('')).join('')}
     </ul>
@@ -165,7 +165,7 @@ ${familyShowcase()}
       </div>
       <div class="mq-head-actions"><a class="link-arrow link-arrow--light" href="/machines/">All machine categories ${icon('arrow')}</a>${mqPause('package types', true)}</div>
     </div>
-    <div class="mq-m__viewport"><ul class="pkg-strip mq-m__track" role="list">
+    <div class="mq-m__viewport" data-mq-auto="38"><ul class="pkg-strip mq-m__track" role="list">
       ${(() => { const items = Object.entries(PACKAGE_LINKS).map(([pk, cat], i) => {
         const P = pkgById[pk];
         return html`<li style="--i:${i}"><a class="pkg-tile" href="${categoryUrl(cat)}${pk === 'pallet' ? '#casemaster-palletstakr-palletizer' : ''}">
@@ -185,7 +185,7 @@ ${familyShowcase()}
       <div><p class="eyebrow">Our automated solutions</p><h2 id="cats-title" class="section-title">Machines for every stage</h2></div>
       <div class="mq-head-actions"><a class="link-arrow" href="/machines/">See all ${products.length} machines ${icon('arrow')}</a>${mqPause('machine categories')}</div>
     </div>
-    <div class="mq-m__viewport"><ul class="grid grid--cats mq-m__track" role="list">${(() => { const items = packCats.map((c, i) => `<li style="--i:${i}" data-colors="${c.accent.join(' ')}">${categoryCard(c)}</li>`).join(''); return items + mqDup(items.replace(/ data-colors="[^"]*"/g, '')); })()}</ul></div>
+    <div class="mq-m__viewport" data-mq-auto="34"><ul class="grid grid--cats mq-m__track" role="list">${(() => { const items = packCats.map((c, i) => `<li style="--i:${i}" data-colors="${c.accent.join(' ')}">${categoryCard(c)}</li>`).join(''); return items + mqDup(items.replace(/ data-colors="[^"]*"/g, '')); })()}</ul></div>
   </div>
 </section>
 

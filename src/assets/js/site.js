@@ -243,3 +243,56 @@
   if (mq.addEventListener) mq.addEventListener('change', setup);
   setup();
 })();
+
+// Phones: auto-scrolling strips you can also swipe. The row is natively scrollable; we advance scrollLeft
+// each frame, loop seamlessly at the duplicate copy, pause while touched/scrolled by the user and resume shortly after.
+(function () {
+  var strips = document.querySelectorAll('[data-mq-auto]');
+  if (!strips.length || !window.requestAnimationFrame) return;
+  var mq = window.matchMedia('(max-width: 700px)');
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  strips.forEach(function (vp) {
+    var speed = parseFloat(vp.getAttribute('data-mq-auto')) || 40; // px per second
+    var bar = vp.closest('.ind-marquee, [data-mq]');
+    var track = vp.firstElementChild;
+    var pos = 0, last = 0, touching = false, resumeAt = 0, visible = false, raf = 0, expected = -1;
+    function half() { return track.scrollWidth / 2; }
+    function wrap() {
+      var h = half();
+      if (h <= 0) return;
+      if (vp.scrollLeft >= h) vp.scrollLeft -= h;
+      else if (vp.scrollLeft <= 0) vp.scrollLeft += h;
+      pos = expected = vp.scrollLeft;
+    }
+    function frame(t) {
+      raf = 0;
+      if (!mq.matches || still || !visible) { last = 0; return; }
+      var dt = last ? Math.min(64, t - last) : 0; last = t;
+      var paused = touching || t < resumeAt || (bar && bar.classList.contains('is-paused')) || document.hidden;
+      if (!paused) {
+        pos += speed * dt / 1000;
+        vp.scrollLeft = pos;
+        expected = vp.scrollLeft;
+        if (vp.scrollLeft >= half()) wrap();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+    function hold(ms) { resumeAt = performance.now() + ms; }
+    vp.addEventListener('touchstart', function () { touching = true; }, { passive: true });
+    vp.addEventListener('touchend', function () { touching = false; hold(1200); }, { passive: true });
+    vp.addEventListener('touchcancel', function () { touching = false; hold(1200); }, { passive: true });
+    vp.addEventListener('scroll', function () {
+      if (Math.abs(vp.scrollLeft - expected) < 2) return; // our own movement
+      // user drag or momentum: follow it, keep the loop seamless, and wait before resuming
+      wrap();
+      if (!touching) hold(1200);
+    }, { passive: true });
+    vp.addEventListener('focusin', function () { hold(4000); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }).observe(vp); else visible = true;
+    if (mq.addEventListener) mq.addEventListener('change', function () { if (mq.matches) { pos = vp.scrollLeft; kick(); } });
+    if (bar) bar.addEventListener('click', function (e) { if (e.target.closest('[data-marquee-toggle]')) { pos = vp.scrollLeft; last = 0; kick(); } });
+    pos = vp.scrollLeft;
+    kick();
+  });
+})();
