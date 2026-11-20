@@ -1087,16 +1087,15 @@ body.search-open { overflow: hidden; }
 @media (max-width: 360px) { .brand img { width: 148px; } .eyebrow { letter-spacing: .08em; } }
 
 /* ───── photo bands: the hero photo repeated under thin sections, 75% white/black cover (trial) ───── */
-.ind-marquee, .cta-band { background: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('/assets/img/photos/hero-flow-wrapper-1280.webp') var(--photo-pos, 50% 50%) / cover no-repeat, #fff; }
+.ind-marquee { background: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('/assets/img/photos/hero-flow-wrapper-1280.webp') var(--photo-pos, 50% 50%) / cover no-repeat, #fff; }
 .footer-cta { background: linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url('/assets/img/photos/hero-flow-wrapper-1280.webp') var(--photo-pos, 50% 50%) / cover no-repeat, #0b0f17; }
 @media (min-width: 1281px) {
-  .ind-marquee, .cta-band { background-image: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('/assets/img/photos/hero-flow-wrapper-2400.webp'); }
+  .ind-marquee { background-image: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('/assets/img/photos/hero-flow-wrapper-2400.webp'); }
   .footer-cta { background-image: linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url('/assets/img/photos/hero-flow-wrapper-2400.webp'); }
 }
 .ind-marquee { --photo-pos: 20% 35%; }   /* conveyor */
-.cta-band { --photo-pos: 55% 70%; }      /* film roll */
 .footer-cta { --photo-pos: 85% 40%; }    /* control panel */
 /* keep small text AA on the lighter photo cover */
-.ind-marquee .eyebrow, .cta-band .eyebrow { color: #1c3a7c; }
-.ind-marquee .link-arrow, .cta-band a:not(.btn) { color: #1c3a7c; }
-.cta-band p { color: var(--ink-2); }
+.ind-marquee .eyebrow { color: #1c3a7c; }
+.ind-marquee .link-arrow { color: #1c3a7c; }
+/* .cta-band stays plain: it sits directly above .footer-cta, and photo bands must not touch */
