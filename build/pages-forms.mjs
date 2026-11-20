@@ -51,6 +51,10 @@ export function contactPage() {
     <fieldset class="form-section">
       <legend class="form-section__title"><span class="form-section__n" aria-hidden="true">1</span> Your project</legend>
 
+      <div class="form-grid form-grid--lead" data-show-for="new-machine line custom film financing">
+        ${field({ id: 'product', label: 'What are you packaging?', required: true, hint: 'For example: “ground coffee, 12 oz bags” or “protein powder in 30 g stick packs”.', full: true, attrs: 'maxlength="300" data-required-for="new-machine line custom film"' })}
+      </div>
+
       <fieldset class="field field--full choice-group" aria-describedby="type-err">
         <legend>What can we help you with? <span class="req" aria-hidden="true">*</span></legend>
         <div class="choice-row">
@@ -74,7 +78,6 @@ export function contactPage() {
       </div>
 
       <div class="form-grid" data-show-for="new-machine line custom film financing">
-        ${field({ id: 'product', label: 'What are you packaging?', required: true, hint: 'For example: “ground coffee, 12 oz bags” or “protein powder in 30 g stick packs”.', full: true, attrs: 'maxlength="300" data-required-for="new-machine line custom film"' })}
         ${select({ id: 'form', label: 'Product type', options: forms.map((f) => [f.id, f.name]) })}
         ${select({ id: 'pkg', label: 'Package format', options: packages.map((p) => [p.id, p.name]) })}
         ${select({ id: 'speed', label: 'Target output', options: speedBands.map((s) => [s.id, s.name]) })}
