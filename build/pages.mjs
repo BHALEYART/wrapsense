@@ -152,19 +152,19 @@ export function homePage() {
 
 ${familyShowcase()}
 
-<section class="section section--alt" aria-labelledby="pkg-title">
+<section class="section section--dark pkg-sec" aria-labelledby="pkg-title" data-reveal>
   <div class="container">
     <div class="section-head section-head--row">
       <div>
-        <p class="eyebrow">Shop by package</p>
+        <p class="eyebrow eyebrow--light">Shop by package</p>
         <h2 id="pkg-title" class="section-title">Already know your package?</h2>
       </div>
-      <a class="link-arrow" href="/machines/">All machine categories ${icon('arrow')}</a>
+      <a class="link-arrow link-arrow--light" href="/machines/">All machine categories ${icon('arrow')}</a>
     </div>
     <ul class="pkg-strip" role="list">
-      ${Object.entries(PACKAGE_LINKS).map(([pk, cat]) => {
+      ${Object.entries(PACKAGE_LINKS).map(([pk, cat], i) => {
         const P = pkgById[pk];
-        return html`<li><a class="pkg-tile" href="${categoryUrl(cat)}${pk === 'pallet' ? '#casemaster-palletstakr-palletizer' : ''}">
+        return html`<li style="--i:${i}"><a class="pkg-tile" href="${categoryUrl(cat)}${pk === 'pallet' ? '#casemaster-palletstakr-palletizer' : ''}">
           <span class="pkg-tile__img">${imgTag(P.image, '')}</span>
           <span class="pkg-tile__name">${esc(P.name)}</span>
           <span class="pkg-tile__cat">${esc(catBySlug[cat].short)}</span>

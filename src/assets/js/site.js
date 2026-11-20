@@ -189,3 +189,15 @@
     }, { rootMargin: '300px 0px' }).observe(v);
   });
 })();
+
+// Scroll reveal for [data-reveal] sections (armed by JS so no-JS / reduced-motion visitors see everything)
+(function () {
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('[data-reveal]').forEach(function (el) {
+    el.classList.add('reveal-armed');
+    var io = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { el.classList.add('is-revealed'); io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(el);
+  });
+})();
