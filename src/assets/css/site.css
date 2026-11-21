@@ -1249,3 +1249,31 @@ body.search-open { overflow: hidden; }
 .cta-band__fin { display: flex; align-items: center; gap: .55rem; margin-top: .9rem; font-size: .95rem; color: var(--ink-2); }
 .cta-band__fin .icon { flex: none; width: 22px; height: 22px; color: var(--brand-text); }
 .cta-band__fin a { color: var(--brand-text); font-weight: 600; }
+
+/* ───── home: financing band with quick estimate ───── */
+.fin-home { position: relative; overflow: hidden; color: #dbe3ff; background: radial-gradient(900px 420px at 85% 20%, rgba(46, 122, 214, .45), transparent 60%), linear-gradient(110deg, #0e1e3c 0%, #15295a 50%, #1c3a7c 100%); }
+.fin-home__inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.fin-home .section-title { color: #fff; }
+.fin-home .section-title .hl { color: #6cc0f0; }
+.fin-home__lead { font-size: 1.1rem; color: #dbe3ff; max-width: 48ch; margin: 1rem 0 1.25rem; }
+.fin-home__points { display: grid; gap: .55rem; margin: 0 0 1.75rem; color: #fff; font-weight: 500; }
+.fin-home__points li { display: flex; align-items: center; gap: .6rem; }
+.fin-home__points .icon { flex: none; width: 1.15em; height: 1.15em; color: #6cc0f0; }
+.fin-home__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.fin-mini { background: #fff; color: var(--ink); border-radius: 12px; padding: clamp(1.25rem, 3vw, 2rem); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .55); }
+.fin-mini__title { margin: 0 0 1rem; font-family: var(--display); text-transform: uppercase; font-size: 1.4rem; letter-spacing: .01em; color: var(--ink); }
+.fin-mini__field { margin-bottom: 1.1rem; }
+.fin-mini__field label { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-weight: 600; font-size: .92rem; color: var(--ink-2); margin-bottom: .4rem; }
+.fin-mini__field output { font-family: var(--text); font-weight: 700; font-size: 1.15rem; color: var(--ink); }
+.fin-mini input[type='range'] { width: 100%; accent-color: var(--brand); height: 28px; cursor: pointer; }
+.fin-mini__results { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin: 1.25rem 0 .9rem; }
+.fin-mini__results div { background: var(--bg-alt); border-radius: 8px; padding: .8rem .9rem; }
+.fin-mini__results dt { font-size: .74rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fin-mini__results dd { margin: .2rem 0 0; font-weight: 700; font-size: 1.5rem; color: var(--ink); line-height: 1.1; }
+.fin-mini__payback { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg-tint) !important; }
+.fin-mini__payback dd { color: var(--brand-text); margin: 0; }
+.fin-mini.is-covered .fin-mini__payback { background: #e3f5ec !important; }
+.fin-mini.is-covered .fin-mini__payback dd { color: #136c3f; }
+.fin-mini__note { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 900px) { .fin-home__inner { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .fin-mini__results { grid-template-columns: 1fr; } }

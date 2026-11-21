@@ -9,6 +9,8 @@
   var set = function (k, t) { var el = form.querySelector('[data-out="' + k + '"]'); if (el) el.textContent = t; };
   var status = form.querySelector('[data-calc-status]');
   var timer, tracked = false;
+  // prefill from the home quick estimate, e.g. /financing/?cost=150000&crewNow=3&crewAfter=1#calculator
+  new URLSearchParams(location.search).forEach(function (v, k) { var el = form.elements[k]; if (el && el.type === 'number' && isFinite(parseFloat(v))) el.value = v; });
 
   function calc() {
     var hoursYear = $('hours') * $('shifts') * $('days');

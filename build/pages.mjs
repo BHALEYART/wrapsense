@@ -212,14 +212,51 @@ ${homeCases()}
 
 ${homeGuides()}
 
-${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 'We can set up testing with your products and packaging so you can see results before you invest.' })}
+<section class="section fin-home" aria-labelledby="fin-home-title">
+  <div class="container fin-home__inner">
+    <div class="fin-home__copy">
+      <p class="eyebrow eyebrow--light">Equipment financing</p>
+      <h2 id="fin-home-title" class="section-title section-title--xl">Automate now. <span class="hl">Pay monthly.</span></h2>
+      <p class="fin-home__lead">Spread the cost of a machine or a complete line into monthly payments — and see how that payment compares with the labor it saves.</p>
+      <ul class="fin-home__points" role="list">
+        <li>${icon('check')} Finance a single machine or a full turn-key line</li>
+        <li>${icon('check')} Compare the payment with your labor savings</li>
+        <li>${icon('check')} Quick online application</li>
+      </ul>
+      <div class="fin-home__actions">
+        <a class="btn btn--light" href="/financing/#calculator" data-fin-full data-track="home_fin_calculator">Run the full savings calculator ${icon('arrow')}</a>
+        <a class="btn btn--ghost-light" href="/financing/" data-track="home_fin_page">Financing options</a>
+      </div>
+    </div>
+    <form class="fin-mini" data-fin-mini onsubmit="return false" aria-labelledby="fin-mini-title" aria-describedby="fin-mini-note">
+      <p id="fin-mini-title" class="fin-mini__title">Quick estimate</p>
+      <div class="fin-mini__field">
+        <label for="fm-cost">Equipment cost <output for="fm-cost" data-fm-out="cost">$100,000</output></label>
+        <input id="fm-cost" name="cost" type="range" min="25000" max="500000" step="5000" value="100000">
+      </div>
+      <div class="fin-mini__field">
+        <label for="fm-people">People it frees up per shift <output for="fm-people" data-fm-out="people">2</output></label>
+        <input id="fm-people" name="people" type="range" min="0" max="6" step="1" value="2">
+      </div>
+      <dl class="fin-mini__results">
+        <div><dt>Est. monthly payment</dt><dd data-fm-out="payment">$2,076</dd></div>
+        <div><dt>Est. monthly labor savings</dt><dd data-fm-out="savings">$7,333</dd></div>
+        <div class="fin-mini__payback"><dt>Estimated payback</dt><dd data-fm-out="payback">14 months</dd></div>
+      </dl>
+      <p class="fin-mini__live visually-hidden" aria-live="polite" data-fm-status></p>
+      <p id="fin-mini-note" class="fin-mini__note">Example: 60 months at 9%, one 8-hour shift, 250 days a year, $22/hr per person. Not a financing offer — rates and approval come from the lender.</p>
+    </form>
+  </div>
+</section>
+
+${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 'We can set up testing with your products and packaging so you can see results before you invest.', financing: false })}
 `;
   return layout({
     path: '/',
     title: 'Packaging Machines & Turn-Key Lines | WrapSense Packaging',
     description: 'Packaging machines and turn-key lines for small and medium businesses: VFFS, stick pack, pouch, flow wrap, weighing, labeling, cartoning and case packing.',
     body,
-    scripts: ['finder.js', 'line-fx.js'],
+    scripts: ['finder.js', 'line-fx.js', 'fin-mini.js'],
     jsonld: [orgLd, { '@context': 'https://schema.org', '@type': 'WebSite', '@id': site.url + '/#website', url: site.url + '/', name: site.name, publisher: { '@id': site.url + '/#organization' } }],
     bodyClass: 'page-home',
   });
