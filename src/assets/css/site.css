@@ -1272,8 +1272,8 @@ body.search-open { overflow: hidden; }
 .fin-mini__results dd { margin: .2rem 0 0; font-weight: 700; font-size: 1.5rem; color: var(--ink); line-height: 1.1; }
 .fin-mini__payback { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg-tint) !important; }
 .fin-mini__payback dd { color: var(--brand-text); margin: 0; }
-.fin-mini.is-covered .fin-mini__payback { background: #e3f5ec !important; }
-.fin-mini.is-covered .fin-mini__payback dd { color: #136c3f; }
 .fin-mini__note { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.45; }
 @media (max-width: 900px) { .fin-home__inner { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .fin-mini__results { grid-template-columns: 1fr; } }
+.fin-mini__cta { margin: 0 0 .75rem; font-size: .92rem; color: var(--ink-2); }
+.fin-mini__cta a { font-weight: 600; color: var(--brand-text); }

@@ -229,22 +229,23 @@ ${homeGuides()}
       </div>
     </div>
     <form class="fin-mini" data-fin-mini onsubmit="return false" aria-labelledby="fin-mini-title" aria-describedby="fin-mini-note">
-      <p id="fin-mini-title" class="fin-mini__title">Quick estimate</p>
-      <div class="fin-mini__field">
-        <label for="fm-cost">Equipment cost <output for="fm-cost" data-fm-out="cost">$100,000</output></label>
-        <input id="fm-cost" name="cost" type="range" min="25000" max="500000" step="5000" value="100000">
-      </div>
+      <p id="fin-mini-title" class="fin-mini__title">What could automation save you?</p>
       <div class="fin-mini__field">
         <label for="fm-people">People it frees up per shift <output for="fm-people" data-fm-out="people">2</output></label>
-        <input id="fm-people" name="people" type="range" min="0" max="6" step="1" value="2">
+        <input id="fm-people" name="people" type="range" min="1" max="6" step="1" value="2">
+      </div>
+      <div class="fin-mini__field">
+        <label for="fm-shifts">Shifts per day <output for="fm-shifts" data-fm-out="shifts">1</output></label>
+        <input id="fm-shifts" name="shifts" type="range" min="1" max="3" step="1" value="1">
       </div>
       <dl class="fin-mini__results">
-        <div><dt>Est. monthly payment</dt><dd data-fm-out="payment">$2,076</dd></div>
-        <div><dt>Est. monthly labor savings</dt><dd data-fm-out="savings">$7,333</dd></div>
-        <div class="fin-mini__payback"><dt>Estimated payback</dt><dd data-fm-out="payback">14 months</dd></div>
+        <div><dt>Est. labor savings / month</dt><dd data-fm-out="month">$7,333</dd></div>
+        <div><dt>Est. labor savings / year</dt><dd data-fm-out="year">$88,000</dd></div>
+        <div class="fin-mini__payback"><dt>Hours freed up per year</dt><dd data-fm-out="hours">4,000 hrs</dd></div>
       </dl>
+      <p class="fin-mini__cta">Your monthly payment depends on the machine — <a href="/contact/?type=financing" data-track="home_fin_quote">get a quote</a> and we’ll show you the payment next to these savings.</p>
       <p class="fin-mini__live visually-hidden" aria-live="polite" data-fm-status></p>
-      <p id="fin-mini-note" class="fin-mini__note">Example: 60 months at 9%, one 8-hour shift, 250 days a year, $22/hr per person. Not a financing offer — rates and approval come from the lender.</p>
+      <p id="fin-mini-note" class="fin-mini__note">Example: 8-hour shifts, 250 days a year, $22/hr per person including taxes and benefits. Estimates only.</p>
     </form>
   </div>
 </section>
