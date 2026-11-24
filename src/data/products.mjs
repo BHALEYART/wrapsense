@@ -372,7 +372,7 @@ export const products = [
     category: 'flow-wrappers',
     role: 'primary',
     image: 'products/triservo-23000-3sp.webp',
-    gallery: ['packages/flow-wrap-bag.webp', 'photos/flow-wrapper-floor.webp'],
+    gallery: ['packages/flow-wrap-bag.webp'],
     tagline: 'Triple-jaw speed for small items — up to 350 packs per minute.',
     summary: 'The 23000-3SP is TriServo’s compact, high-speed wrapper for small items like bars, candy and single-serve baked goods. The triple-jaw head reaches up to 350 packs per minute; a single-jaw configuration handles longer packs.',
     highlights: ['Triple jaw up to 350 packs per minute', 'Single-jaw option for packs up to 19.5" long', 'Film width up to 8.66"', 'Product height up to 1.2" (1.35" single jaw)', ...common.servoWrapper],
