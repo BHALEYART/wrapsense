@@ -398,7 +398,7 @@ Browse all [flow wrappers](c:flow-wrappers), or send us your product dimensions 
     description: 'Leaking, wrinkled or weak seals on your VFFS bagger? Troubleshoot temperature, dwell, pressure, product in the seal and film issues step by step.',
     topic: 'how-to',
     date: '2026-09-09',
-    image: 'products/fastpack-63000.webp',
+    image: 'products/fastpack.webp',
     imageAlt: 'FastPack vertical form fill and seal machine',
     products: ['fastpack-intermittent-motion-vffs', 'custom-printed-packaging-film', 'sensiweigh-pro-multihead-weigher'],
     faqs: [

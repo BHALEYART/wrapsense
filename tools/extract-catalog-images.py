@@ -10,8 +10,7 @@ pdf = sys.argv[1]
 # catalog image index -> (output folder, name, kind)
 # kind: cut = transparent machine/package cutout, photo = rectangular photo
 MAP = {
-  75:('products','fastpack-line','cut'), 83:('products','fastpack-43000','cut'),
-  81:('products','fastpack-63000','cut'),
+  75:('products','fastpack-line','cut'),
   89:('products','quickstick-eco','cut'), 91:('products','quickstick-pro','cut'), 93:('products','quickstick-pro-xl','cut'),
   103:('products','rapidbagger-compact','cut'), 105:('products','rapidbagger-inline','cut'),
   107:('products','rapidbagger-model-x','cut'), 109:('products','rapidbagger-sideload','cut'),
