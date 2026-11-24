@@ -530,7 +530,7 @@ export const products = [
     category: 'metal-detectors-checkweighers',
     role: 'addon',
     stageRole: 'inspect',
-    image: 'legacy:checkweigher',
+    image: 'products/high-precision-checkweigher.webp',
     gallery: [],
     tagline: 'Reject off-weight packs automatically.',
     summary: 'The HP-CW checkweigher weighs every pack in motion and removes out-of-tolerance packs with an air-reject blower — a good fit after stick-pack, sachet and small-bag machines.',
