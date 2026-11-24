@@ -40,8 +40,7 @@ MAP = {
   123:('photos','weigher-snacks','photo'), 125:('photos','weigher-install','photo'), 128:('photos','vffs-install','photo'),
   181:('photos','case-erector-action','photo'),
   206:('photos','case-packing-action','photo'), 204:('photos','case-packing-line','photo'),
-  226:('photos','cartoning-action','photo'), 228:('photos','cartoning-rotary','photo'),
-  246:('photos','capping-action','photo'), 250:('photos','sachet-film','photo'), 251:('photos','weigher-detail','photo'),
+  226:('photos','cartoning-action','photo'), 228:('photos','cartoning-rotary','photo'), 250:('photos','sachet-film','photo'), 251:('photos','weigher-detail','photo'),
 }
 
 tmp = tempfile.mkdtemp()

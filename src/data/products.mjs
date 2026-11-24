@@ -623,7 +623,7 @@ export const products = [
     role: 'primary',
     stageRole: 'finish',
     image: 'products/capvantage-sdl-2.webp',
-    gallery: ['photos/capping-action.webp'],
+    gallery: [],
     tagline: 'Automatic screw capping, 15–40 bottles per minute.',
     summary: 'The CapVantage SDL-2 feeds, places and tightens screw caps automatically, delivering consistent torque on bottles and jars without hand-tightening.',
     highlights: ['15–40 bottles per minute', 'Cap diameters 1.18"–5.12"', 'Runs on 220 V single-phase power (1.2 kW)', 'Inclined cap elevator feeder'],
