@@ -468,7 +468,7 @@ If you’ve worked through the list and seals still fail, it’s time for a tech
     description: 'How metal detectors and checkweighers fit into a food safety program — where to place them, what sensitivity means, reject systems and record keeping.',
     topic: 'how-to',
     date: '2026-09-30',
-    image: 'legacy:metal-detector',
+    image: 'products/food-metal-detector.webp',
     imageAlt: 'Conveyor food metal detector',
     products: ['food-metal-detector', 'high-precision-checkweigher', 'take-away-exit-conveyor'],
     faqs: [

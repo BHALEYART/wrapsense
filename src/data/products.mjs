@@ -508,7 +508,7 @@ export const products = [
     category: 'metal-detectors-checkweighers',
     role: 'addon',
     stageRole: 'inspect',
-    image: 'legacy:metal-detector',
+    image: 'products/food-metal-detector.webp',
     gallery: [],
     tagline: 'Conveyor metal detection for HACCP and SQF programs.',
     summary: 'The WS-MD conveyor metal detector finds ferrous, non-ferrous and stainless steel contamination — including in hard-to-inspect products with high water or salt content — and can stop the belt or reject the pack automatically.',
