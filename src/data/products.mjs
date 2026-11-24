@@ -812,7 +812,7 @@ export const products = [
     category: 'case-erectors-sealers',
     role: 'primary',
     stageRole: 'end',
-    image: 'legacy:ws-300',
+    image: 'products/ws-300.webp',
     gallery: [],
     tagline: 'Erect, fill and top-seal in one compact system.',
     summary: 'The WS-300 pulls flat boxes from a magazine, tapes the bottom, holds the box at a filling station, then folds and tapes the top — a complete erect-fill-seal station.',
