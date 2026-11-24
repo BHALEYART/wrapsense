@@ -904,7 +904,7 @@ export const products = [
     category: 'conveyors-elevators',
     role: 'addon',
     stageRole: 'feed',
-    image: 'legacy:bucket-elevator',
+    image: 'products/bucket-elevator.webp',
     gallery: [],
     tagline: 'Gentle, food-grade lifting to your weigher or filler.',
     summary: 'The WS-E1000V lifts bulk and granular product in food-grade buckets on a looped chain — gently, and at steep angles — to feed weighers and fillers from floor level.',
