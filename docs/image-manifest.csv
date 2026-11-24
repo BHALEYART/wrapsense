@@ -1,6 +1,6 @@
 #,Folder,File,Current size (px),Transparent,Pages using it,In search,Example page,What it shows / where used,Requested render spec,Status
 1,products,capvantage-sdl-2.webp,1600x776,yes,20,yes,/,CapVantage SDL-2 Automatic Capping Machine (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render); blurry capping photo removed
-2,products,cartomate-h.webp,608x320,yes,24,yes,/blog/stick-packs-vs-sachets/,CartoMate-H Horizontal Cartoning Machine (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
+2,products,cartomate-h.webp,1600x760,yes,24,yes,/blog/stick-packs-vs-sachets/,CartoMate-H Horizontal Cartoning Machine (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render); blurry cartoning photo removed
 3,products,cartomate-v.webp,538x612,yes,17,yes,/,CartoMate-V Vertical Cartoning Machine (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 4,products,casemaster-fastseal.webp,236x174,yes,30,yes,/blog/end-of-line-automation-guide/,CaseMaster FastSeal Case Sealer & Taper (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 5,products,casemaster-line.webp,800x442,yes,7,yes,/blog/,CaseMaster Velocity Prime Case Erector (gallery); CaseMaster Velocity Ultra Case Erector (gallery); CaseMaster Velocity Turbo High-Speed Case Erector (gallery),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
@@ -52,7 +52,6 @@
 53,packages,stand-up-zipper.webp,108x138,yes,1,no,/machines/premade-pouch-machines/rapidbagger-inline/,RapidBagger Inline Premade Pouch Machine (gallery),"Transparent cutout of the package, ~800px",
 54,packages,stick-pack.webp,256x304,yes,96,yes,/,QuickStick Eco Stick Pack Machine (gallery); QuickStick Pro Multi-Lane Stick Pack Machine (gallery); Package format: Stick pack,"Transparent cutout of the package, ~800px",
 55,packages,weigh-fill.webp,360x240,no,96,yes,/,Package format: Gusseted bag,"Transparent cutout of the package, ~800px",
-57,photos,cartoning-action.webp,180x140,no,1,no,/machines/cartoning-machines/cartomate-h-horizontal-cartoner/,Cartoner loading cartons,"Rectangular photo, 4:3, ~1600×1200",
 58,photos,cartoning-rotary.webp,230x140,no,1,no,/machines/cartoning-machines/cartomate-v-vertical-cartoner/,Rotary cartoning,"Rectangular photo, 4:3, ~1600×1200",
 59,photos,case-erector-action.webp,708x566,no,1,no,/machines/case-erectors-sealers/casemaster-velocity-prime-case-erector/,Case erector forming boxes,"Rectangular photo, 4:3, ~1600×1200",
 60,photos,case-packing-action.webp,372x196,no,2,no,/machines/case-packing/pickn-pack-casepacker-2/,Robot packing pouches into cases,"Rectangular photo, 4:3, ~1600×1200",

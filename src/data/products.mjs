@@ -669,7 +669,7 @@ export const products = [
     role: 'primary',
     stageRole: 'end',
     image: 'products/cartomate-h.webp',
-    gallery: ['packages/carton.webp', 'photos/cartoning-action.webp'],
+    gallery: ['packages/carton.webp'],
     tagline: 'Horizontal cartoning, 30–70 cartons per minute.',
     summary: 'CartoMate-H erects folding cartons, loads products horizontally — stick packs, sachets, bars, blister packs, tubes — and closes the flaps automatically.',
     highlights: ['30–70 cartons per minute', 'Cartons from 4.72" × 1.8" × 1.2"', 'Up to 9.84" × 7.09" × 3.94"', 'Horizontal end-load'],
