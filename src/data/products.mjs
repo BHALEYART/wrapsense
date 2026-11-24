@@ -691,7 +691,7 @@ export const products = [
     role: 'primary',
     stageRole: 'end',
     image: 'products/cartomate-v.webp',
-    gallery: ['packages/carton.webp', 'photos/cartoning-rotary.webp'],
+    gallery: ['packages/carton.webp'],
     tagline: 'Vertical cartoning for bottles and jars.',
     summary: 'CartoMate-V loads upright products such as bottles and jars down into folding cartons — ideal for supplements, cosmetics and beverages sold in retail boxes.',
     highlights: ['20–60 cartons per minute', 'Cartons from 1.2" × 1.2" × 2.36"', 'Up to 4.7" × 4.7" × 9.44"', 'Vertical top-load'],
