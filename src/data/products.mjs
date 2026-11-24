@@ -645,7 +645,7 @@ export const products = [
     role: 'addon',
     stageRole: 'finish',
     image: 'products/oxygen-sachet-inserter.webp',
-    gallery: ['photos/sachet-film.webp'],
+    gallery: [],
     tagline: 'Drop an oxygen absorber or desiccant into every pack.',
     summary: 'Cuts and dispenses oxygen-absorber or desiccant sachets from a continuous strip into bottles, jars or pouches — protecting shelf life without manual inserting.',
     highlights: ['10–80 packs per minute', 'Sachet lengths 20–50 mm', 'Sachet widths 10–40 mm', 'Stainless steel frame'],
