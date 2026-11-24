@@ -926,7 +926,7 @@ export const products = [
     category: 'conveyors-elevators',
     role: 'addon',
     stageRole: 'feed',
-    image: 'legacy:take-away-conveyor',
+    image: 'products/take-away-conveyor.webp',
     gallery: [],
     tagline: 'Carry finished packs to inspection and pack-off.',
     summary: 'A take-away conveyor moves finished bags from your VFFS, pouch or stick-pack machine to a metal detector, checkweigher, rotary table or case erector.',
