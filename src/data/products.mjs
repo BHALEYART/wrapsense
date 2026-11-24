@@ -480,7 +480,7 @@ export const products = [
     series: 'TriServo',
     category: 'flow-wrappers',
     role: 'primary',
-    image: 'legacy:reciprocating',
+    image: 'products/triservo-reciprocating.webp',
     gallery: [],
     tagline: 'Long-dwell sealing for tall, heavy or bulky products.',
     summary: 'Reciprocating jaws travel with the film to give a longer seal dwell — useful for thicker films and taller, heavier products.',
