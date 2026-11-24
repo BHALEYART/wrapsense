@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { legacyImages } from '../src/data/legacy-images.mjs';
 
 export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
@@ -54,7 +55,8 @@ export function img(ref) {
     const local = path.join(SRC, 'assets/img/legacy', L.file);
     if (fs.existsSync(local)) {
       const s = L.file.endsWith('.png') ? pngSize(local) : jpgSize(local) || { w: L.w, h: L.h };
-      out = { src: '/assets/img/legacy/' + L.file, w: s.w, h: s.h, remote: false, alt: L.alt };
+      const v = crypto.createHash('sha1').update(fs.readFileSync(local)).digest('hex').slice(0, 8);
+      out = { src: '/assets/img/legacy/' + L.file + '?v=' + v, w: s.w, h: s.h, remote: false, alt: L.alt };
     } else {
       warnings.push(`legacy image "${key}" not downloaded — hotlinking ${L.src} (run npm run fetch-images)`);
       out = { src: L.src, w: L.w, h: L.h, remote: true, alt: L.alt };
@@ -63,7 +65,9 @@ export function img(ref) {
     const file = path.join(SRC, 'assets/img', ref);
     if (!fs.existsSync(file)) throw new Error('Missing image ' + ref);
     const s = ref.endsWith('.webp') ? webpSize(file) : pngSize(file);
-    out = { src: '/assets/img/' + ref, w: s.w, h: s.h, remote: false };
+    // content hash in the URL: images are cached for 30 days, so a replaced file needs a new URL
+    const v = crypto.createHash('sha1').update(fs.readFileSync(file)).digest('hex').slice(0, 8);
+    out = { src: '/assets/img/' + ref + '?v=' + v, w: s.w, h: s.h, remote: false };
   }
   cache.set(ref, out);
   return out;
