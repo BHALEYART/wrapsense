@@ -715,7 +715,7 @@ export const products = [
     role: 'primary',
     stageRole: 'end',
     image: 'products/casemaster-velocity-prime.webp',
-    gallery: ['products/casemaster-line.webp', 'photos/case-erector-action.webp'],
+    gallery: ['products/casemaster-line.webp'],
     tagline: 'Entry-level case erecting, up to 15 cases per minute.',
     summary: 'Velocity Prime forms corrugated cases from flat blanks and tapes the bottom — an affordable first step away from hand-folding boxes.',
     highlights: ['Up to 15 cases per minute', 'Two size ranges, up to 25.6" long', 'Bottom taping included'],

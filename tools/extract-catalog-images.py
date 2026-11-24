@@ -38,7 +38,6 @@ MAP = {
   # photos
   0:('photos','film-line','photo'), 3:('photos','filling-closeup','photo'), 4:('photos','technician','photo'),
   123:('photos','weigher-snacks','photo'), 125:('photos','weigher-install','photo'), 128:('photos','vffs-install','photo'),
-  181:('photos','case-erector-action','photo'),
   206:('photos','case-packing-action','photo'), 204:('photos','case-packing-line','photo'), 251:('photos','weigher-detail','photo'),
 }
 

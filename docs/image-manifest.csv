@@ -5,7 +5,7 @@
 4,products,casemaster-fastseal.webp,236x174,yes,30,yes,/blog/end-of-line-automation-guide/,CaseMaster FastSeal Case Sealer & Taper (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 5,products,casemaster-line.webp,800x442,yes,7,yes,/blog/,CaseMaster Velocity Prime Case Erector (gallery); CaseMaster Velocity Ultra Case Erector (gallery); CaseMaster Velocity Turbo High-Speed Case Erector (gallery),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 6,products,casemaster-palletstakr.webp,170x166,yes,15,yes,/blog/end-of-line-automation-guide/,CaseMaster PalletStakr Collaborative Palletizer (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
-7,products,casemaster-velocity-prime.webp,272x158,yes,22,yes,/blog/signs-its-time-to-automate-packaging/,CaseMaster Velocity Prime Case Erector (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
+7,products,casemaster-velocity-prime.webp,1600x791,yes,22,yes,/blog/signs-its-time-to-automate-packaging/,CaseMaster Velocity Prime Case Erector (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render); blurry case-erector photo removed
 8,products,casemaster-velocity-turbo.webp,254x140,yes,9,yes,/industries/frozen-foods/,CaseMaster Velocity Turbo High-Speed Case Erector (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 9,products,casemaster-velocity-ultra.webp,272x160,yes,17,yes,/blog/end-of-line-automation-guide/,CaseMaster Velocity Ultra Case Erector (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",
 10,products,exactdose-auger.webp,693x1100,yes,28,yes,/blog/multihead-weigher-vs-auger-filler-vs-linear-weigher/,ExactDose Servo Auger Filler (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render)
@@ -52,7 +52,6 @@
 53,packages,stand-up-zipper.webp,108x138,yes,1,no,/machines/premade-pouch-machines/rapidbagger-inline/,RapidBagger Inline Premade Pouch Machine (gallery),"Transparent cutout of the package, ~800px",
 54,packages,stick-pack.webp,256x304,yes,96,yes,/,QuickStick Eco Stick Pack Machine (gallery); QuickStick Pro Multi-Lane Stick Pack Machine (gallery); Package format: Stick pack,"Transparent cutout of the package, ~800px",
 55,packages,weigh-fill.webp,360x240,no,96,yes,/,Package format: Gusseted bag,"Transparent cutout of the package, ~800px",
-59,photos,case-erector-action.webp,708x566,no,1,no,/machines/case-erectors-sealers/casemaster-velocity-prime-case-erector/,Case erector forming boxes,"Rectangular photo, 4:3, ~1600×1200",
 60,photos,case-packing-action.webp,372x196,no,2,no,/machines/case-packing/pickn-pack-casepacker-2/,Robot packing pouches into cases,"Rectangular photo, 4:3, ~1600×1200",
 61,photos,case-packing-line.webp,262x186,no,1,no,/machines/case-packing/pickn-pack-casepacker-3/,Case packing line,"Rectangular photo, 4:3, ~1600×1200",
 62,photos,filling-closeup.webp,836x562,no,2,no,/about/,Filler dosing into containers (About page hero),"Rectangular photo, 4:3, ~1600×1200",
