@@ -949,7 +949,7 @@ export const products = [
     series: null,
     category: 'specialty-machines',
     role: 'primary',
-    image: 'legacy:preroll',
+    image: 'products/preroll-cone-filler.webp',
     gallery: [],
     tagline: 'Weigh, fill and close preroll cones automatically.',
     summary: 'Automate preroll production — weighing, filling and closing cones — for consistent fills and far less hand labor. Configuration depends on cone size and output, so tell us about your product.',
