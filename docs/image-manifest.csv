@@ -33,22 +33,22 @@
 36,products,triservo-63000-3sp.webp,1600x710,yes,12,yes,/industries/bakery/,TriServo 63000-3SP Large-Format Flow Wrapper (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render)
 37,products,triservo-inverted-33000-i3sp.webp,1230x810,yes,96,yes,/,TriServo Inverted 33000-I3SP Flow Wrapper (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render)
 38,products,triservo-inverted-63000-i3sp.webp,1600x520,yes,9,yes,/industries/bakery/,TriServo Inverted 63000-I3SP Large-Format Flow Wrapper (main photo),"Transparent PNG/WebP cutout, machine centered, no background, ~1600px on long side",Replaced 2026-11-24 (new render)
-39,packages,carton.webp,360x283,yes,96,yes,/,CartoMate-H Horizontal Cartoning Machine (gallery); CartoMate-V Vertical Cartoning Machine (gallery); Package format: Folding carton,"Transparent cutout of the package, ~800px",
-40,packages,case-erect.webp,360x270,yes,11,no,/,Package format: Shipping case,"Transparent cutout of the package, ~800px",
+39,packages,carton.webp,640x418,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+40,packages,case-erect.webp,640x250,yes,11,no,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
 41,packages,case-pack.webp,360x360,yes,0,no,,Category/industry artwork,"Transparent cutout of the package, ~800px",UNUSED — skip
 42,packages,flat-pouch.webp,114x148,yes,9,no,/industries/frozen-foods/,RapidBagger SideLoad Premade Pouch Machine (gallery); Package format: Flat pouch,"Transparent cutout of the package, ~800px",
-43,packages,flow-wrap-bag.webp,238x324,yes,96,yes,/,TriServo 23000-3SP Horizontal Flow Wrapper (gallery); Package format: Flow wrap,"Transparent cutout of the package, ~800px",
-44,packages,flow-wrap.webp,230x286,no,96,yes,/,TriServo 33000-3SP Horizontal Flow Wrapper (gallery),"Transparent cutout of the package, ~800px",
-45,packages,jar.webp,120x90,yes,96,yes,/,Category/industry artwork,"Transparent cutout of the package, ~800px",
-46,packages,label-cap.webp,142x286,yes,96,yes,/,ExactDose Servo Auger Filler (gallery); LabelEase CL2 Cylindrical Labeler (gallery); Package format: Jar / bottle,"Transparent cutout of the package, ~800px",
-47,packages,pallet.webp,360x343,yes,3,no,/,CaseMaster PalletStakr Collaborative Palletizer (gallery); Package format: Pallet,"Transparent cutout of the package, ~800px",
-48,packages,pillow-bag.webp,288x320,yes,19,no,/,Package format: Pillow bag,"Transparent cutout of the package, ~800px",
+43,packages,flow-wrap-bag.webp,497x640,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+44,packages,flow-wrap.webp,504x640,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+45,packages,jar.webp,640x520,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+46,packages,label-cap.webp,294x640,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+47,packages,pallet.webp,640x515,yes,3,no,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
+48,packages,pillow-bag.webp,463x640,yes,19,no,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
 49,packages,sachet.webp,150x212,no,12,no,/industries/beverage/,QuickStick Pro Multi-Lane Stick Pack Machine (gallery); QuickStick Pro XL Wide Multi-Lane Stick Pack Machine (gallery); Package format: Sachet / 3-side seal,"Transparent cutout of the package, ~800px",
 50,packages,spout-pouch.webp,196x302,yes,96,yes,/,RapidBagger Compact Premade Pouch Machine (gallery); Package format: Spout / shaped pouch,"Transparent cutout of the package, ~800px",
 51,packages,spout-shaped.webp,106x148,yes,0,no,,Category/industry artwork,"Transparent cutout of the package, ~800px",UNUSED — skip
-52,packages,stand-up-pouch.webp,202x294,yes,96,yes,/,RapidBagger Compact Premade Pouch Machine (gallery); Package format: Stand-up / zipper pouch,"Transparent cutout of the package, ~800px",
+52,packages,stand-up-pouch.webp,446x640,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
 53,packages,stand-up-zipper.webp,108x138,yes,1,no,/machines/premade-pouch-machines/rapidbagger-inline/,RapidBagger Inline Premade Pouch Machine (gallery),"Transparent cutout of the package, ~800px",
-54,packages,stick-pack.webp,256x304,yes,96,yes,/,QuickStick Eco Stick Pack Machine (gallery); QuickStick Pro Multi-Lane Stick Pack Machine (gallery); Package format: Stick pack,"Transparent cutout of the package, ~800px",
+54,packages,stick-pack.webp,564x640,yes,96,yes,/,"New WrapSense-branded render 2026-11-25, transparent cutout","Transparent cutout of the package, ~800px",
 55,packages,weigh-fill.webp,360x240,no,96,yes,/,Package format: Gusseted bag,"Transparent cutout of the package, ~800px",
 62,photos,filling-closeup.webp,836x562,no,2,no,/about/,Filler dosing into containers (About page hero),"Rectangular photo, 4:3, ~1600×1200",
 63,photos,film-line.webp,895x839,no,0,no,,Film / packaging line (catalog cover),"Rectangular photo, 4:3, ~1600×1200",UNUSED — skip
