@@ -301,7 +301,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'cosmetics', name: 'Cosmetics & Personal Care', short: 'Cosmetics & personal care', image: 'products/labelease-combo-fbcl.webp',
+    slug: 'cosmetics', name: 'Cosmetics & Personal Care', short: 'Cosmetics & personal care', image: 'industries/cosmetics.webp',
     seoTitle: 'Cosmetics & Personal Care Packaging Machines', seoDescription: 'Cosmetics and personal care packaging equipment: bottle and jar labeling, capping, sachet samples, spout pouches, flow wrapping and cartoning.',
     intro: 'Creams, serums, shampoos, soaps and samples come in jars, bottles, tubes, sachets and boxes — often in short runs with many SKUs. Labeling, capping and cartoning are where automation saves the most time. WrapSense supplies equipment for finishing containers, making samples and boxing retail products.',
     intro2: 'Brand presentation matters in beauty, so precise label placement and clean cartons are a focus.',
