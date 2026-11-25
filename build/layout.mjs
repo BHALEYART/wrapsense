@@ -45,13 +45,19 @@ const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden=
 </defs></svg>`;
 
 const hubspotId = process.env.HUBSPOT_PORTAL_ID || site.hubspotPortalId;
+// Share images must be fetchable where the site is actually deployed. Canonical URLs stay on
+// site.url, but og:image uses Vercel's production domain when building there (e.g. the
+// vercel.app preview today; the real domain once it is pointed at Vercel). SITE_ASSET_URL overrides.
+const assetBase = (process.env.SITE_ASSET_URL
+  || (process.env.VERCEL_PROJECT_PRODUCTION_URL && 'https://' + process.env.VERCEL_PROJECT_PRODUCTION_URL)
+  || site.url).replace(/\/$/, '');
 
 function headTags(p) {
   const url = site.url + p.path;
   // Keep titles ≤ 60 characters where possible: full brand → short brand → none.
   const fit = (t) => [`${t} | ${site.name}`, `${t} | WrapSense`, t].find((x) => x.length <= 60) || t;
   const title = p.path === '/' ? p.title : fit(p.title);
-  const ogImg = p.ogImage ? site.url + p.ogImage : site.url + '/assets/img/og/default.jpg';
+  const ogImg = assetBase + (p.ogImage || '/assets/img/og/default.jpg');
   const ld = [].concat(p.jsonld || []);
   return html`
 <meta charset="utf-8">
@@ -66,6 +72,8 @@ ${p.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="ro
 <meta property="og:description" content="${esc(p.description)}">
 <meta property="og:url" content="${esc(url)}">
 <meta property="og:image" content="${esc(ogImg)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="${esc(p.ogImageAlt || p.title)}">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
