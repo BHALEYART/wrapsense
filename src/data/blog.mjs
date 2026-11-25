@@ -665,8 +665,8 @@ If you want a second set of eyes on your line’s accuracy, [send us your produc
     description: 'Automate the end of your packaging line: when to add a case erector, case sealer, case packer, cartoner or palletizer — and which to buy first.',
     topic: 'line-planning',
     date: '2026-10-28',
-    image: 'products/casemaster-line.webp',
-    imageAlt: 'CaseMaster case erector',
+    image: 'products/casemaster-velocity-ultra.webp',
+    imageAlt: 'CaseMaster Velocity Ultra case erector',
     products: ['casemaster-fastseal-case-sealer', 'casemaster-velocity-ultra-case-erector', 'pickn-pack-casepacker-3', 'casemaster-palletstakr-palletizer'],
     faqs: [
       ['What is the first end-of-line machine I should buy?', 'For many facilities it’s a case sealer, because taping cases by hand is slow and the machine is simple to integrate. A case erector is a common next step.'],
