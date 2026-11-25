@@ -971,7 +971,7 @@ export const products = [
     category: 'specialty-machines',
     role: 'addon',
     stageRole: 'specialty',
-    image: 'legacy:bakesense',
+    image: 'products/bakesense-cake-slicer.webp',
     gallery: [],
     tagline: 'Precise horizontal slicing for layer cakes.',
     summary: 'BakeSense slices layer cakes horizontally with an adjustable band saw — consistent layers with less labor. Custom configurations are available.',
