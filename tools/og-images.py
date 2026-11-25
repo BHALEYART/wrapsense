@@ -78,6 +78,21 @@ def card(title, kicker, sub, accent, image):
             d.text((64, y), l, font=f_s, fill=(201, 212, 255)); y += 38
     return im.convert('RGB')
 
+def home_card():
+    """Homepage share card: the WrapSense logo, centered on white."""
+    im = Image.new('RGB', (W, H), (255, 255, 255))
+    d = ImageDraw.Draw(im)
+    a1, a2 = (14, 30, 60), (42, 117, 209)
+    for x in range(W):
+        t = x / W
+        d.line([(x, H - 12), (x, H)], fill=tuple(int(a1[i] * (1 - t) + a2[i] * t) for i in range(3)))
+    logo = Image.open(os.path.join(IMG, 'brand/wrapsense-logo.png')).convert('RGBA')
+    lw = 820; logo = logo.resize((lw, round(logo.height * lw / logo.width)), Image.LANCZOS)
+    logo = logo.filter(ImageFilter.UnsharpMask(1.2, 60, 2))
+    im.paste(logo, ((W - lw) // 2, (H - 12 - logo.height) // 2), logo)
+    return im
+
+home_card().save(os.path.join(OUT, 'home.jpg'), quality=90, optimize=True)
 card('Packaging machines matched to your product', 'Packaging machinery · Gaithersburg, MD', 'Turn-key packaging solutions for small & medium-size enterprises', ['#0e1e3c', '#2e7ad6'], 'products/fastpack-line.webp').save(os.path.join(OUT, 'default.jpg'), quality=86, optimize=True)
 for c in data['categories']:
     card(c['name'], c['series'] or 'WrapSense Packaging', None, c['accent'], c['image']).save(os.path.join(OUT, f"category-{c['slug']}.jpg"), quality=80, optimize=True)

@@ -254,6 +254,8 @@ ${ctaBand({ title: 'Send us your product. We’ll show you how it runs.', text: 
 `;
   return layout({
     path: '/',
+    ogImage: '/assets/img/og/home.jpg',
+    ogImageAlt: 'WrapSense Packaging Machinery',
     title: 'Packaging Machines & Turn-Key Lines | WrapSense Packaging',
     description: 'Packaging machines and turn-key lines for small and medium businesses: VFFS, stick pack, pouch, flow wrap, weighing, labeling, cartoning and case packing.',
     body,
