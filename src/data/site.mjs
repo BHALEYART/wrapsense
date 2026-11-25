@@ -64,7 +64,7 @@ export const packages = [
   { id: 'carton', name: 'Folding carton', note: 'Retail boxes', image: 'packages/carton.webp', category: 'cartoning-machines' },
   { id: 'case', name: 'Shipping case', note: 'Corrugated cases, erected and sealed', image: 'packages/case-erect.webp', category: 'case-erectors-sealers' },
   { id: 'pallet', name: 'Pallet', note: 'Stacked, ready for freight', image: 'packages/pallet.webp', category: 'case-erectors-sealers' },
-  { id: 'preroll', name: 'Preroll cone', note: 'Filled and closed cones', image: null, category: 'specialty-machines' },
+  { id: 'preroll', name: 'Preroll cone', note: 'Filled and closed cones', image: 'packages/preroll.webp', category: 'specialty-machines' },
 ];
 
 export const speedBands = [
