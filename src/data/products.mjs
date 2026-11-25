@@ -859,7 +859,7 @@ export const products = [
     role: 'primary',
     stageRole: 'end',
     image: 'products/pickn-pack-casepacker-3.webp',
-    gallery: ['products/pickn-pack-line.webp', 'photos/case-packing-action.webp', 'photos/case-packing-line.webp'],
+    gallery: ['products/pickn-pack-line.webp'],
     tagline: 'Pick-and-place case packing for bags and pouches.',
     summary: 'CasePacker 3 picks finished bags and pouches from the conveyor and places them into shipping cases — up to 75 small packs per minute.',
     highlights: ['60–75 packs/min for 3 oz products', '30–60 packs/min for 3 oz–2.2 lb products', 'Products up to 19.7" L × 17.7" W × 18.9" H', '5 lb payload'],
