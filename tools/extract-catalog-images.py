@@ -28,8 +28,7 @@ MAP = {
   248:('products','capvantage-sdl-2','cut'), 244:('products','oxygen-sachet-inserter','cut'),
   # package types
   49:('packages','pillow-bag','cut'), 52:('packages','flow-wrap','cut'), 54:('packages','stick-pack','cut'),
-  56:('packages','sachet','cut'), 60:('packages','stand-up-pouch','cut'), 62:('packages','spout-pouch','cut'),
-  64:('packages','weigh-fill','cut'), 65:('packages','case-erect','cut'), 67:('packages','case-pack','cut'),
+  56:('packages','sachet','cut'), 60:('packages','stand-up-pouch','cut'), 62:('packages','spout-pouch','cut'), 65:('packages','case-erect','cut'), 67:('packages','case-pack','cut'),
   69:('packages','carton','cut'), 71:('packages','label-cap','cut'), 73:('packages','pallet','cut'),
   157:('packages','flow-wrap-bag','cut'), 115:('packages','stand-up-zipper','cut'), 117:('packages','flat-pouch','cut'),
   119:('packages','spout-shaped','cut'), 133:('packages','jar','cut'),

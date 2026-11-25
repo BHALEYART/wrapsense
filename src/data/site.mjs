@@ -53,7 +53,7 @@ export const forms = [
 // Package formats: step 2 of the finder
 export const packages = [
   { id: 'pillow-bag', name: 'Pillow bag', note: 'Classic chip-style bag', image: 'packages/pillow-bag.webp', category: 'vertical-form-fill-seal' },
-  { id: 'gusseted-bag', name: 'Gusseted bag', note: 'Stands up with side or bottom gussets', image: 'packages/weigh-fill.webp', category: 'vertical-form-fill-seal' },
+  { id: 'gusseted-bag', name: 'Gusseted bag', note: 'Stands up with side or bottom gussets', image: 'packages/gusseted-bag.webp', category: 'vertical-form-fill-seal' },
   { id: 'stick-pack', name: 'Stick pack', note: 'Single-serve narrow tube', image: 'packages/stick-pack.webp', category: 'stick-pack-sachet-machines' },
   { id: 'sachet', name: 'Sachet / 3-side seal', note: 'Flat single-serve packet', image: 'packages/sachet.webp', category: 'stick-pack-sachet-machines' },
   { id: 'stand-up-pouch', name: 'Stand-up / zipper pouch', note: 'Premade retail pouch', image: 'packages/stand-up-pouch.webp', category: 'premade-pouch-machines' },
