@@ -7,7 +7,7 @@
 export const industries = [
   // ─────────────────────────────────────────────
   {
-    slug: 'snacks', name: 'Snack Food', short: 'Snack food', image: 'photos/weigher-snacks.webp',
+    slug: 'snacks', name: 'Snack Food', short: 'Snack food', image: 'industries/snacks.webp',
     seoTitle: 'Snack Food Packaging Machines', seoDescription: 'Snack food packaging machines for chips, pretzels, popcorn, nuts and jerky: multihead weighers, VFFS baggers, pouch machines, inspection and case packing.',
     intro: 'Chips, pretzels, popcorn, nuts and jerky are light, fragile and sold by weight — a combination that punishes inaccurate filling and rough handling. WrapSense snack lines pair accurate combination weighing with fast baggers and pouch machines, then carry packs through inspection to the case.',
     intro2: 'Whether you’re moving off hand-scooping or adding a second high-speed line, we can match the machines to your bag size, product and output — and test with your product first.',
@@ -171,7 +171,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'frozen-foods', name: 'Frozen Foods', short: 'Frozen foods', image: 'products/fastpack-line.webp',
+    slug: 'frozen-foods', name: 'Frozen Foods', short: 'Frozen foods', image: 'industries/frozen-foods.webp',
     seoTitle: 'Frozen Food Packaging Machines', seoDescription: 'Frozen food packaging machines: multihead weighers, VFFS baggers, pouch machines, inspection and case packing for frozen vegetables, fruit and meals.',
     intro: 'Frozen vegetables, fruit, potato products, dumplings and prepared meals are bagged fast, often in cold and wet conditions. WrapSense frozen food lines combine combination weighing with VFFS baggers or pouch machines, inspection and automated casing.',
     intro2: 'We’ll configure machines for your product size, bag format and environment — including stainless and wash-down options.',
@@ -197,7 +197,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'produce', name: 'Fruit & Vegetables', short: 'Fresh produce', image: 'products/triservo-inverted-33000-i3sp.webp',
+    slug: 'produce', name: 'Fruit & Vegetables', short: 'Fresh produce', image: 'industries/produce.webp',
     seoTitle: 'Fresh Produce Packaging Machines', seoDescription: 'Fresh produce packaging machines: inverted flow wrappers, weighers, baggers, side-load pouch machines, case erectors and case packers for fruit and vegetables.',
     intro: 'Fresh produce is soft, uneven and perishable, and volumes spike at harvest. Inverted flow wrappers, weighers and case-handling equipment help growers and packers move product quickly without bruising.',
     intro2: 'From wrapped cucumbers and salad kits to bagged baby carrots and boxed shipments, we’ll help you match equipment to your crop and season.',
@@ -223,7 +223,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'pet-food', name: 'Pet Food & Treats', short: 'Pet food', image: 'packages/weigh-fill.webp',
+    slug: 'pet-food', name: 'Pet Food & Treats', short: 'Pet food', image: 'industries/pet-food.webp',
     seoTitle: 'Pet Food & Treat Packaging Machines', seoDescription: 'Pet food and treat packaging machines: weighers, VFFS baggers, stand-up pouch machines, inspection, case packers and palletizing for kibble and treats.',
     intro: 'Kibble, treats, chews and jerky are sold in everything from small resealable pouches to large bags. Accurate weighing and durable seals matter at every size. WrapSense pet food lines cover weighing, bagging, pouching, inspection and the end of line.',
     intro2: 'Heavy bags and dusty kibble put different demands on equipment than small treat pouches — we size machines for your real product mix.',
@@ -275,7 +275,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'beverage', name: 'Beverage & Drink Mixes', short: 'Beverage & drink mixes', image: 'packages/spout-pouch.webp',
+    slug: 'beverage', name: 'Beverage & Drink Mixes', short: 'Beverage & drink mixes', image: 'industries/beverage.webp',
     seoTitle: 'Beverage & Drink Mix Packaging Machines', seoDescription: 'Packaging machines for drink mixes, electrolytes and liquids: stick pack machines, spout pouch machines, bottle capping and labeling, and cartoning.',
     intro: 'Powdered drink mixes, electrolytes, instant coffee, syrups and liquid shots are increasingly sold in single-serve sticks, spout pouches and bottles. WrapSense supplies stick-pack and pouch equipment with the right dosing for powders or liquids, plus capping, labeling and cartoning.',
     intro2: 'Tell us whether your product is a powder or a liquid and the dose size — dosing is configured around it.',
@@ -355,7 +355,7 @@ export const industries = [
   },
   // ─────────────────────────────────────────────
   {
-    slug: 'hardware', name: 'Hardware & Non-Food', short: 'Hardware & non-food', image: 'products/sensiweigh-pro.webp',
+    slug: 'hardware', name: 'Hardware & Non-Food', short: 'Hardware & non-food', image: 'industries/hardware.webp',
     seoTitle: 'Hardware & Non-Food Packaging Machines', seoDescription: 'Packaging machines for hardware, small parts and non-food products: count and weigh fillers, VFFS baggers, flow wrappers, case erecting and sealing.',
     intro: 'Screws, fasteners, small parts, masks, air fresheners, cleaning products and household goods all benefit from the same automation as food. WrapSense weighers, baggers, flow wrappers, labelers and end-of-line equipment adapt well to non-food products.',
     intro2: 'If you’re packing by hand or by count today, we can recommend equipment and test with your parts.',
