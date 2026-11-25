@@ -881,7 +881,7 @@ export const products = [
     role: 'primary',
     stageRole: 'end',
     image: 'products/pickn-pack-casepacker-2.webp',
-    gallery: ['photos/case-packing-action.webp'],
+    gallery: [],
     tagline: 'Heavier products, up to 30 cases per minute.',
     summary: 'CasePacker 2 loads heavier products into cases at up to 30 cases per minute.',
     highlights: ['Up to 30 cases per minute', 'Products up to 15.75" W × 3.9" H', 'Cases 11"–19.7" L × 5.9"–15.75" W × 5.9"–22.8" H', '33 lb payload'],
